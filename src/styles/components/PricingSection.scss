@@ -1,0 +1,56 @@
+.PricingSection {
+  &__column {
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__card {
+    display: flex;
+    // Stretch to fit column width
+    width: 100%;
+    // Ensure .card-content stretches to fit width
+    align-items: stretch;
+  }
+
+  &__card-content {
+    // Flex so that button can position self at
+    // bottom of card using margin-top auto.
+    display: flex;
+    flex-direction: column;
+    // Stretch to fit column width
+    width: 100%;
+    padding: 2rem;
+  }
+
+  &__name {
+    font-size: 1.25rem;
+  }
+
+  &__price {
+    margin: 20px 0;
+  }
+
+  &__period {
+    opacity: 0.4;
+  }
+
+  &__description {
+    margin-bottom: 1.6rem;
+  }
+
+  &__perks {
+    margin-bottom: 1.6rem;
+
+    li {
+      margin: 0.7rem 0;
+    }
+
+    i {
+      margin-right: 0.8rem;
+    }
+  }
+
+  &__button {
+    margin-top: auto;
+  }
+}

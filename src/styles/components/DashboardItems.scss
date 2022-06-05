@@ -1,0 +1,25 @@
+.DashboardItems {
+  &__panel {
+    min-height: 300px;
+
+    .featured {
+      background-color: #fdf8c2;
+    }
+
+    .action {
+      border: none;
+      padding: 0 0.85rem;
+      height: auto;
+      color: rgb(116, 116, 116) !important;
+      opacity: 0.8;
+      &:hover {
+        color: inherit;
+        opacity: 1;
+        text-decoration: none !important;
+      }
+      &.star-featured {
+        color: #ff9800 !important;
+      }
+    }
+  }
+}
