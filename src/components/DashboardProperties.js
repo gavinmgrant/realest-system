@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import FormAlert from "components/FormAlert";
 import EditProperty from "components/EditProperty";
 import { useAuth } from "util/auth";
@@ -7,6 +8,7 @@ import { formatCurrency, formatPercentage } from "../util/util";
 import { totalAmount } from "../util/calculations";
 
 function DashboardProperties(props) {
+  const router = useRouter();
   const auth = useAuth();
 
   const {
@@ -21,6 +23,18 @@ function DashboardProperties(props) {
   const [updatingPropertyId, setUpdatingPropertyId] = useState(null);
 
   const propertiesAreEmpty = !properties || properties.length === 0;
+
+  const isProUser =
+    auth.user.planIsActive &&
+    (auth.user.planId === "pro" || auth.user.planId === "business");
+
+  const handleAddProperty = () => {
+    if (properties.length < 1 || isProUser) {
+      setCreatingProperty(true);
+    } else {
+      router.replace("/pricing");
+    }
+  };
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -63,7 +77,7 @@ function DashboardProperties(props) {
             <h2 className="title is-4 m-0">Properties</h2>
             <button
               className="button is-primary"
-              onClick={() => setCreatingProperty(true)}
+              onClick={handleAddProperty}
             >
               Add Property
             </button>
