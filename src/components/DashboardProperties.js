@@ -22,14 +22,14 @@ function DashboardProperties(props) {
   const [creatingProperty, setCreatingProperty] = useState(false);
   const [updatingPropertyId, setUpdatingPropertyId] = useState(null);
 
-  const propertiesAreEmpty = !properties || properties.length === 0;
+  const propertiesAreEmpty = !properties || properties?.length === 0;
 
   const isProUser =
     auth.user.planIsActive &&
     (auth.user.planId === "pro" || auth.user.planId === "business");
 
   const handleAddProperty = () => {
-    if (properties.length < 1 || isProUser) {
+    if (properties?.length < 1 || isProUser) {
       setCreatingProperty(true);
     } else {
       router.replace("/pricing");
@@ -47,7 +47,7 @@ function DashboardProperties(props) {
   const getTotalIncome = (id) => {
     const property = properties.find((property) => property.id === id);
     let total = 0;
-    for (let i = 0; i < units.length; i++) {
+    for (let i = 0; i < units?.length; i++) {
       if (units[i].property_id === property.id) {
         total += units[i].rent_current;
         total += units[i].income_parking;
