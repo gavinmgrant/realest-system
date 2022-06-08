@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormAlert from "components/FormAlert";
 import EditProperty from "components/EditProperty";
 import { useAuth } from "util/auth";
@@ -21,6 +21,33 @@ function DashboardProperties(props) {
   const [updatingPropertyId, setUpdatingPropertyId] = useState(null);
 
   const propertiesAreEmpty = !properties || properties.length === 0;
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const getTotalIncome = (id) => {
+    const property = properties.find((property) => property.id === id);
+    let total = 0;
+    for (let i = 0; i < units.length; i++) {
+      if (units[i].property_id === property.id) {
+        total += units[i].rent_current;
+        total += units[i].income_parking;
+        total += units[i].income_storage;
+      }
+    }
+    return formatCurrency(total);
+  };
+
+  useEffect(() => {
+    setCreatingProperty(false);
+    setUpdatingPropertyId(null);
+    scrollToTop();
+  }, [properties]);
 
   return (
     <>
@@ -176,6 +203,7 @@ function DashboardProperties(props) {
                             <th scope="col">Rent</th>
                             <th scope="col">Parking</th>
                             <th scope="col">Storage</th>
+                            <th scope="col">Total</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -185,14 +213,35 @@ function DashboardProperties(props) {
                                 (unit) => unit.property_id === property.id
                               )
                               .sort((a, b) => a.number - b.number)
-                              .map((unit, index) => (
-                                <tr key={index}>
-                                  <td>{unit.number}</td>
-                                  <td>{formatCurrency(unit.rent_current)}</td>
-                                  <td>{formatCurrency(unit.income_parking)}</td>
-                                  <td>{formatCurrency(unit.income_storage)}</td>
-                                </tr>
-                              ))}
+                              .map((unit, index) => {
+                                const income = Array.from([
+                                  unit.rent_current,
+                                  unit.income_parking,
+                                  unit.income_storage,
+                                ]);
+                                const totalIncome = totalAmount(income);
+
+                                return (
+                                  <tr key={index}>
+                                    <td>{unit.number}</td>
+                                    <td>{formatCurrency(unit.rent_current)}</td>
+                                    <td>
+                                      {formatCurrency(unit.income_parking)}
+                                    </td>
+                                    <td>
+                                      {formatCurrency(unit.income_storage)}
+                                    </td>
+                                    <td>{formatCurrency(totalIncome)}</td>
+                                  </tr>
+                                );
+                              })}
+                          <tr>
+                            <td>Total Income:</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{getTotalIncome(property.id)}</td>
+                          </tr>
                         </tbody>
                       </table>
                       <h3 className="title is-5">Investment Analytics</h3>
@@ -233,13 +282,21 @@ function DashboardProperties(props) {
       )}
 
       {creatingProperty && (
-        <EditProperty onDone={() => setCreatingProperty(false)} />
+        <EditProperty
+          onDone={() => {
+            setCreatingProperty(false);
+            scrollToTop();
+          }}
+        />
       )}
 
       {updatingPropertyId && (
         <EditProperty
           id={updatingPropertyId}
-          onDone={() => setUpdatingPropertyId(null)}
+          onDone={() => {
+            setUpdatingPropertyId(null);
+            scrollToTop();
+          }}
         />
       )}
     </>

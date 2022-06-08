@@ -19,21 +19,17 @@ function DeleteModal(props) {
           </span>
         </header>
         <div className="card-content">
-          <form onSubmit={() => deleteProperty(props.id)}>
-            <div className="field">
-              <div className="control">
-                <button
-                  className={
-                    "button is-medium is-danger" +
-                    (pending ? " is-loading" : "")
-                  }
-                  type="submit"
-                >
-                  Yes, delete this property
-                </button>
-              </div>
+          <div className="field">
+            <div className="control">
+              <button
+                className="button is-medium is-danger"
+                type="submit"
+                onClick={() => deleteProperty(props.id)}
+              >
+                Yes, delete this property
+              </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
