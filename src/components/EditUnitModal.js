@@ -102,7 +102,6 @@ function EditUnitModal(props) {
               defaultValue={unitData && unitData.rent_current}
               size="medium"
               error={errors.rent_current}
-              autoFocus={true}
               inputRef={register({
                 required: "Please enter the rent for this unit",
               })}
@@ -115,7 +114,6 @@ function EditUnitModal(props) {
               defaultValue={unitData && unitData.income_parking}
               size="medium"
               error={errors.income_parking}
-              autoFocus={true}
               inputRef={register({
                 required: "Please enter a parking fee or 0 if none",
               })}
@@ -128,7 +126,6 @@ function EditUnitModal(props) {
               defaultValue={unitData && unitData.income_storage}
               size="medium"
               error={errors.income_storage}
-              autoFocus={true}
               inputRef={register({
                 required: "Please enter a storage fee or 0 if none",
               })}
