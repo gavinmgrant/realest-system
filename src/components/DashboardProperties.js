@@ -5,7 +5,12 @@ import EditProperty from "components/EditProperty";
 import { useAuth } from "util/auth";
 import { usePropertiesByUser, useUnitsByUser } from "util/db";
 import { formatCurrency, formatPercentage } from "../util/util";
-import { totalAmount } from "../util/calculations";
+import {
+  totalAmount,
+  monthlyNOI,
+  annualNOI,
+  grossRentMultiplier,
+} from "../util/calculations";
 
 function DashboardProperties(props) {
   const router = useRouter();
@@ -54,7 +59,7 @@ function DashboardProperties(props) {
         total += units[i].income_storage;
       }
     }
-    return formatCurrency(total);
+    return total;
   };
 
   useEffect(() => {
@@ -75,10 +80,7 @@ function DashboardProperties(props) {
         <div>
           <div className="panel has-background-light mb-4 py-3 px-4 is-flex is-justify-content-space-between is-align-items-center">
             <h2 className="title is-4 m-0">Properties</h2>
-            <button
-              className="button is-primary"
-              onClick={handleAddProperty}
-            >
+            <button className="button is-primary" onClick={handleAddProperty}>
               Add Property
             </button>
           </div>
@@ -254,7 +256,7 @@ function DashboardProperties(props) {
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>{getTotalIncome(property.id)}</td>
+                            <td>{formatCurrency(getTotalIncome(property.id))}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -267,7 +269,12 @@ function DashboardProperties(props) {
                           </tr>
                           <tr>
                             <td>Gross Rent Multiplier (GRM):</td>
-                            <td>TODO</td>
+                            <td>
+                              {grossRentMultiplier(
+                                property.purchase_price,
+                                getTotalIncome(property.id)
+                              )}
+                            </td>
                           </tr>
                           <tr>
                             <td>CAP Rate:</td>
