@@ -19,7 +19,13 @@ function Navbar(props) {
           <div className="mt-1 ml-2">
             <Link href="/">
               <a>
-                <img className="image" src={props.logo} width="120" height="47" alt="Realest System Logo" />
+                <img
+                  className="image"
+                  src={props.logo}
+                  width="120"
+                  height="47"
+                  alt="Realest System Logo"
+                />
               </a>
             </Link>
           </div>
@@ -36,16 +42,20 @@ function Navbar(props) {
           <div className="navbar-end">
             {auth.user && (
               <div className="navbar-item has-dropdown is-hoverable">
-                <Link href="/">
+                <div onClick={() => setMenuOpen(!menuOpen)}>
                   <a className="navbar-link">Account</a>
-                </Link>
+                </div>
                 <div className="navbar-dropdown is-boxed">
-                  <Link href="/dashboard">
-                    <a className="navbar-item">Dashboard</a>
-                  </Link>
-                  <Link href="/settings/general">
-                    <a className="navbar-item">Settings</a>
-                  </Link>
+                  <div onClick={() => setMenuOpen(!menuOpen)}>
+                    <Link href="/dashboard">
+                      <a className="navbar-item">Dashboard</a>
+                    </Link>
+                  </div>
+                  <div onClick={() => setMenuOpen(!menuOpen)}>
+                    <Link href="/settings/general">
+                      <a className="navbar-item">Settings</a>
+                    </Link>
+                  </div>
                   <hr className="dropdown-divider" />
                   <Link href="/auth/signout">
                     <a
