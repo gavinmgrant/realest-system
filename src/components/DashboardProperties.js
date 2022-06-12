@@ -71,11 +71,18 @@ function DashboardProperties() {
 
       {!creatingProperty && !updatingPropertyId && (
         <div>
-          <div className="panel has-background-light mb-4 py-3 px-4 is-flex is-justify-content-space-between is-align-items-center">
-            <h2 className="title is-4 m-0">Properties</h2>
-            <button className="button is-primary" onClick={handleAddProperty}>
-              {canAddProperty ? "Add Property" : "Upgrade to Add More"}
-            </button>
+          <div className="panel has-background-light mb-4 py-3 px-4">
+            <div className="columns is-tablet">
+              <h2 className="title is-4 m-0 column">Properties</h2>
+              <div className="is-flex-tablet is-justify-content-flex-end column">
+                <button
+                  className="button is-primary"
+                  onClick={handleAddProperty}
+                >
+                  {canAddProperty ? "Add Property" : "Upgrade to add more"}
+                </button>
+              </div>
+            </div>
           </div>
 
           {(propertiesStatus === "loading" || propertiesAreEmpty) && (
