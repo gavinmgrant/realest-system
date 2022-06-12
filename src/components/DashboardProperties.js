@@ -7,12 +7,16 @@ import { usePropertiesByUser, useUnitsByUser } from "util/db";
 import { formatCurrency, formatPercentage } from "../util/util";
 import {
   totalAmount,
+  getTotalIncome,
+  monthlyLoanPayment,
   monthlyNOI,
   annualNOI,
   grossRentMultiplier,
+  cashFlow,
+  capRate,
 } from "../util/calculations";
 
-function DashboardProperties(props) {
+function DashboardProperties() {
   const router = useRouter();
   const auth = useAuth();
 
@@ -33,8 +37,10 @@ function DashboardProperties(props) {
     auth.user.planIsActive &&
     (auth.user.planId === "pro" || auth.user.planId === "business");
 
+  const canAddProperty = properties?.length < 1 || isProUser;
+
   const handleAddProperty = () => {
-    if (properties?.length < 1 || isProUser) {
+    if (canAddProperty) {
       setCreatingProperty(true);
     } else {
       router.replace("/pricing");
@@ -47,19 +53,6 @@ function DashboardProperties(props) {
       left: 0,
       behavior: "smooth",
     });
-  };
-
-  const getTotalIncome = (id) => {
-    const property = properties.find((property) => property.id === id);
-    let total = 0;
-    for (let i = 0; i < units?.length; i++) {
-      if (units[i].property_id === property.id) {
-        total += units[i].rent_current;
-        total += units[i].income_parking;
-        total += units[i].income_storage;
-      }
-    }
-    return total;
   };
 
   useEffect(() => {
@@ -81,7 +74,7 @@ function DashboardProperties(props) {
           <div className="panel has-background-light mb-4 py-3 px-4 is-flex is-justify-content-space-between is-align-items-center">
             <h2 className="title is-4 m-0">Properties</h2>
             <button className="button is-primary" onClick={handleAddProperty}>
-              Add Property
+              {canAddProperty ? "Add Property" : "Upgrade to Add More"}
             </button>
           </div>
 
@@ -115,6 +108,17 @@ function DashboardProperties(props) {
                 property.exp_vacancy,
               ]);
               const totalExpenses = totalAmount(expenses);
+              const totalIncome = getTotalIncome(
+                properties,
+                units,
+                property.id
+              );
+              const monthlyPayment = monthlyLoanPayment(
+                property.purchase_price,
+                property.down_payment,
+                property.loan_interest_rate,
+                property.loan_period
+              );
 
               return (
                 <div
@@ -156,6 +160,10 @@ function DashboardProperties(props) {
                           <tr>
                             <td>Loan Period (in months):</td>
                             <td>{property.loan_period}</td>
+                          </tr>
+                          <tr>
+                            <td>Monthly Mortgage Payment:</td>
+                            <td>{formatCurrency(monthlyPayment)}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -204,7 +212,7 @@ function DashboardProperties(props) {
                             <td>{formatCurrency(property.exp_vacancy)}</td>
                           </tr>
                           <tr>
-                            <td>Total Expenses:</td>
+                            <td>Total:</td>
                             <td>{formatCurrency(totalExpenses)}</td>
                           </tr>
                         </tbody>
@@ -252,11 +260,11 @@ function DashboardProperties(props) {
                                 );
                               })}
                           <tr>
-                            <td>Total Income:</td>
+                            <td>Total:</td>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>{formatCurrency(getTotalIncome(property.id))}</td>
+                            <td>{formatCurrency(totalIncome)}</td>
                           </tr>
                         </tbody>
                       </table>
@@ -265,32 +273,48 @@ function DashboardProperties(props) {
                         <tbody>
                           <tr>
                             <td>Total Cash Flow:</td>
-                            <td>TODO</td>
+                            <td>
+                              {formatCurrency(
+                                cashFlow(
+                                  monthlyNOI(totalIncome, totalExpenses),
+                                  monthlyPayment
+                                )
+                              )}
+                            </td>
                           </tr>
                           <tr>
                             <td>Gross Rent Multiplier (GRM):</td>
                             <td>
                               {grossRentMultiplier(
                                 property.purchase_price,
-                                getTotalIncome(property.id)
+                                totalIncome
                               )}
                             </td>
                           </tr>
                           <tr>
                             <td>CAP Rate:</td>
-                            <td>TODO</td>
+                            <td>
+                              {capRate(
+                                annualNOI(totalIncome, totalExpenses),
+                                property.purchase_price
+                              )}
+                            </td>
                           </tr>
                           <tr>
                             <td>NOI (Monthly):</td>
-                            <td>TODO</td>
+                            <td>
+                              {formatCurrency(
+                                monthlyNOI(totalIncome, totalExpenses)
+                              )}
+                            </td>
                           </tr>
                           <tr>
                             <td>NOI (Yearly):</td>
-                            <td>TODO</td>
-                          </tr>
-                          <tr>
-                            <td>Appreciation (Yearly):</td>
-                            <td>TODO</td>
+                            <td>
+                              {formatCurrency(
+                                annualNOI(totalIncome, totalExpenses)
+                              )}
+                            </td>
                           </tr>
                         </tbody>
                       </table>
