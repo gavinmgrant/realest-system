@@ -71,7 +71,7 @@ function EditProperty(props) {
         </button>
       </header>
 
-      <div className="DashboardProperties__panel panel p-4 mb-4">
+      <div className="DashboardProperties__panel panel">
         {formAlert && (
           <FormAlert type={formAlert.type} message={formAlert.message} />
         )}

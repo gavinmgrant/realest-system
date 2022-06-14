@@ -71,18 +71,11 @@ function DashboardProperties() {
 
       {!creatingProperty && !updatingPropertyId && (
         <div>
-          <div className="panel has-background-light mb-4 py-3 px-4">
-            <div className="columns is-tablet">
-              <h2 className="title is-4 m-0 column">Properties</h2>
-              <div className="is-flex-tablet is-justify-content-flex-end column">
-                <button
-                  className="button is-primary"
-                  onClick={handleAddProperty}
-                >
-                  {canAddProperty ? "Add Property" : "Upgrade to add more"}
-                </button>
-              </div>
-            </div>
+          <div className="panel panel-heading has-background-light py-3 px-4 is-flex is-justify-content-space-between is-align-items-center">
+            <h2 className="title is-4 m-0">Properties</h2>
+            <button className="button is-primary" onClick={handleAddProperty}>
+              {canAddProperty ? "Add Property" : "Upgrade to Add"}
+            </button>
           </div>
 
           {(propertiesStatus === "loading" || propertiesAreEmpty) && (
@@ -129,7 +122,7 @@ function DashboardProperties() {
 
               return (
                 <div
-                  className="DashboardProperties__panel panel p-4 mb-4"
+                  className="DashboardProperties__panel panel mb-4"
                   key={index}
                 >
                   <div className="columns is-tablet">
@@ -232,8 +225,18 @@ function DashboardProperties() {
                           <tr>
                             <th scope="col">Unit</th>
                             <th scope="col">Rent</th>
-                            <th scope="col">Parking</th>
-                            <th scope="col">Storage</th>
+                            <th className="is-hidden-tablet" scope="col">
+                              Pkg
+                            </th>
+                            <th className="is-hidden-mobile" scope="col">
+                              Parking
+                            </th>
+                            <th className="is-hidden-tablet" scope="col">
+                              Sto
+                            </th>
+                            <th className="is-hidden-mobile" scope="col">
+                              Storage
+                            </th>
                             <th scope="col">Total</th>
                           </tr>
                         </thead>
@@ -290,7 +293,7 @@ function DashboardProperties() {
                             </td>
                           </tr>
                           <tr>
-                            <td>Gross Rent Multiplier (GRM):</td>
+                            <td>Gross Rent Multiplier:</td>
                             <td>
                               {grossRentMultiplier(
                                 property.purchase_price,
