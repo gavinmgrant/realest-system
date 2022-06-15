@@ -75,8 +75,8 @@ function DashboardProperties() {
             <h2 className="title is-4 m-0">Properties</h2>
             <button className="button is-primary" onClick={handleAddProperty}>
               {canAddProperty ? "Add Property" : "Upgrade to Add"}
-              <span class="icon is-small ml-2">
-                <i class="fas fa-plus"></i>
+              <span className="icon is-small ml-2">
+                <i className="fas fa-plus"></i>
               </span>
             </button>
           </div>
@@ -138,8 +138,8 @@ function DashboardProperties() {
                         onClick={() => setUpdatingPropertyId(property.id)}
                       >
                         Edit
-                        <span class="icon is-small ml-2">
-                          <i class="fas fa-pen"></i>
+                        <span className="icon is-small ml-2">
+                          <i className="fas fa-pen"></i>
                         </span>
                       </button>
                     </div>
