@@ -138,7 +138,7 @@ function DashboardProperties() {
                       </button>
                     </div>
                   </div>
-                  <div className="columns is-tablet">
+                  <div className="columns is-desktop">
                     <div className="column p-3">
                       <h3 className="title is-5">Mortgage</h3>
                       <table className="table">
@@ -167,7 +167,8 @@ function DashboardProperties() {
                           </tr>
                         </tbody>
                       </table>
-
+                    </div>
+                    <div className="column p-3">
                       <h3 className="title is-5">Expenses</h3>
                       <table className="table">
                         <tbody>
@@ -218,6 +219,7 @@ function DashboardProperties() {
                         </tbody>
                       </table>
                     </div>
+
                     <div className="column p-3">
                       <h3 className="title is-5">Income</h3>
                       <table className="table">
@@ -278,57 +280,74 @@ function DashboardProperties() {
                           </tr>
                         </tbody>
                       </table>
-                      <h3 className="title is-5">Investment Analytics</h3>
-                      <table className="table">
-                        <tbody>
-                          <tr>
-                            <td>Total Cash Flow:</td>
-                            <td>
+                    </div>
+                  </div>
+                  <div className="notification is-primary">
+                    <h3 className="title is-5 has-text-white">
+                      Investment Analytics
+                    </h3>
+                    <table
+                      className="table has-text-white"
+                      style={{ background: "none" }}
+                    >
+                      <tbody>
+                        <tr>
+                          <td>Total Cash Flow:</td>
+                          <td>
+                            <strong>
                               {formatCurrency(
                                 cashFlow(
                                   monthlyNOI(totalIncome, totalExpenses),
                                   monthlyPayment
                                 )
                               )}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>Gross Rent Multiplier:</td>
-                            <td>
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Gross Rent Multiplier:</td>
+                          <td>
+                            <strong>
                               {grossRentMultiplier(
                                 property.purchase_price,
                                 totalIncome
                               )}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>CAP Rate:</td>
-                            <td>
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>CAP Rate:</td>
+                          <td>
+                            <strong>
                               {capRate(
                                 annualNOI(totalIncome, totalExpenses),
                                 property.purchase_price
                               )}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>NOI (Monthly):</td>
-                            <td>
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>NOI (Monthly):</td>
+                          <td>
+                            <strong>
                               {formatCurrency(
                                 monthlyNOI(totalIncome, totalExpenses)
                               )}
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>NOI (Yearly):</td>
-                            <td>
+                            </strong>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>NOI (Yearly):</td>
+                          <td>
+                            <strong>
                               {formatCurrency(
                                 annualNOI(totalIncome, totalExpenses)
                               )}
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+                            </strong>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               );
