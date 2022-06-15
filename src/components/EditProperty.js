@@ -68,6 +68,9 @@ function EditProperty(props) {
         </h2>
         <button className="button" onClick={() => props.onDone()}>
           Cancel
+          <span class="icon is-small ml-2">
+            <i class="fas fa-ban"></i>
+          </span>
         </button>
       </header>
 
@@ -300,6 +303,9 @@ function EditProperty(props) {
                   type="button"
                 >
                   Add Unit
+                  <span class="icon is-small ml-2">
+                    <i class="fas fa-plus"></i>
+                  </span>
                 </button>
               </section>
             </div>
@@ -314,6 +320,9 @@ function EditProperty(props) {
                 type="submit"
               >
                 {props.id ? "Save" : "Create"}
+                <span class="icon is-small ml-2">
+                  <i class="fas fa-check"></i>
+                </span>
               </button>
               {props.id && units?.length < 1 && (
                 <button
