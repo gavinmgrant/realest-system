@@ -318,22 +318,30 @@ function DashboardProperties() {
                                     </tr>
                                   );
                                 })}
-                            <tr>
-                              <td>Total:</td>
-                              <td></td>
-                              <td></td>
-                              <td></td>
-                              <td className="has-text-right">
-                                {formatCurrency(totalIncome)}
-                              </td>
-                            </tr>
+                            {units?.length > 0 && (
+                              <tr>
+                                <td>Total:</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td className="has-text-right">
+                                  {formatCurrency(totalIncome)}
+                                </td>
+                              </tr>
+                            )}
                           </tbody>
                         </table>
+                        {units?.length === 0 && (
+                          <p className="has-text-centered">
+                            No units found for this property. Click the edit
+                            button above to add one.
+                          </p>
+                        )}
                       </div>
                     </div>
                   </div>
                   <div className="columns">
-                    <div className="notification is-primary column is-two-thirds m-3">
+                    <div className="notification is-primary column is-two-thirds m-3 mt-5">
                       <h3 className="title is-5 has-text-white">
                         Investment Analytics
                       </h3>
