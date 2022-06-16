@@ -37,7 +37,7 @@ function Footer(props) {
             rel="noopener noreferrer"
           >
             <span className="icon">
-              <i className="fab fa-twitter" />
+              <i className="fab fa-twitter fa-lg" />
             </span>
           </a>
           <a
@@ -46,7 +46,7 @@ function Footer(props) {
             rel="noopener noreferrer"
           >
             <span className="icon">
-              <i className="fab fa-instagram" />
+              <i className="fab fa-instagram fa-lg" />
             </span>
           </a>
         </div>

@@ -170,7 +170,7 @@ function DashboardProperties() {
                           <tr>
                             <td>Loan Period (in months):</td>
                             <td className="has-text-right">
-                              {property.loan_period}
+                              {property.loan_period || 0}
                             </td>
                           </tr>
                           <tr>
@@ -250,18 +250,34 @@ function DashboardProperties() {
                         <table className="table is-fullwidth">
                           <thead>
                             <tr>
-                              <th className="has-text-left" scope="col">Unit</th>
-                              <th className="has-text-left" scope="col">Rent</th>
-                              <th className="is-hidden-tablet has-text-left" scope="col">
+                              <th className="has-text-left" scope="col">
+                                Unit
+                              </th>
+                              <th className="has-text-left" scope="col">
+                                Rent
+                              </th>
+                              <th
+                                className="is-hidden-tablet has-text-left"
+                                scope="col"
+                              >
                                 Pkg
                               </th>
-                              <th className="is-hidden-mobile has-text-left" scope="col">
+                              <th
+                                className="is-hidden-mobile has-text-left"
+                                scope="col"
+                              >
                                 Parking
                               </th>
-                              <th className="is-hidden-tablet has-text-left" scope="col">
+                              <th
+                                className="is-hidden-tablet has-text-left"
+                                scope="col"
+                              >
                                 Sto
                               </th>
-                              <th className="is-hidden-mobile has-text-left" scope="col">
+                              <th
+                                className="is-hidden-mobile has-text-left"
+                                scope="col"
+                              >
                                 Storage
                               </th>
                               <th className="has-text-right" scope="col">

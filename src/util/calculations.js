@@ -24,7 +24,7 @@ export const monthlyLoanPayment = (
 ) => {
   // helper function to calculate monthly loan payment
   const monthlyPayment = (p, n, i) => {
-    return (p * i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1);
+    return (p * i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1) || 0;
   };
   const P = purchasePrice - downPayment; // principle amount
   const I = interestRate / 12; // monthly interest rate
@@ -54,5 +54,5 @@ export const cashFlow = (monthlyNOI, monthlyLoanPayment) => {
 export const capRate = (annualNOI, purchasePrice) => {
   const cap = (annualNOI / purchasePrice) * 100;
 
-  return cap.toFixed(2);
+  return cap ? cap.toFixed(2) : 0;
 };
