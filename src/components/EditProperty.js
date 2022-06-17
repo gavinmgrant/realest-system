@@ -332,6 +332,9 @@ function EditProperty(props) {
                   onClick={() => setDeletingProperty(props.id)}
                 >
                   Delete
+                  <span className="icon is-small ml-2">
+                    <i className="fas fa-trash"></i>
+                  </span>
                 </button>
               )}
             </div>

@@ -139,6 +139,9 @@ function EditUnitModal(props) {
                   type="submit"
                 >
                   Save
+                  <span className="icon is-small ml-2">
+                    <i className="fas fa-check"></i>
+                  </span>
                 </button>
                 {props.id && (
                   <button
@@ -148,6 +151,9 @@ function EditUnitModal(props) {
                     onClick={() => onDelete(props.id)}
                   >
                     Delete
+                    <span className="icon is-small ml-2">
+                      <i className="fas fa-trash"></i>
+                    </span>
                   </button>
                 )}
               </div>
