@@ -31,7 +31,7 @@ function EditProperty(props) {
   const { data: units } = useUnitsByProperty(props.id, auth.user.uid);
 
   // If we are updating an existing property
-  // don't show modal until property data is fetched.
+  // don't show until property data is fetched.
   if (props.id && propertyStatus !== "success") {
     return null;
   }
@@ -45,7 +45,7 @@ function EditProperty(props) {
 
     query
       .then(() => {
-        // Let parent know we're done so they can hide modal
+        // Let parent know we're done so they can hide the view.
         props.onDone();
       })
       .catch((error) => {
@@ -150,7 +150,7 @@ function EditProperty(props) {
               </section>
 
               <section className="column">
-                <h3 className="title is-5">Expenses</h3>
+                <h3 className="title is-5">Monthly Expenses</h3>
 
                 <FormField
                   name="exp_property_taxes"
@@ -261,7 +261,7 @@ function EditProperty(props) {
               </section>
 
               <section className="column">
-                <h3 className="title is-5">Income</h3>
+                <h3 className="title is-5">Monthly Income</h3>
 
                 <table className="table is-fullwidth is-hoverable">
                   <thead>
@@ -358,7 +358,10 @@ function EditProperty(props) {
       )}
 
       {deletingProperty && (
-        <DeleteModal id={props.id} onDone={() => setDeletingProperty(false)} />
+        <DeleteModal
+          onDone={() => setDeletingProperty(false)}
+          onDelete={() => props.onDelete()}
+        />
       )}
     </>
   );

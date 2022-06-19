@@ -1,5 +1,4 @@
 import React from "react";
-import { deleteProperty } from "util/db";
 
 function DeleteModal(props) {
   return (
@@ -24,7 +23,7 @@ function DeleteModal(props) {
               <button
                 className="button is-medium is-danger"
                 type="submit"
-                onClick={() => deleteProperty(props.id)}
+                onClick={() => props.onDelete()}
               >
                 Yes, delete this property
               </button>
