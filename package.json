@@ -6,21 +6,21 @@
     "divjoy"
   ],
   "dependencies": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "next": "12.0.2",
-    "sass": "1.32.13",
-    "react-hook-form": "6.15.1",
+    "@analytics/google-analytics": "0.2.2",
+    "@stripe/stripe-js": "1.11.0",
+    "@supabase/supabase-js": "1.29.1",
+    "analytics": "0.3.1",
     "bulma": "0.9.3",
     "camelcase-keys": "7.0.1",
-    "@supabase/supabase-js": "1.29.1",
-    "react-query": "3.32.1",
     "mailchimp-api-v3": "1.14.0",
-    "@stripe/stripe-js": "1.11.0",
-    "stripe": "8.132.0",
+    "next": "^12.1.6",
     "raw-body": "2.4.1",
-    "analytics": "0.3.1",
-    "@analytics/google-analytics": "0.2.2"
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hook-form": "6.15.1",
+    "react-query": "3.32.1",
+    "sass": "1.32.13",
+    "stripe": "8.132.0"
   },
   "scripts": {
     "dev": "next dev",
