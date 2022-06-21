@@ -353,6 +353,7 @@ function EditProperty(props) {
         <EditUnitModal
           propertyId={props.id}
           id={updatingUnitId}
+          tab={props.tab}
           onDone={() => setUpdatingUnitId(null)}
         />
       )}

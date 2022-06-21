@@ -56,7 +56,7 @@ function EditUnitModal(props) {
   };
 
   return (
-    <div className="modal is-active">
+    <div className="modal is-active p-3">
       <div className="modal-background" onClick={() => props.onDone()} />
       <div className="EditUnitModal__card card">
         <header className="card-header">
@@ -79,57 +79,128 @@ function EditUnitModal(props) {
           {formAlert && (
             <FormAlert type={formAlert.type} message={formAlert.message} />
           )}
-
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FormField
-              name="number"
-              label="Unit Number"
-              type="text"
-              placeholder="Number"
-              defaultValue={unitData && unitData.number}
-              size="medium"
-              error={errors.number}
-              autoFocus={true}
-              inputRef={register({
-                required: "Please enter a unit number",
-              })}
-            />
-            <FormField
-              name="rent_current"
-              label="Rent per month"
-              type="text"
-              placeholder="Rent"
-              defaultValue={unitData && unitData.rent_current}
-              size="medium"
-              error={errors.rent_current}
-              inputRef={register({
-                required: "Please enter the rent for this unit",
-              })}
-            />
-            <FormField
-              name="income_parking"
-              label="Parking fee per month"
-              type="text"
-              placeholder="Parking fee"
-              defaultValue={unitData && unitData.income_parking}
-              size="medium"
-              error={errors.income_parking}
-              inputRef={register({
-                required: "Please enter a parking fee or 0 if none",
-              })}
-            />
-            <FormField
-              name="income_storage"
-              label="Storage fee per month"
-              type="text"
-              placeholder="Storage fee"
-              defaultValue={unitData && unitData.income_storage}
-              size="medium"
-              error={errors.income_storage}
-              inputRef={register({
-                required: "Please enter a storage fee or 0 if none",
-              })}
-            />
+            <div className="columns is-tablet">
+              <div className="column">
+                <FormField
+                  name="number"
+                  label="Unit Number"
+                  type="text"
+                  placeholder="Number"
+                  defaultValue={unitData && unitData.number}
+                  size="medium"
+                  error={errors.number}
+                  autoFocus={true}
+                  inputRef={register({
+                    required: "Please enter a unit number",
+                  })}
+                />
+                <FormField
+                  name="rent_current"
+                  label="Rent / month"
+                  type="text"
+                  placeholder="Rent"
+                  defaultValue={unitData && unitData.rent_current}
+                  size="medium"
+                  error={errors.rent_current}
+                  inputRef={register({
+                    required: "Please enter the rent for this unit",
+                  })}
+                />
+                <div className="columns is-mobile">
+                  <div className="column">
+                    <FormField
+                      name="income_parking"
+                      label="Parking fee / month"
+                      type="text"
+                      placeholder="Parking fee"
+                      defaultValue={unitData && unitData.income_parking}
+                      size="medium"
+                      error={errors.income_parking}
+                      inputRef={register({
+                        required: "Please enter a parking fee or 0 if none",
+                      })}
+                    />
+                  </div>
+                  <div className="column">
+                    <FormField
+                      name="income_storage"
+                      label="Storage fee / month"
+                      type="text"
+                      placeholder="Storage fee"
+                      defaultValue={unitData && unitData.income_storage}
+                      size="medium"
+                      error={errors.income_storage}
+                      inputRef={register({
+                        required: "Please enter a storage fee or 0 if none",
+                      })}
+                    />
+                  </div>
+                </div>
+              </div>
+              {props.tab === "rent-roll" && (
+                <div className="column">
+                  <FormField
+                    name="rent_market"
+                    label="Market Rent / month"
+                    type="text"
+                    placeholder="Market Rent"
+                    defaultValue={unitData && unitData.rent_market}
+                    size="medium"
+                    error={errors.rent_market}
+                    inputRef={register({
+                      required: "Please enter the market rent for this unit",
+                    })}
+                  />
+                  <div className="columns is-mobile">
+                    <div className="column">
+                      <FormField
+                        name="bedrooms"
+                        label="Bedrooms"
+                        type="text"
+                        placeholder="Bedrooms"
+                        defaultValue={unitData && unitData.bedrooms}
+                        size="medium"
+                        error={errors.bedrooms}
+                        inputRef={register({
+                          required:
+                            "Please enter the number of bedrooms in this unit",
+                        })}
+                      />
+                    </div>
+                    <div className="column">
+                      <FormField
+                        name="baths"
+                        label="Baths"
+                        type="text"
+                        placeholder="Baths"
+                        defaultValue={unitData && unitData.baths}
+                        size="medium"
+                        error={errors.baths}
+                        inputRef={register({
+                          required:
+                            "Please enter the number of bathrooms in this unit",
+                        })}
+                      />
+                    </div>
+                    <div className="column">
+                      <FormField
+                        name="floor_area"
+                        label="Floor Area"
+                        type="text"
+                        placeholder="Floor Area"
+                        defaultValue={unitData && unitData.floor_area}
+                        size="medium"
+                        error={errors.floor_area}
+                        inputRef={register({
+                          required: "Please enter the floor area for this unit",
+                        })}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
             <div className="field">
               <div className="control is-flex is-justify-content-space-between">
                 <button
