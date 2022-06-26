@@ -263,7 +263,7 @@ function EditProperty(props) {
               <section className="column">
                 <h3 className="title is-5">Monthly Income</h3>
 
-                <table className="table is-fullwidth is-hoverable">
+                <table className="table is-fullwidth is-hoverable is-bordered">
                   <thead>
                     <tr>
                       <th className="pt-0" scope="col">

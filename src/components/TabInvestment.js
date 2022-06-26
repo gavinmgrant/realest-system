@@ -58,7 +58,7 @@ function TabInvestment(props) {
               <div className="columns is-desktop">
                 <div className="column p-3">
                   <h3 className="title is-5">Mortgage</h3>
-                  <table className="table is-fullwidth">
+                  <table className="table is-fullwidth is-bordered">
                     <tbody>
                       <tr>
                         <td>Purchase Price:</td>
@@ -95,7 +95,7 @@ function TabInvestment(props) {
                 </div>
                 <div className="column p-3">
                   <h3 className="title is-5">Monthly Expenses</h3>
-                  <table className="table is-fullwidth">
+                  <table className="table is-fullwidth is-bordered">
                     <tbody>
                       <tr>
                         <td>Property Taxes:</td>
@@ -158,7 +158,7 @@ function TabInvestment(props) {
                 <div className="column p-3">
                   <h3 className="title is-5">Monthly Income</h3>
                   <div className="table-container">
-                    <table className="table is-fullwidth">
+                    <table className="table is-fullwidth is-bordered">
                       <thead>
                         <tr>
                           <th className="has-text-left" scope="col">
@@ -222,10 +222,10 @@ function TabInvestment(props) {
                               );
                             })}
                         <tr>
+                          <td></td>
+                          <td></td>
+                          <td></td>
                           <td>Total:</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
                           <td className="has-text-right">
                             {formatCurrency(totalIncome)}
                           </td>

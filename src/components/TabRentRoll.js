@@ -37,11 +37,83 @@ function TabRentRoll(props) {
                           const totalIncome = totalAmount(income);
 
                           return (
-                            <div key={unit.id} className="mb-4">
-                              <h3 className="title is-5">Unit {unit.number}</h3>
+                            <section key={unit.id}>
+                              <hr className="my-1" />
+                              <h3
+                                className="title is-5 mt-3 is-clickable"
+                                onClick={() => props.setUpdatingUnitId(unit.id)}
+                              >
+                                Unit {unit.number}
+                              </h3>
                               <div className="columns is-desktop">
                                 <div className="column">
-                                  <table className="table is-fullwidth is-hoverable">
+                                  <table className="table is-fullwidth is-hoverable is-bordered">
+                                    <thead>
+                                      <tr>
+                                        <th
+                                          className="has-text-left"
+                                          scope="col"
+                                        >
+                                          Current Rent
+                                        </th>
+                                        <th
+                                          className="is-hidden-tablet has-text-left"
+                                          scope="col"
+                                        >
+                                          Pkg
+                                        </th>
+                                        <th
+                                          className="is-hidden-mobile has-text-left"
+                                          scope="col"
+                                        >
+                                          Parking
+                                        </th>
+                                        <th
+                                          className="is-hidden-tablet has-text-left"
+                                          scope="col"
+                                        >
+                                          Sto
+                                        </th>
+                                        <th
+                                          className="is-hidden-mobile has-text-left"
+                                          scope="col"
+                                        >
+                                          Storage
+                                        </th>
+                                        <th
+                                          className="has-text-right"
+                                          scope="col"
+                                        >
+                                          Total
+                                        </th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr
+                                        key={index}
+                                        className="is-clickable"
+                                        onClick={() =>
+                                          props.setUpdatingUnitId(unit.id)
+                                        }
+                                      >
+                                        <td className="has-text-left">
+                                          {formatCurrency(unit.rent_current)}
+                                        </td>
+                                        <td className="has-text-left">
+                                          {formatCurrency(unit.income_parking)}
+                                        </td>
+                                        <td className="has-text-left">
+                                          {formatCurrency(unit.income_storage)}
+                                        </td>
+                                        <td className="has-text-right">
+                                          {formatCurrency(totalIncome)}
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div className="column">
+                                  <table className="table is-fullwidth is-hoverable is-bordered">
                                     <thead>
                                       <tr>
                                         <th
@@ -122,74 +194,9 @@ function TabRentRoll(props) {
                                     </tbody>
                                   </table>
                                 </div>
-                                <div className="column">
-                                  <table className="table is-fullwidth is-hoverable">
-                                    <thead>
-                                      <tr>
-                                        <th
-                                          className="has-text-left"
-                                          scope="col"
-                                        >
-                                          Current Rent
-                                        </th>
-                                        <th
-                                          className="is-hidden-tablet has-text-left"
-                                          scope="col"
-                                        >
-                                          Pkg
-                                        </th>
-                                        <th
-                                          className="is-hidden-mobile has-text-left"
-                                          scope="col"
-                                        >
-                                          Parking
-                                        </th>
-                                        <th
-                                          className="is-hidden-tablet has-text-left"
-                                          scope="col"
-                                        >
-                                          Sto
-                                        </th>
-                                        <th
-                                          className="is-hidden-mobile has-text-left"
-                                          scope="col"
-                                        >
-                                          Storage
-                                        </th>
-                                        <th
-                                          className="has-text-right"
-                                          scope="col"
-                                        >
-                                          Total
-                                        </th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr
-                                        key={index}
-                                        className="is-clickable"
-                                        onClick={() =>
-                                          props.setUpdatingUnitId(unit.id)
-                                        }
-                                      >
-                                        <td className="has-text-left">
-                                          {formatCurrency(unit.rent_current)}
-                                        </td>
-                                        <td className="has-text-left">
-                                          {formatCurrency(unit.income_parking)}
-                                        </td>
-                                        <td className="has-text-left">
-                                          {formatCurrency(unit.income_storage)}
-                                        </td>
-                                        <td className="has-text-right">
-                                          {formatCurrency(totalIncome)}
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
                               </div>
-                            </div>
+                              <hr className="my-1" />
+                            </section>
                           );
                         })}
                     {props.units.filter(
