@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import FormAlert from "components/FormAlert";
 import FormField from "components/FormField";
@@ -9,15 +9,21 @@ function EditUnitModal(props) {
   const auth = useAuth();
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
+  const [unitData, setUnitData] = useState(null);
 
   const { register, handleSubmit, errors } = useForm();
 
   // This will fetch unit if props.id is defined
   // Otherwise query does nothing and we assume
   // we are creating a new unit.
-  const { data: unitData, status: unitStatus } = useUnit(props.id);
+  const { data: data, status: unitStatus } = useUnit(props.id);
 
-  // If we are updating an existing item
+  // If unit data in database updates, update local unit state
+  useEffect(() => {
+    data && setUnitData(data);
+  }, [data]);
+
+  // If we are updating an existing unit
   // don't show modal until unit data is fetched.
   if (props.id && unitStatus !== "success") {
     return null;
@@ -87,7 +93,7 @@ function EditUnitModal(props) {
                   label="Unit Number"
                   type="text"
                   placeholder="Number"
-                  defaultValue={unitData && unitData.number}
+                  defaultValue={unitData?.number}
                   size="medium"
                   error={errors.number}
                   autoFocus={true}
@@ -100,7 +106,7 @@ function EditUnitModal(props) {
                   label="Rent / month"
                   type="text"
                   placeholder="Rent"
-                  defaultValue={unitData && unitData.rent_current}
+                  defaultValue={unitData?.rent_current}
                   size="medium"
                   error={errors.rent_current}
                   inputRef={register({
@@ -114,7 +120,7 @@ function EditUnitModal(props) {
                       label="Parking fee / month"
                       type="text"
                       placeholder="Parking fee"
-                      defaultValue={unitData && unitData.income_parking}
+                      defaultValue={unitData?.income_parking}
                       size="medium"
                       error={errors.income_parking}
                       inputRef={register({
@@ -128,7 +134,7 @@ function EditUnitModal(props) {
                       label="Storage fee / month"
                       type="text"
                       placeholder="Storage fee"
-                      defaultValue={unitData && unitData.income_storage}
+                      defaultValue={unitData?.income_storage}
                       size="medium"
                       error={errors.income_storage}
                       inputRef={register({
@@ -145,7 +151,7 @@ function EditUnitModal(props) {
                     label="Market Rent / month"
                     type="text"
                     placeholder="Market Rent"
-                    defaultValue={unitData && unitData.rent_market}
+                    defaultValue={unitData?.rent_market}
                     size="medium"
                     error={errors.rent_market}
                     inputRef={register({
