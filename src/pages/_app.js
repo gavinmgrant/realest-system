@@ -6,17 +6,15 @@ import Footer from "components/Footer";
 import "util/analytics";
 import { AuthProvider } from "util/auth";
 import { QueryClientProvider } from "util/db";
+import { ToastContainer } from "react-toastify";
+import "styles/toastify/main.scss";
 
 function MyApp({ Component, pageProps }) {
   return (
     <QueryClientProvider>
       <AuthProvider>
         <>
-          <Navbar
-            color="white"
-            spaced={true}
-            logo="/images/logo.png"
-          />
+          <Navbar color="white" spaced={true} logo="/images/logo.png" />
 
           <Component {...pageProps} />
 
@@ -28,6 +26,8 @@ function MyApp({ Component, pageProps }) {
             copyright={`© ${new Date().getFullYear()} Realest System`}
             logo="/images/logo.png"
           />
+
+          <ToastContainer />
         </>
       </AuthProvider>
     </QueryClientProvider>

@@ -7,6 +7,7 @@ import TabRentRoll from "components/TabRentRoll";
 import EditUnitModal from "components/EditUnitModal";
 import { useAuth } from "util/auth";
 import { usePropertiesByUser, useUnitsByUser, deleteProperty } from "util/db";
+import { toast } from "react-toastify";
 
 function DashboardProperties() {
   const router = useRouter();
@@ -184,6 +185,7 @@ function DashboardProperties() {
             setUpdatingPropertyId(null);
             deleteProperty(currentPropertyId);
             setCurrentPropertyId(null);
+            toast("Property deleted!");
           }}
         />
       )}
@@ -191,7 +193,9 @@ function DashboardProperties() {
       {creatingUnit && (
         <EditUnitModal
           propertyId={updatingPropertyId}
-          onDone={() => setCreatingUnit(false)}
+          onDone={() => {
+            setCreatingUnit(false);
+          }}
         />
       )}
 
@@ -200,7 +204,9 @@ function DashboardProperties() {
           propertyId={updatingPropertyId}
           id={updatingUnitId}
           tab={selectedTab}
-          onDone={() => setUpdatingUnitId(null)}
+          onDone={() => {
+            setUpdatingUnitId(null);
+          }}
         />
       )}
     </>

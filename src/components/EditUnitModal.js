@@ -4,6 +4,7 @@ import FormAlert from "components/FormAlert";
 import FormField from "components/FormField";
 import { useAuth } from "util/auth";
 import { useUnit, updateUnit, createUnit, deleteUnit } from "util/db";
+import { toast } from "react-toastify";
 
 function EditUnitModal(props) {
   const auth = useAuth();
@@ -40,6 +41,12 @@ function EditUnitModal(props) {
           ...data,
         });
 
+    if (props.id) {
+      toast("Unit saved!");
+    } else {
+      toast("Unit created!");
+    }
+
     query
       .then(() => {
         // Let parent know we're done so they can hide modal
@@ -58,6 +65,7 @@ function EditUnitModal(props) {
 
   const onDelete = (id) => {
     deleteUnit(id);
+    toast("Unit deleted!");
     props.onDone();
   };
 

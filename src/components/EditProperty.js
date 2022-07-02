@@ -12,6 +12,7 @@ import {
   createProperty,
   useUnitsByProperty,
 } from "util/db";
+import { toast } from "react-toastify";
 
 function EditProperty(props) {
   const auth = useAuth();
@@ -42,6 +43,12 @@ function EditProperty(props) {
     const query = props.id
       ? updateProperty(props.id, data)
       : createProperty({ user_id: auth.user.uid, ...data });
+
+    if (props.id) {
+      toast("Property saved!");
+    } else {
+      toast("Property created!");
+    }
 
     query
       .then(() => {
@@ -345,7 +352,9 @@ function EditProperty(props) {
       {creatingUnit && (
         <EditUnitModal
           propertyId={props.id}
-          onDone={() => setCreatingUnit(false)}
+          onDone={() => {
+            setCreatingUnit(false);
+          }}
         />
       )}
 
@@ -354,14 +363,18 @@ function EditProperty(props) {
           propertyId={props.id}
           id={updatingUnitId}
           tab={props.tab}
-          onDone={() => setUpdatingUnitId(null)}
+          onDone={() => {
+            setUpdatingUnitId(null);
+          }}
         />
       )}
 
       {deletingProperty && (
         <DeleteModal
           onDone={() => setDeletingProperty(false)}
-          onDelete={() => props.onDelete()}
+          onDelete={() => {
+            props.onDelete();
+          }}
         />
       )}
     </>
