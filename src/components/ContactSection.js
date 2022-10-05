@@ -22,9 +22,11 @@ function ContactSection(props) {
           className="has-text-centered"
         />
         <CenteredColumns>
-          <Link href="mailto:hello@realestsystem.com">
-            <a>hello@realestsystem.com</a>
-          </Link>
+          <div className="column is-flex is-flex-direction-column is-align-items-center">
+            <Link href="mailto:hello@realestsystem.com">
+              <a>hello@realestsystem.com</a>
+            </Link>
+          </div>
         </CenteredColumns>
         {/* <Contact
           showNameField={props.showNameField}
