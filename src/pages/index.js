@@ -39,15 +39,15 @@ function IndexPage(props) {
         title=""
         subtitle=""
       />
-      <TestimonialsSection
+      {/* <TestimonialsSection
         color="light"
         size="medium"
         backgroundImage=""
         backgroundImageOpacity={1}
         title="Here's what people are saying about Realest System"
         subtitle=""
-      />
-      <NewsletterSection
+      /> */}
+      {/* <NewsletterSection
         color="white"
         size="medium"
         backgroundImage=""
@@ -59,7 +59,7 @@ function IndexPage(props) {
         buttonInverted={false}
         inputPlaceholder="Enter your email"
         subscribedMessage="You are now subscribed!"
-      />
+      /> */}
     </>
   );
 }

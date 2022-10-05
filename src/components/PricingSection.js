@@ -13,35 +13,20 @@ function PricingSection(props) {
       name: "Free",
       price: "0",
       perks: [
-        "Lorem ipsum dolor sit amet",
-        "Consectetur adipiscing elit",
-        "Integer molestie lorem at massa",
-      ],
-    },
-    {
-      id: "starter",
-      name: "Starter",
-      price: "10",
-      perks: [
-        "Lorem ipsum dolor sit amet",
-        "Consectetur adipiscing elit",
-        "Integer molestie lorem at massa",
-        "Faucibus porta lacus fringilla vel",
-        "Aenean sit amet erat nunc",
+        "Create 1 property at a time",
+        "Store property details in the cloud",
+        "Edit property details anytime",
+        "Recalcuate investment analytics anytime",
       ],
     },
     {
       id: "pro",
-      name: "Pro",
-      price: "20",
+      name: "PRO",
+      price: "TBD",
       perks: [
-        "Lorem ipsum dolor sit amet",
-        "Consectetur adipiscing elit",
-        "Integer molestie lorem at massa",
-        "Faucibus porta lacus fringilla vel",
-        "Aenean sit amet erat nunc",
-        "Lorem ipsum dolor sit amet",
-        "Consectetur adipiscing elit",
+        "All features in the free plan",
+        "Pro features to be determined",
+        "Email us what you would like",
       ],
     },
   ];
@@ -102,13 +87,18 @@ function PricingSection(props) {
                     </ul>
                   )}
 
-                  <Link
+                  {/* <Link
                     href={
                       auth.user
                         ? `/purchase/${item.id}`
                         : `/auth/signup?next=/purchase/${item.id}`
                     }
                   >
+                    <a className="PricingSection__button button is-medium is-primary">
+                      Choose
+                    </a>
+                  </Link> */}
+                  <Link href="auth/signin">
                     <a className="PricingSection__button button is-medium is-primary">
                       Choose
                     </a>

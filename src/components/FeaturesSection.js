@@ -5,28 +5,28 @@ import SectionHeader from "components/SectionHeader";
 function FeaturesSection(props) {
   const items = [
     {
-      title: "Calculators",
+      title: "Mortgage information",
       description:
-        "Input a few numbers and our calculators provide key investment analytics, like cash flow, gross rent multiplier, and cap rate.",
-      image: "/illustrations/calculators.svg",
+        "Enter loan information such as price, down payment, and interest rate.",
+      image: "/illustrations/1.png",
     },
     {
-      title: "Guides",
+      title: "Monthly expenses",
       description:
-        "Our checklists and cheat sheets guide you through what to look for in residential real estate to make a sound investment.",
-      image: "/illustrations/guides.svg",
+        "Enter monthly expenses such as taxes, insurance, utilties, and maintenance costs.",
+      image: "/illustrations/2.png",
     },
     {
-      title: "Tenant Management",
+      title: "Monthly income",
       description:
-        "Evaluate tenants, download rental application forms, and email templates to communicate clearly to tenants.",
-      image: "/illustrations/tenant-management.svg",
+        "Add units to the property and enter income such as rent, parking, and storage.",
+      image: "/illustrations/3.png",
     },
     {
-      title: "Property Management",
+      title: "Get investment analytics",
       description:
-        "Track key metrics for each of your properties in a rent roll and manage them like a business.",
-      image: "/illustrations/property-management.svg",
+        "We provide key investment analytics, like cash flow, gross rent multiplier, and cap rate. Make an informed residential real estate purchase.",
+      image: "/illustrations/4.png",
     },
   ];
 

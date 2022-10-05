@@ -1,7 +1,9 @@
 import React from "react";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
-import Contact from "components/Contact";
+import Link from "next/link";
+import CenteredColumns from "components/CenteredColumns";
+// import Contact from "components/Contact";
 
 function ContactSection(props) {
   return (
@@ -19,12 +21,17 @@ function ContactSection(props) {
           spaced={true}
           className="has-text-centered"
         />
-        <Contact
+        <CenteredColumns>
+          <Link href="mailto:hello@realestsystem.com">
+            <a>hello@realestsystem.com</a>
+          </Link>
+        </CenteredColumns>
+        {/* <Contact
           showNameField={props.showNameField}
           buttonText={props.buttonText}
           buttonColor={props.buttonColor}
           buttonInverted={props.buttonInverted}
-        />
+        /> */}
       </div>
     </Section>
   );

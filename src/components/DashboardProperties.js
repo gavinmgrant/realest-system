@@ -33,7 +33,7 @@ function DashboardProperties() {
     auth.user.planIsActive &&
     (auth.user.planId === "pro" || auth.user.planId === "business");
 
-  const canAddProperty = properties?.length < 3 || isProUser;
+  const canAddProperty = properties?.length < 1 || isProUser;
 
   const handleAddProperty = () => {
     if (canAddProperty) {

@@ -15,29 +15,19 @@ function FaqSection(props) {
 
   const items = [
     {
-      question: "Integer ornare neque mauris?",
+      question: "What investment analytics are provided after I input my information?",
       answer:
-        "Integer ornare neque mauris, ac vulputate lacus venenatis et. Pellentesque ut ultrices purus. Suspendisse ut tincidunt eros. In velit mi, rhoncus dictum neque a, tincidunt lobortis justo.",
+        "After you input mortgage, monthly expenses, and monthly income information, we calculate your property's total cash flow, gross rent multiplier (GRM), CAP rate, and net operating income (NOI).",
     },
     {
-      question: "Lorem ipsum dolor sit amet?",
+      question: "How do I delete a property?",
       answer:
-        "Nunc nulla mauris, laoreet vel cursus lacinia, consectetur sit amet tellus. Suspendisse ut tincidunt eros. In velit mi, rhoncus dictum neque a, tincidunt lobortis justo.",
+        "First, delete all units in the property by clicking on each unit and deleting them. Once all units have been deleted, a red delete button will appear at the bottom of the screen when editing a property.",
     },
     {
-      question: "Suspendisse ut tincidunt?",
+      question: "How can I contact Realest System?",
       answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In lobortis, metus et mattis ullamcorper. Suspendisse ut tincidunt eros. In velit mi, rhoncus dictum neque a, tincidunt lobortis justo.",
-    },
-    {
-      question: "Ut enim ad minim veniam?",
-      answer:
-        "Suspendisse ut tincidunt eros. In velit mi, rhoncus dictum neque a, tincidunt lobortis justo.",
-    },
-    {
-      question: "In velit mi, rhoncus dictum neque?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud.",
+        "Email us at hello@realestsystem.com.",
     },
   ];
 

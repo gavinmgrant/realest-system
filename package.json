@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "keywords": [
-    "divjoy"
+    "divjoy",
+    "real estate"
   ],
   "dependencies": {
     "@analytics/google-analytics": "0.2.2",
