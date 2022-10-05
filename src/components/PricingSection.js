@@ -98,7 +98,7 @@ function PricingSection(props) {
                       Choose
                     </a>
                   </Link> */}
-                  <Link href="auth/signin">
+                  <Link href="/dashboard">
                     <a className="PricingSection__button button is-medium is-primary">
                       Choose
                     </a>
