@@ -8,7 +8,7 @@ function AuthPage(props) {
 
   return (
     <>
-      <Meta title="Auth" />
+      <Meta title="Sign in" />
       <AuthSection
         color="white"
         size="large"
