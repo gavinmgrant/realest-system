@@ -64,7 +64,7 @@ function DashboardSection(props) {
             .
           </div>
 
-          {!auth.user.stripeSubscriptionId && (
+          {/* {!auth.user.stripeSubscriptionId && (
             <div>
               You can signup for a plan in{` `}
               <Link href="/pricing">
@@ -74,7 +74,7 @@ function DashboardSection(props) {
               </Link>
               .
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </Section>
