@@ -57,8 +57,6 @@ function DashboardProperties() {
     scrollToTop();
   }, [properties]);
 
-  useEffect(() => {}, units);
-
   return (
     <>
       {propertiesError && (

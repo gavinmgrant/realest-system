@@ -14,7 +14,7 @@ function SettingsGeneral(props) {
     setPending(true);
 
     return auth
-      .updateProfile(data)
+      .updateProfile({ ...data, name: data.name_first + " " + data.name_last })
       .then(() => {
         // Set success status
         props.onStatus({
