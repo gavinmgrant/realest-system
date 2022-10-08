@@ -28,7 +28,11 @@ function TabInvestment(props) {
             property.exp_vacancy,
           ]);
           const totalExpenses = totalAmount(expenses);
-          const totalIncome = getTotalIncome(props.properties, props.units, property.id);
+          const totalIncome = getTotalIncome(
+            props.properties,
+            props.units,
+            property.id
+          );
           const monthlyPayment = monthlyLoanPayment(
             property.purchase_price,
             property.down_payment,
@@ -42,7 +46,7 @@ function TabInvestment(props) {
               key={property.id}
             >
               <div className="columns is-tablet">
-                <h2 className="title is-4 mb-0 column">{property.address}</h2>
+                <h2 className="title is-4 is-size-4 is-size-3-tablet mb-0 column">{property.address}</h2>
                 <div className="column is-flex-tablet is-justify-content-flex-end">
                   <button
                     className="button is-primary"
@@ -54,6 +58,59 @@ function TabInvestment(props) {
                     </span>
                   </button>
                 </div>
+              </div>
+              <div className="is-full notification is-primary mb-4 p-2">
+                <h3 className="title is-5 has-text-white mb-3 m-1">
+                  Investment Analytics
+                </h3>
+                <table
+                  className="table has-text-white is-fullwidth"
+                  style={{ background: "none" }}
+                >
+                  <tbody>
+                    <tr>
+                      <td>Monthly Cash Flow:</td>
+                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                        {formatCurrency(
+                          cashFlow(
+                            monthlyNOI(totalIncome, totalExpenses),
+                            monthlyPayment
+                          )
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Gross Rent Multiplier:</td>
+                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                        {grossRentMultiplier(
+                          property.purchase_price,
+                          totalIncome
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>CAP Rate:</td>
+                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                        {capRate(
+                          annualNOI(totalIncome, totalExpenses),
+                          property.purchase_price
+                        )}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>NOI (Monthly):</td>
+                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                        {formatCurrency(monthlyNOI(totalIncome, totalExpenses))}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>NOI (Yearly):</td>
+                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                        {formatCurrency(annualNOI(totalIncome, totalExpenses))}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
               <div className="columns is-desktop">
                 <div className="column p-3">
@@ -79,7 +136,7 @@ function TabInvestment(props) {
                         </td>
                       </tr>
                       <tr>
-                        <td>Loan Period (in months):</td>
+                        <td>Loan Period (in years):</td>
                         <td className="has-text-right">
                           {property.loan_period || 0}
                         </td>
@@ -104,7 +161,7 @@ function TabInvestment(props) {
                         </td>
                       </tr>
                       <tr>
-                        <td>Property Manager:</td>
+                        <td>Property Manager Fee:</td>
                         <td className="has-text-right">
                           {formatCurrency(property.exp_property_manager)}
                         </td>
@@ -232,8 +289,9 @@ function TabInvestment(props) {
                         </tr>
                       </tbody>
                     </table>
-                    {props.units.filter((unit) => unit.property_id === property.id)
-                      .length === 0 && (
+                    {props.units.filter(
+                      (unit) => unit.property_id === property.id
+                    ).length === 0 && (
                       <p className="has-text-centered">
                         No units found for this property. Click the edit button
                         above to add one.
@@ -241,66 +299,6 @@ function TabInvestment(props) {
                     )}
                   </div>
                 </div>
-              </div>
-              <div className="columns">
-                <div className="notification is-primary column is-two-thirds m-3 mt-5">
-                  <h3 className="title is-5 has-text-white">
-                    Investment Analytics
-                  </h3>
-                  <table
-                    className="table has-text-white is-fullwidth"
-                    style={{ background: "none" }}
-                  >
-                    <tbody>
-                      <tr>
-                        <td>Total Cash Flow:</td>
-                        <td className="has-text-right title is-5 has-text-white">
-                          {formatCurrency(
-                            cashFlow(
-                              monthlyNOI(totalIncome, totalExpenses),
-                              monthlyPayment
-                            )
-                          )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Gross Rent Multiplier:</td>
-                        <td className="has-text-right title is-5 has-text-white">
-                          {grossRentMultiplier(
-                            property.purchase_price,
-                            totalIncome
-                          )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>CAP Rate:</td>
-                        <td className="has-text-right title is-5 has-text-white">
-                          {capRate(
-                            annualNOI(totalIncome, totalExpenses),
-                            property.purchase_price
-                          )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>NOI (Monthly):</td>
-                        <td className="has-text-right title is-5 has-text-white">
-                          {formatCurrency(
-                            monthlyNOI(totalIncome, totalExpenses)
-                          )}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>NOI (Yearly):</td>
-                        <td className="has-text-right title is-5 has-text-white">
-                          {formatCurrency(
-                            annualNOI(totalIncome, totalExpenses)
-                          )}
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className="column"></div>
               </div>
             </div>
           );

@@ -12,7 +12,7 @@ function AboutPage(props) {
         size="large"
         backgroundImage="https://source.unsplash.com/7lvzopTxjOU/1600x800"
         backgroundImageOpacity={0.2}
-        title="A real estate system for independent landlords."
+        title="Quickly calculate your return on invesment in just a few steps."
         subtitle="We provide you with tools that simplify and systematize your residential rental property workflow. Ultimately, saving you time and money."
       />
       <TeamBiosSection

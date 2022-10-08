@@ -28,7 +28,7 @@ function SectionHeader(props) {
       {props.subtitle && (
         <p
           className={
-            "SectionHeader__subtitle subtitle" + (props.size > 4 ? " is-6" : "")
+            "SectionHeader__subtitle subtitle is-size-6"
           }
         >
           {props.subtitle}

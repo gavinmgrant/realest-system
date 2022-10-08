@@ -48,5 +48,5 @@ export function formatPercentage(amount) {
   return new Intl.NumberFormat("en-US", {
     style: "percent",
     maximumFractionDigits: 2,
-  }).format(amount);
+  }).format(amount / 100);
 }

@@ -67,8 +67,26 @@ function DashboardProperties() {
 
       {!creatingProperty && !updatingPropertyId && (
         <div>
-          <div className="panel panel-heading has-background-light py-3 px-4 is-flex is-justify-content-space-between is-align-items-center">
+          <div className="panel panel-heading has-background-light py-3 px-4 is-flex-tablet is-justify-content-space-between is-align-items-center has-text-center-mobile">
             <h2 className="title is-4 m-0">Properties</h2>
+            {currentPropertyId && (
+              <div className="tabs is-toggle m-0 my-3">
+                <ul>
+                  <li
+                    className={selectedTab === "investment" ? "is-active" : ""}
+                    onClick={() => setSelectedTab("investment")}
+                  >
+                    <a>Investment Evaluation</a>
+                  </li>
+                  <li
+                    className={selectedTab === "rent-roll" ? "is-active" : ""}
+                    onClick={() => setSelectedTab("rent-roll")}
+                  >
+                    <a>Rent Roll</a>
+                  </li>
+                </ul>
+              </div>
+            )}
             {currentPropertyId ? (
               <button
                 className="button is-primary"
@@ -80,7 +98,7 @@ function DashboardProperties() {
                 </span>
               </button>
             ) : (
-              <button className="button is-primary" onClick={handleAddProperty}>
+              <button className="button is-primary my-3" onClick={handleAddProperty}>
                 {canAddProperty ? "Add Property" : "Upgrade to Add"}
                 <span className="icon is-small ml-2">
                   <i className="fas fa-plus"></i>
@@ -88,25 +106,6 @@ function DashboardProperties() {
               </button>
             )}
           </div>
-
-          {currentPropertyId && (
-            <div className="tabs is-toggle is-centered mb-4 is-flex-tablet">
-              <ul>
-                <li
-                  className={selectedTab === "investment" ? "is-active" : ""}
-                  onClick={() => setSelectedTab("investment")}
-                >
-                  <a>Investment Evaluation</a>
-                </li>
-                <li
-                  className={selectedTab === "rent-roll" ? "is-active" : ""}
-                  onClick={() => setSelectedTab("rent-roll")}
-                >
-                  <a>Rent Roll</a>
-                </li>
-              </ul>
-            </div>
-          )}
 
           {(propertiesStatus === "loading" || propertiesAreEmpty) && (
             <div className="py-5 px-3">
@@ -130,14 +129,22 @@ function DashboardProperties() {
             properties.map((property) => {
               return (
                 <div
-                  className="card p-3 mb-4 is-clickable"
+                  className="card p-4 mb-4 is-clickable is-flex is-justify-content-space-between"
                   key={property.id}
                   onClick={() => {
                     setSelectedTab("investment");
                     setCurrentPropertyId(property.id);
                   }}
                 >
-                  <h3 className="title is-5 mb-0">{property.address}</h3>
+                  <h3 className="title is-size-4-tablet is-size-5 is-5 mb-0">{property.address}</h3>
+                  <button className="button is-primary p-2">
+                    <span className="is-hidden-mobile pl-2 pr-2">
+                      See Property Details
+                    </span>
+                    <span className="icon is-small m-0">
+                      <i className="fas fa-arrow-right"></i>
+                    </span>
+                  </button>
                 </div>
               );
             })}

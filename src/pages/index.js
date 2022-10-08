@@ -5,10 +5,14 @@ import HeroSection from "components/HeroSection";
 import ClientsSection from "components/ClientsSection";
 import FeaturesSection from "components/FeaturesSection";
 import CenteredColumns from "components/CenteredColumns";
+import { useAuth } from "util/auth";
 // import TestimonialsSection from "components/TestimonialsSection";
 // import NewsletterSection from "components/NewsletterSection";
 
 function IndexPage(props) {
+  const auth = useAuth();
+  const { user } = auth;
+  console.log("user", user);
   return (
     <>
       <Meta />
@@ -17,13 +21,13 @@ function IndexPage(props) {
         size="medium"
         backgroundImage=""
         backgroundImageOpacity={1}
-        title="A real estate system for independent landlords."
-        subtitle="Use our system to quickly calculate investment analytics. Create a free account to begin!"
-        image="/illustrations/landing-hero.svg"
-        buttonText="Create account"
+        title="Quickly calculate your return on invesment in just a few steps."
+        subtitle="Residential real estate investors, sign up for free! Save your work and return at anytime to review your properties analytics."
+        image="/hero-animation.gif"
+        buttonText={user ? "Go to Dashboard" : "Create Account"}
         buttonColor="primary"
         buttonInverted={false}
-        buttonPath="/auth/signup"
+        buttonPath={user ? "/dashboard" : "/auth/signup"}
       />
       <ClientsSection
         color="light"
@@ -49,6 +53,23 @@ function IndexPage(props) {
         title="Here's what people are saying about Realest System"
         subtitle=""
       /> */}
+      {!user && (
+        <CenteredColumns>
+          <div className="column is-flex is-flex-direction-column is-align-items-center">
+            <Link href="/auth/signup">
+              <a
+                className={
+                  "button is-medium is-primary mt-5 mb-5" +
+                  (props.buttonColor ? ` is-${props.buttonColor}` : "") +
+                  (props.buttonInverted ? " is-inverted" : "")
+                }
+              >
+                Create Account to Begin
+              </a>
+            </Link>
+          </div>
+        </CenteredColumns>
+      )}
       {/* <NewsletterSection
         color="white"
         size="medium"
@@ -62,21 +83,6 @@ function IndexPage(props) {
         inputPlaceholder="Enter your email"
         subscribedMessage="You are now subscribed!"
       /> */}
-      <CenteredColumns>
-        <div className="column is-flex is-flex-direction-column is-align-items-center">
-          <Link href="/auth/signup">
-            <a
-              className={
-                "button is-medium is-primary mt-5 mb-5" +
-                (props.buttonColor ? ` is-${props.buttonColor}` : "") +
-                (props.buttonInverted ? " is-inverted" : "")
-              }
-            >
-              Create account to begin
-            </a>
-          </Link>
-        </div>
-      </CenteredColumns>
     </>
   );
 }

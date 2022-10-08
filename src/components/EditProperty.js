@@ -21,6 +21,15 @@ function EditProperty(props) {
   const [creatingUnit, setCreatingUnit] = useState(false);
   const [updatingUnitId, setUpdatingUnitId] = useState(null);
   const [deletingProperty, setDeletingProperty] = useState(false);
+  const [purchasePrice, setPurchasePrice] = useState(0);
+  const [propertyTax, setPropertyTax] = useState(0);
+
+  useEffect(() => {
+    const monthlyTax = Math.round((purchasePrice * 0.0125) / 12);
+    if (props.id && purchasePrice) {
+      setPropertyTax(monthlyTax);
+    }
+  }, [purchasePrice]);
 
   const { register, handleSubmit, errors } = useForm();
 
@@ -73,7 +82,7 @@ function EditProperty(props) {
           {props.id ? "Edit" : "Create"}
           {` `}Property
         </h2>
-        <button className="button" onClick={() => props.onDone()}>
+        <button className="button my-3" onClick={() => props.onDone()}>
           Cancel
           <span className="icon is-small ml-2">
             <i className="fas fa-ban"></i>
@@ -110,19 +119,29 @@ function EditProperty(props) {
                   name="purchase_price"
                   label="Purchase Price"
                   type="number"
-                  placeholder="Purchase Price"
-                  defaultValue={propertyData && propertyData.purchase_price}
+                  placeholder="1000000"
                   size="medium"
                   error={errors.purchase_price}
                   inputRef={register({
                     required: "Please enter a purchase price",
                   })}
+                  value={
+                    (propertyData && propertyData.purchase_price) ||
+                    purchasePrice
+                  }
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      setPurchasePrice(parseInt(e.target.value));
+                    } else {
+                      setPurchasePrice("");
+                    }
+                  }}
                 />
                 <FormField
                   name="down_payment"
                   label="Down Payment"
                   type="number"
-                  placeholder="Down Payment"
+                  placeholder={200000}
                   defaultValue={propertyData && propertyData.down_payment}
                   size="medium"
                   error={errors.down_payment}
@@ -134,7 +153,7 @@ function EditProperty(props) {
                   name="loan_interest_rate"
                   label="Loan Interest Rate (in decimals)"
                   type="float"
-                  placeholder="Loan Interest Rate"
+                  placeholder={5}
                   defaultValue={propertyData && propertyData.loan_interest_rate}
                   size="medium"
                   error={errors.loan_interest_rate}
@@ -144,9 +163,9 @@ function EditProperty(props) {
                 />
                 <FormField
                   name="loan_period"
-                  label="Loan Period (in months)"
+                  label="Loan Period (in years)"
                   type="number"
-                  placeholder="Loan Period in Months"
+                  placeholder={30}
                   defaultValue={propertyData && propertyData.loan_period}
                   size="medium"
                   error={errors.loan_period}
@@ -161,22 +180,31 @@ function EditProperty(props) {
 
                 <FormField
                   name="exp_property_taxes"
-                  label="Property Taxes"
+                  label="Property Taxes (default 1.25%)"
                   type="number"
-                  placeholder="Property Taxes"
-                  defaultValue={propertyData && propertyData.exp_property_taxes}
                   size="medium"
                   error={errors.exp_property_taxes}
                   inputRef={register({
                     required:
                       "Please enter an amount for annual property taxes",
                   })}
+                  value={
+                    (propertyData && propertyData.exp_property_taxes) ||
+                    propertyTax
+                  }
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      setPropertyTax(parseInt(e.target.value));
+                    } else {
+                      setPropertyTax("");
+                    }
+                  }}
                 />
                 <FormField
                   name="exp_property_manager"
-                  label="Property Manager"
+                  label="Property Manager Fee"
                   type="number"
-                  placeholder="Property Manager"
+                  placeholder={300}
                   defaultValue={
                     propertyData && propertyData.exp_property_manager
                   }
@@ -190,7 +218,7 @@ function EditProperty(props) {
                   name="exp_insurance_umbrella"
                   label="Umbrella Insurance"
                   type="number"
-                  placeholder="Umbrella Insurance"
+                  placeholder={30}
                   defaultValue={
                     propertyData && propertyData.exp_insurance_umbrella
                   }
@@ -204,7 +232,7 @@ function EditProperty(props) {
                   name="exp_insurance_hazard"
                   label="Hazard Insurance"
                   type="number"
-                  placeholder="Hazard Insurance"
+                  placeholder={100}
                   defaultValue={
                     propertyData && propertyData.exp_insurance_hazard
                   }
@@ -218,7 +246,7 @@ function EditProperty(props) {
                   name="exp_water_sewer"
                   label="Water and Sewer"
                   type="number"
-                  placeholder="Water and Sewer"
+                  placeholder={150}
                   defaultValue={propertyData && propertyData.exp_water_sewer}
                   size="medium"
                   error={errors.exp_water_sewer}
@@ -230,7 +258,7 @@ function EditProperty(props) {
                   name="exp_landscape"
                   label="Landscape"
                   type="number"
-                  placeholder="Landscape"
+                  placeholder={100}
                   defaultValue={propertyData && propertyData.exp_landscape}
                   size="medium"
                   error={errors.exp_landscape}
@@ -243,7 +271,7 @@ function EditProperty(props) {
                   name="exp_maintenance"
                   label="Maintenance"
                   type="number"
-                  placeholder="Maintenance"
+                  placeholder={500}
                   defaultValue={propertyData && propertyData.exp_maintenance}
                   size="medium"
                   error={errors.exp_maintenance}
@@ -256,7 +284,7 @@ function EditProperty(props) {
                   name="exp_vacancy"
                   label="Vacancy"
                   type="number"
-                  placeholder="Vacancy"
+                  placeholder={0}
                   defaultValue={propertyData && propertyData.exp_vacancy}
                   size="medium"
                   error={errors.exp_maintenance}
@@ -273,18 +301,10 @@ function EditProperty(props) {
                 <table className="table is-fullwidth is-hoverable is-bordered">
                   <thead>
                     <tr>
-                      <th className="pt-0" scope="col">
-                        Unit
-                      </th>
-                      <th className="pt-0" scope="col">
-                        Rent
-                      </th>
-                      <th className="pt-0" scope="col">
-                        Parking
-                      </th>
-                      <th className="pt-0" scope="col">
-                        Storage
-                      </th>
+                      <th scope="col">Unit</th>
+                      <th scope="col">Rent</th>
+                      <th scope="col">Parking</th>
+                      <th scope="col">Storage</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -319,19 +339,19 @@ function EditProperty(props) {
           )}
 
           <div className="field">
-            <div className="control is-flex is-justify-content-space-between">
+            <div className="control is-flex-tablet is-justify-content-space-between is-align-items-center">
               <button
                 className={
                   "button is-primary my-2" + (pending ? " is-loading" : "")
                 }
                 type="submit"
               >
-                {props.id ? "Save" : "Create"}
+                {props.id ? "Save and See Analytics" : "Create"}
                 <span className="icon is-small ml-2">
                   <i className="fas fa-check"></i>
                 </span>
               </button>
-              {props.id && units?.length < 1 && (
+              {props.id && units?.length < 1 ? (
                 <button
                   className="button is-danger my-2"
                   aria-label="delete"
@@ -343,6 +363,8 @@ function EditProperty(props) {
                     <i className="fas fa-trash"></i>
                   </span>
                 </button>
+              ) : (
+                <div>To delete a property, first delete all of its units.</div>
               )}
             </div>
           </div>

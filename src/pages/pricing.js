@@ -12,8 +12,7 @@ function PricingPage(props) {
         backgroundImage=""
         backgroundImageOpacity={1}
         title="Pricing"
-        subtitle="We are in beta right now and will be offering a pro plan in the near future. All accounts are free plans today."
-        // subtitle="Choose the plan that makes sense for you. All plans include a 14-day free trial."
+        subtitle="We are in beta right now and will be offering a pro plan in the future. All accounts are free plans today."
       />
     </>
   );

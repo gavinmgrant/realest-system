@@ -27,8 +27,8 @@ export const monthlyLoanPayment = (
     return (p * i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1) || 0;
   };
   const P = purchasePrice - downPayment; // principle amount
-  const I = interestRate / 12; // monthly interest rate
-  const N = loanPeriod; // number of payments months
+  const I = (interestRate / 100) / 12; // monthly interest rate
+  const N = loanPeriod * 12; // number of payments months
   const M = monthlyPayment(P, N, I); // monthly mortgage payment
 
   return Math.round(M);

@@ -19,9 +19,9 @@ function Meta(props) {
   // Default meta values for current page (override with props)
   const defaultPageMeta = {
     // Page title
-    title: "Realest System | A real estate system for independent landlords",
+    title: "Realest System | Quickly calculate your return on invesment in just a few steps.",
     // Page description
-    description: "A real estate system for independent landlords",
+    description: "Residential real estate investors, quickly calculate your return on invesment in just a few steps.",
     // Social share image (create this file in /public/images/)
     image: "/images/social.png",
     // Page type (see https://ogp.me/#types)
