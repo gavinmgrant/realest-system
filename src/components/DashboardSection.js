@@ -39,7 +39,7 @@ function DashboardSection(props) {
             You are signed in as <strong>{auth.user.email}</strong>.
           </div>
 
-          {auth.user.stripeSubscriptionId && (
+          {/* {auth.user.stripeSubscriptionId && (
             <>
               <div>
                 You are subscribed to the{" "}
@@ -50,11 +50,11 @@ function DashboardSection(props) {
                 <strong>{auth.user.stripeSubscriptionStatus}</strong>.
               </div>
             </>
-          )}
+          )} */}
 
           <div>
             You can change your account info{` `}
-            {auth.user.stripeSubscriptionId && <>and plan{` `}</>}
+            {/* {auth.user.stripeSubscriptionId && <>and plan{` `}</>} */}
             in{` `}
             <Link href="/settings/general">
               <a className="has-text-link">
