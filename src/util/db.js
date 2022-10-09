@@ -23,7 +23,8 @@ export function useUser(uid) {
     () =>
       supabase
         .from("users")
-        .select(`*, customers ( * )`)
+        // TODO why does this crash sign in page?
+        // .select(`*, customers ( * )`)
         .eq("id", uid)
         .single()
         .then(handle),
