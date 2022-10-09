@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import FormAlert from "components/FormAlert";
 import FormField from "components/FormField";
@@ -36,17 +37,18 @@ function EditProperty(props) {
   );
 
   useEffect(() => {
-    if (propertyData) {
+    if (propertyData?.purchasePrice) {
       setPurchasePrice(propertyData.purchase_price);
+    }
+    if (propertyData?.exp_property_taxes) {
       setPropertyTax(propertyData.exp_property_taxes);
     }
   }, [propertyData]);
 
+  const monthlyTax = Math.round((purchasePrice * 0.0125) / 12);
+
   useEffect(() => {
-    const monthlyTax = Math.round((purchasePrice * 0.0125) / 12);
-    if (props.id && purchasePrice) {
-      setPropertyTax(monthlyTax);
-    }
+    setPropertyTax(monthlyTax);
   }, [purchasePrice]);
 
   const { data: units } = useUnitsByProperty(props.id, auth.user.uid);
@@ -84,6 +86,14 @@ function EditProperty(props) {
           message: error.message,
         });
       });
+  };
+
+  const handlePriceChange = (e) => {
+    if (e.target.value) {
+      setPurchasePrice(parseInt(e.target.value));
+    } else {
+      setPurchasePrice("");
+    }
   };
 
   return (
@@ -137,13 +147,7 @@ function EditProperty(props) {
                     required: "Please enter a purchase price",
                   })}
                   value={purchasePrice}
-                  onChange={(e) => {
-                    if (e.target.value) {
-                      setPurchasePrice(parseInt(e.target.value));
-                    } else {
-                      setPurchasePrice("");
-                    }
-                  }}
+                  onChange={handlePriceChange}
                 />
                 <FormField
                   name="down_payment"
@@ -188,22 +192,16 @@ function EditProperty(props) {
 
                 <FormField
                   name="exp_property_taxes"
-                  label="Property Taxes (default 1.25%)"
+                  label="Property Taxes"
                   type="number"
+                  placeholder={propertyTax + " at 1.25%"}
+                  defaultValue={propertyData && propertyData.exp_property_taxes}
                   size="medium"
                   error={errors.exp_property_taxes}
                   inputRef={register({
                     required:
-                      "Please enter an amount for annual property taxes",
+                      "Please enter an amount for monthly property taxes",
                   })}
-                  value={propertyTax}
-                  onChange={(e) => {
-                    if (e.target.value) {
-                      setPropertyTax(parseInt(e.target.value));
-                    } else {
-                      setPropertyTax("");
-                    }
-                  }}
                 />
                 <FormField
                   name="exp_property_manager"
@@ -356,20 +354,33 @@ function EditProperty(props) {
                   <i className="fas fa-check"></i>
                 </span>
               </button>
-              {props.id && units?.length < 1 ? (
-                <button
-                  className="button is-danger my-2"
-                  aria-label="delete"
-                  type="button"
-                  onClick={() => setDeletingProperty(props.id)}
-                >
-                  Delete
-                  <span className="icon is-small ml-2">
-                    <i className="fas fa-trash"></i>
-                  </span>
-                </button>
+              {auth.user.stripeSubscriptionId ? (
+                <>
+                  {props.id && units?.length < 1 ? (
+                    <button
+                      className="button is-danger my-2"
+                      aria-label="delete"
+                      type="button"
+                      onClick={() => setDeletingProperty(props.id)}
+                    >
+                      Delete
+                      <span className="icon is-small ml-2">
+                        <i className="fas fa-trash"></i>
+                      </span>
+                    </button>
+                  ) : (
+                    <div>
+                      To delete a property, first delete all of its units.
+                    </div>
+                  )}
+                </>
               ) : (
-                <div>To delete a property, first delete all of its units.</div>
+                <div>
+                  Delete properties with a{" "}
+                  <Link href="/pricing">
+                    <a>Pro plan.</a>
+                  </Link>
+                </div>
               )}
             </div>
           </div>

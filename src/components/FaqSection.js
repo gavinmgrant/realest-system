@@ -22,7 +22,7 @@ function FaqSection(props) {
     {
       question: "How do I delete a property?",
       answer:
-        "First, delete all units in the property by clicking on each unit and deleting them. Once all units have been deleted, a red delete button will appear at the bottom of the screen when editing a property.",
+        "You can only delete a property with a Pro plan. First, delete all units in the property by clicking on each unit and deleting them. Once all units have been deleted, a red delete button will appear at the bottom of the screen when editing a property.",
     },
     {
       question: "How can I contact Realest System?",
