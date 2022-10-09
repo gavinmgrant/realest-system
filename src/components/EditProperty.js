@@ -15,14 +15,32 @@ import {
 import { toast } from "react-toastify";
 
 function EditProperty(props) {
+  const { register, handleSubmit, errors } = useForm();
+
+  // This will fetch property if props.id is defined
+  // Otherwise query does nothing and we assume
+  // we are creating a new property.
+  const { data: propertyData, status: propertyStatus } = useProperty(props.id);
+
   const auth = useAuth();
   const [pending, setPending] = useState(false);
   const [formAlert, setFormAlert] = useState(null);
   const [creatingUnit, setCreatingUnit] = useState(false);
   const [updatingUnitId, setUpdatingUnitId] = useState(null);
   const [deletingProperty, setDeletingProperty] = useState(false);
-  const [purchasePrice, setPurchasePrice] = useState(0);
-  const [propertyTax, setPropertyTax] = useState(0);
+  const [purchasePrice, setPurchasePrice] = useState(
+    propertyData?.purchase_price || 0
+  );
+  const [propertyTax, setPropertyTax] = useState(
+    propertyData?.exp_property_taxes || 0
+  );
+
+  useEffect(() => {
+    if (propertyData) {
+      setPurchasePrice(propertyData.purchase_price);
+      setPropertyTax(propertyData.exp_property_taxes);
+    }
+  }, [propertyData]);
 
   useEffect(() => {
     const monthlyTax = Math.round((purchasePrice * 0.0125) / 12);
@@ -30,13 +48,6 @@ function EditProperty(props) {
       setPropertyTax(monthlyTax);
     }
   }, [purchasePrice]);
-
-  const { register, handleSubmit, errors } = useForm();
-
-  // This will fetch property if props.id is defined
-  // Otherwise query does nothing and we assume
-  // we are creating a new property.
-  const { data: propertyData, status: propertyStatus } = useProperty(props.id);
 
   const { data: units } = useUnitsByProperty(props.id, auth.user.uid);
 
@@ -125,10 +136,7 @@ function EditProperty(props) {
                   inputRef={register({
                     required: "Please enter a purchase price",
                   })}
-                  value={
-                    (propertyData && propertyData.purchase_price) ||
-                    purchasePrice
-                  }
+                  value={purchasePrice}
                   onChange={(e) => {
                     if (e.target.value) {
                       setPurchasePrice(parseInt(e.target.value));
@@ -188,10 +196,7 @@ function EditProperty(props) {
                     required:
                       "Please enter an amount for annual property taxes",
                   })}
-                  value={
-                    (propertyData && propertyData.exp_property_taxes) ||
-                    propertyTax
-                  }
+                  value={propertyTax}
                   onChange={(e) => {
                     if (e.target.value) {
                       setPropertyTax(parseInt(e.target.value));
