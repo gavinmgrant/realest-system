@@ -17,15 +17,18 @@ function PricingSection(props) {
         "Store property details in the cloud",
         "Edit property details anytime",
         "Recalcuate investment analytics anytime",
+        "Rent roll included",
       ],
     },
     {
       id: "pro",
-      name: "PRO",
+      name: "Pro",
       price: "TBD",
       perks: [
-        "All features in the free plan",
-        "Pro features to be determined",
+        "All features in the Free plan",
+        "Compare properties side-by-side",
+        "Share property reports",
+        "More features to be determined",
         "Email us what you would like",
       ],
     },
@@ -50,7 +53,7 @@ function PricingSection(props) {
         <div className="columns is-centered is-variable is-4 is-desktop">
           {items.map((item, index) => (
             <div
-              className="PricingSection__column column is-one-third-desktop"
+              className="PricingSection__column column is-one-half-desktop"
               key={index}
             >
               <div
@@ -98,9 +101,9 @@ function PricingSection(props) {
                       Choose
                     </a>
                   </Link> */}
-                  <Link href="/dashboard">
+                  <Link href={item.id === "free" ? "/dashboard" : "#"}>
                     <a className="PricingSection__button button is-medium is-primary">
-                      Choose
+                      {item.id === "free" ? "Choose" : "Coming Soon"}
                     </a>
                   </Link>
                 </div>

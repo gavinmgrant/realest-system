@@ -12,7 +12,7 @@ function PricingPage(props) {
         backgroundImage=""
         backgroundImageOpacity={1}
         title="Pricing"
-        subtitle="We are in beta right now and will be offering a pro plan in the future. All accounts are free plans today."
+        subtitle="We are in beta right now and will be offering a Pro plan in the future. All accounts are Free plans today."
       />
     </>
   );
