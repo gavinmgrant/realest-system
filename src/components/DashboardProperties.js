@@ -98,7 +98,11 @@ function DashboardProperties() {
                 </span>
               </button>
             ) : (
-              <button className="button is-primary my-3" onClick={handleAddProperty}>
+              <button
+                className="button is-primary my-3"
+                onClick={handleAddProperty}
+                disabled={!canAddProperty}
+              >
                 {canAddProperty ? "Add Property" : "Upgrade to Add"}
                 <span className="icon is-small ml-2">
                   <i className="fas fa-plus"></i>
@@ -136,7 +140,9 @@ function DashboardProperties() {
                     setCurrentPropertyId(property.id);
                   }}
                 >
-                  <h3 className="title is-size-4-tablet is-size-5 is-5 mb-0">{property.address}</h3>
+                  <h3 className="title is-size-4-tablet is-size-5 is-5 mb-0">
+                    {property.address}
+                  </h3>
                   <button className="button is-primary p-2">
                     <span className="is-hidden-mobile pl-2 pr-2">
                       See Property Details
