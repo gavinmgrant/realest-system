@@ -23,9 +23,11 @@ function ContactSection(props) {
         />
         <CenteredColumns>
           <div className="column is-flex is-flex-direction-column is-align-items-center">
-            <Link href="mailto:hello@realestsystem.com">
-              <a>hello@realestsystem.com</a>
-            </Link>
+            <div className="button is-primary">
+              <Link href="mailto:hello@realestsystem.com">
+                <a>hello@realestsystem.com</a>
+              </Link>
+            </div>
           </div>
         </CenteredColumns>
         {/* <Contact
