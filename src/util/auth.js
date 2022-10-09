@@ -14,7 +14,7 @@ import { getFriendlyPlanId } from "./prices";
 import analytics from "./analytics";
 
 // Whether to merge extra user data from database into `auth.user`
-const MERGE_DB_USER = true;
+const MERGE_DB_USER = false;
 
 // Whether to connect analytics session to `user.uid`
 const ANALYTICS_IDENTIFY = true;
