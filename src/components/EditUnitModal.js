@@ -100,7 +100,7 @@ function EditUnitModal(props) {
                   name="number"
                   label="Unit Number"
                   type="text"
-                  placeholder="Number"
+                  placeholder="101"
                   defaultValue={unitData?.number}
                   size="medium"
                   error={errors.number}
@@ -112,8 +112,8 @@ function EditUnitModal(props) {
                 <FormField
                   name="rent_current"
                   label="Rent / month"
-                  type="text"
-                  placeholder="Rent"
+                  type="number"
+                  placeholder={2000}
                   defaultValue={unitData?.rent_current}
                   size="medium"
                   error={errors.rent_current}
@@ -126,8 +126,8 @@ function EditUnitModal(props) {
                     <FormField
                       name="income_parking"
                       label="Parking fee / month"
-                      type="text"
-                      placeholder="Parking fee"
+                      type="number"
+                      placeholder={0}
                       defaultValue={unitData?.income_parking}
                       size="medium"
                       error={errors.income_parking}
@@ -140,8 +140,8 @@ function EditUnitModal(props) {
                     <FormField
                       name="income_storage"
                       label="Storage fee / month"
-                      type="text"
-                      placeholder="Storage fee"
+                      type="number"
+                      placeholder={0}
                       defaultValue={unitData?.income_storage}
                       size="medium"
                       error={errors.income_storage}
@@ -157,8 +157,8 @@ function EditUnitModal(props) {
                   <FormField
                     name="rent_market"
                     label="Market Rent / month"
-                    type="text"
-                    placeholder="Market Rent"
+                    type="number"
+                    placeholder={unitData?.rent_current}
                     defaultValue={unitData?.rent_market}
                     size="medium"
                     error={errors.rent_market}
@@ -171,8 +171,8 @@ function EditUnitModal(props) {
                       <FormField
                         name="bedrooms"
                         label="Bedrooms"
-                        type="text"
-                        placeholder="Bedrooms"
+                        type="number"
+                        placeholder={1}
                         defaultValue={unitData && unitData.bedrooms}
                         size="medium"
                         error={errors.bedrooms}
@@ -186,8 +186,8 @@ function EditUnitModal(props) {
                       <FormField
                         name="baths"
                         label="Baths"
-                        type="text"
-                        placeholder="Baths"
+                        type="number"
+                        placeholder={1}
                         defaultValue={unitData && unitData.baths}
                         size="medium"
                         error={errors.baths}
@@ -201,8 +201,8 @@ function EditUnitModal(props) {
                       <FormField
                         name="floor_area"
                         label="Floor Area"
-                        type="text"
-                        placeholder="Floor Area"
+                        type="number"
+                        placeholder={1000}
                         defaultValue={unitData && unitData.floor_area}
                         size="medium"
                         error={errors.floor_area}

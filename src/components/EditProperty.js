@@ -130,7 +130,7 @@ function EditProperty(props) {
                   name="purchase_price"
                   label="Purchase Price"
                   type="number"
-                  placeholder="1000000"
+                  placeholder={1000000}
                   size="medium"
                   error={errors.purchase_price}
                   inputRef={register({
