@@ -204,7 +204,7 @@ function TabRentRoll(props) {
                     ).length > 0 ? (
                       <div className="is-fullwidth is-flex is-justify-content-space-between notification is-primary mt-4">
                         <p className="mr-2">Monthly Rent Schedule:</p>
-                        <p className="has-text-right title is-5 has-text-white">
+                        <p className="has-text-right title is-6 has-text-white is-size-5-tablet">
                           {formatCurrency(totalIncome)}
                         </p>
                       </div>
