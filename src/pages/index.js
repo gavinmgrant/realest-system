@@ -12,7 +12,7 @@ import { useAuth } from "util/auth";
 function IndexPage(props) {
   const auth = useAuth();
   const { user } = auth;
-  console.log("user", user);
+
   return (
     <>
       <Meta />
