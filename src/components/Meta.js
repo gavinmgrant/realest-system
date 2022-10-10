@@ -19,7 +19,7 @@ function Meta(props) {
   // Default meta values for current page (override with props)
   const defaultPageMeta = {
     // Page title
-    title: "Realest System | Quickly calculate your return on investment for residential income properties.",
+    title: "Realest System | Residential income property tools.",
     // Page description
     description: "Residential real estate investors, quickly calculate your return on investment for residential income properties.",
     // Social share image (create this file in /public/images/)
