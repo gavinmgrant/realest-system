@@ -11,7 +11,7 @@ function Meta(props) {
     // Site name
     siteName: "Realest System",
     // Your production domain (example: https://myapp.com)
-    domain: "",
+    domain: "https://realestsystem.com",
     // Your Twitter handle (example: @divjoy)
     twitterHandle: "realestsystem",
   };
@@ -19,11 +19,11 @@ function Meta(props) {
   // Default meta values for current page (override with props)
   const defaultPageMeta = {
     // Page title
-    title: "Realest System | Quickly calculate your return on invesment in just a few steps.",
+    title: "Realest System | Quickly calculate your return on investment for residential income properties.",
     // Page description
-    description: "Residential real estate investors, quickly calculate your return on invesment in just a few steps.",
+    description: "Residential real estate investors, quickly calculate your return on investment for residential income properties.",
     // Social share image (create this file in /public/images/)
-    image: "/images/social.png",
+    image: "/images/logo.png",
     // Page type (see https://ogp.me/#types)
     type: "website",
   };

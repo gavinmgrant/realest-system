@@ -21,7 +21,7 @@ function IndexPage(props) {
         size="medium"
         backgroundImage=""
         backgroundImageOpacity={1}
-        title="Quickly calculate your return on invesment in just a few steps."
+        title="Quickly calculate your return on investment for residential income properties."
         subtitle="Residential real estate investors, sign up for free! Save your work and return at anytime to review your properties analytics."
         image="/hero-animation.gif"
         buttonText={user ? "Go to Dashboard" : "Create Account"}
