@@ -45,6 +45,12 @@ function EditProperty(props) {
     }
   }, [propertyData]);
 
+  useEffect(() => {
+    if (!!propertyData) {
+      setPurchasePrice(propertyData?.purchase_price);
+    }
+  }, [propertyData]);
+
   const monthlyTax = Math.round((purchasePrice * 0.0125) / 12);
 
   useEffect(() => {
