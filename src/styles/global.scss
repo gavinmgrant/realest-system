@@ -63,13 +63,18 @@ $spacing-values: (
 @import "~bulma/bulma.sass";
 
 // IMPORT FONT AWESOME
-@import url("https://use.fontawesome.com/releases/v5.10.1/css/all.css");
+@import url("https://use.fontawesome.com/releases/v5.15.4/css/all.css");
 
 body {
   // Fix Bulma bug where columns cause
   // horizontal scroll on mobile.
   // https://github.com/jgthms/bulma/issues/449
   overflow-x: hidden;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: none !important;
 }
 
 #__next {

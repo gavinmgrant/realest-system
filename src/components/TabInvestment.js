@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { formatCurrency, formatPercentage } from "../util/util";
 import {
   totalAmount,
@@ -10,10 +10,17 @@ import {
   cashFlow,
   capRate,
 } from "../util/calculations";
+import AnalyticsModal from "./AnalyticsModal";
 
 function TabInvestment(props) {
+  const [topic, setTopic] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <>
+      {showModal && (
+        <AnalyticsModal onDone={() => setShowModal(false)} topic={topic} />
+      )}
       {props.properties
         .filter((prop) => prop.id === props.currentPropertyId)
         .map((property) => {
@@ -46,7 +53,9 @@ function TabInvestment(props) {
               key={property.id}
             >
               <div className="columns is-tablet">
-                <h2 className="title is-4 is-size-4 is-size-3-tablet mb-0 column">{property.address}</h2>
+                <h2 className="title is-4 is-size-4 is-size-3-tablet mb-0 column">
+                  {property.address}
+                </h2>
                 <div className="column is-flex-tablet is-justify-content-flex-end">
                   <button
                     className="button is-primary"
@@ -69,7 +78,16 @@ function TabInvestment(props) {
                 >
                   <tbody>
                     <tr>
-                      <td>Monthly Cash Flow:</td>
+                      <td>
+                        <a
+                          onClick={() => {
+                            setTopic("cash-flow");
+                            setShowModal(true);
+                          }}
+                        >
+                          Monthly Cash Flow:
+                        </a>
+                      </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
                         {formatCurrency(
                           cashFlow(
@@ -80,7 +98,16 @@ function TabInvestment(props) {
                       </td>
                     </tr>
                     <tr>
-                      <td>Gross Rent Multiplier:</td>
+                      <td>
+                        <a
+                          onClick={() => {
+                            setTopic("grm");
+                            setShowModal(true);
+                          }}
+                        >
+                          Gross Rent Multiplier:
+                        </a>
+                      </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
                         {grossRentMultiplier(
                           property.purchase_price,
@@ -89,22 +116,51 @@ function TabInvestment(props) {
                       </td>
                     </tr>
                     <tr>
-                      <td>CAP Rate:</td>
+                      <td>
+                        <a
+                          onClick={() => {
+                            setTopic("cap-rate");
+                            setShowModal(true);
+                          }}
+                        >
+                          Cap Rate:
+                        </a>
+                      </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
-                        {capRate(
-                          annualNOI(totalIncome, totalExpenses),
-                          property.purchase_price
+                        {formatPercentage(
+                          capRate(
+                            annualNOI(totalIncome, totalExpenses),
+                            property.purchase_price
+                          )
                         )}
                       </td>
                     </tr>
                     <tr>
-                      <td>NOI (Monthly):</td>
+                      <td>
+                        <a
+                          onClick={() => {
+                            setTopic("noi");
+                            setShowModal(true);
+                          }}
+                        >
+                          NOI (Monthly):
+                        </a>
+                      </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
                         {formatCurrency(monthlyNOI(totalIncome, totalExpenses))}
                       </td>
                     </tr>
                     <tr>
-                      <td>NOI (Yearly):</td>
+                      <td>
+                        <a
+                          onClick={() => {
+                            setTopic("noi");
+                            setShowModal(true);
+                          }}
+                        >
+                          NOI (Yearly):
+                        </a>
+                      </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
                         {formatCurrency(annualNOI(totalIncome, totalExpenses))}
                       </td>
