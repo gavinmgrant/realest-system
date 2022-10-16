@@ -11,7 +11,7 @@ function DashboardPage(props) {
         color="white"
         size="medium"
         title="Dashboard"
-        subtitle="We are in beta right now and will be offering a Pro plan that allows you to compare multiple properties side-by-side in the future. All accounts are Free plans today and have a 1 property limit."
+        subtitle="We are in beta right now and will be offering a Pro Plan that allows you to compare multiple properties side-by-side in the future. All accounts are Free Plans today and have a 1 property limit."
       />
     </>
   );

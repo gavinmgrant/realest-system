@@ -25,7 +25,7 @@ function PricingSection(props) {
       name: "Pro",
       price: "TBD",
       perks: [
-        "All features in the Free plan",
+        "All features in the Free Plan",
         "Add and delete multiple properties",
         "Compare properties side-by-side",
         "Share property reports",
@@ -89,7 +89,7 @@ function PricingSection(props) {
                       ))}
                     </ul>
                   )}
-
+                  {/* TODO once ready to sell Pro Plans uncomment */}
                   {/* <Link
                     href={
                       auth.user
