@@ -29,9 +29,7 @@ function DashboardProperties() {
   const [selectedTab, setSelectedTab] = useState("investment");
   const propertiesAreEmpty = !properties || properties?.length === 0;
 
-  const isProUser =
-    auth.user.planIsActive &&
-    (auth.user.planId === "pro" || auth.user.planId === "business");
+  const isProUser = auth.user.planIsActive && auth.user.planId === "pro";
 
   const canAddProperty = properties?.length < 1 || isProUser;
 
@@ -103,7 +101,7 @@ function DashboardProperties() {
                 onClick={handleAddProperty}
                 disabled={!canAddProperty}
               >
-                {canAddProperty ? "Add Property" : "Upgrade to Add"}
+                {canAddProperty ? "Add Property" : "Upgrade to Add More"}
                 <span className="icon is-small ml-2">
                   <i className="fas fa-plus"></i>
                 </span>

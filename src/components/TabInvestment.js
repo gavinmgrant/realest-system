@@ -11,8 +11,10 @@ import {
   capRate,
 } from "../util/calculations";
 import AnalyticsModal from "./AnalyticsModal";
+import { useAuth } from "util/auth";
 
 function TabInvestment(props) {
+  const auth = useAuth();
   const [topic, setTopic] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -56,17 +58,19 @@ function TabInvestment(props) {
                 <h2 className="title is-4 is-size-4 is-size-3-tablet mb-0 column">
                   {property.address}
                 </h2>
-                <div className="column is-flex-tablet is-justify-content-flex-end">
-                  <button
-                    className="button is-primary"
-                    onClick={() => props.setUpdatingPropertyId(property.id)}
-                  >
-                    Edit
-                    <span className="icon is-small ml-2">
-                      <i className="fas fa-pen"></i>
-                    </span>
-                  </button>
-                </div>
+                {auth.user && (
+                  <div className="column is-flex-tablet is-justify-content-flex-end">
+                    <button
+                      className="button is-primary"
+                      onClick={() => props.setUpdatingPropertyId(property.id)}
+                    >
+                      Edit
+                      <span className="icon is-small ml-2">
+                        <i className="fas fa-pen"></i>
+                      </span>
+                    </button>
+                  </div>
+                )}
               </div>
               <div className="is-full notification is-primary mb-4 p-2">
                 <h3 className="title is-5 has-text-white mb-3 m-1">
@@ -345,7 +349,7 @@ function TabInvestment(props) {
                         </tr>
                       </tbody>
                     </table>
-                    {props.units.filter(
+                    {props.units?.filter(
                       (unit) => unit.property_id === property.id
                     ).length === 0 && (
                       <p className="has-text-centered">

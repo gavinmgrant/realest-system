@@ -163,6 +163,20 @@ export function useUnitsByProperty(property_id, user_id) {
   );
 }
 
+// Fetch units for property
+export function useUnitsForProperty(property_id) {  
+  return useQuery(
+    ["units", { property_id }],
+    () =>
+      supabase
+        .from("units")
+        .select()
+        .eq("property_id", property_id)
+        .then(handle),
+    { enabled: !!property_id }
+  );
+}
+
 // Create a unit
 export async function createUnit(data) {
   const response = await supabase.from("units").insert([data]).then(handle);
