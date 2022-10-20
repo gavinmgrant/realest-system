@@ -19,7 +19,9 @@ function TabRentRoll(props) {
               key={property.id}
             >
               <div className="columns is-desktop">
-                <h2 className="title is-4 mb-0 column">{property.address}</h2>
+                <h2 className="title is-8 is-size-4 is-size-3-tablet mb-0 column">
+                  {property.address}
+                </h2>
               </div>
               <div className="columns is-desktop">
                 <div className="column p-3">

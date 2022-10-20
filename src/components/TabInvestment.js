@@ -11,17 +11,25 @@ import {
   capRate,
 } from "../util/calculations";
 import AnalyticsModal from "./AnalyticsModal";
+import ShareModal from "./ShareModal";
 import { useAuth } from "util/auth";
 
 function TabInvestment(props) {
   const auth = useAuth();
   const [topic, setTopic] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
 
   return (
     <>
       {showModal && (
         <AnalyticsModal onDone={() => setShowModal(false)} topic={topic} />
+      )}
+      {showShareModal && (
+        <ShareModal
+          onDone={() => setShowShareModal(false)}
+          url={`https://www.realestsystem.com/report/${props.currentPropertyId}`}
+        />
       )}
       {props.properties
         .filter((prop) => prop.id === props.currentPropertyId)
@@ -55,11 +63,20 @@ function TabInvestment(props) {
               key={property.id}
             >
               <div className="columns is-tablet">
-                <h2 className="title is-4 is-size-4 is-size-3-tablet mb-0 column">
+                <h2 className="title is-8 is-size-4 is-size-3-tablet mb-0 column">
                   {property.address}
                 </h2>
                 {auth.user && (
-                  <div className="column is-flex-tablet is-justify-content-flex-end">
+                  <div className="column is-4 is-flex-tablet is-justify-content-flex-end">
+                    <button
+                      className="button mr-3"
+                      onClick={() => setShowShareModal(true)}
+                    >
+                      Share
+                      <span className="icon is-small ml-2">
+                        <i className="fas fa-share"></i>
+                      </span>
+                    </button>
                     <button
                       className="button is-primary"
                       onClick={() => props.setUpdatingPropertyId(property.id)}

@@ -50,3 +50,12 @@ export function formatPercentage(amount) {
     maximumFractionDigits: 2,
   }).format(amount / 100);
 }
+
+// Copy text to clipboard
+export async function copyTextToClipboard(text) {
+  if ('clipboard' in navigator) {
+    return await navigator.clipboard.writeText(text);
+  } else {
+    return document.execCommand('copy', true, text);
+  }
+}
