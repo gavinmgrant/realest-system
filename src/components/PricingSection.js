@@ -27,7 +27,8 @@ function PricingSection(props) {
       price: "TBD",
       perks: [
         "All features in the Free Plan, plus:",
-        "Add and delete multiple properties",
+        "Add multiple properties",
+        "Delete properties",
         "Compare properties side-by-side",
         "And more!",
         "Email us what you would like to see",
