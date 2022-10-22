@@ -13,7 +13,7 @@ function PricingSection(props) {
       name: "Free",
       price: "0",
       perks: [
-        "Create 1 property at a time",
+        "Create 1 property",
         "Edit property details anytime",
         "Recalcuate investment analytics anytime",
         "Share a property report with unique URL",
@@ -27,7 +27,7 @@ function PricingSection(props) {
       price: "TBD",
       perks: [
         "All features in the Free Plan, plus:",
-        "Add multiple properties",
+        "Create multiple properties",
         "Delete properties",
         "Compare properties side-by-side",
         "And more!",
