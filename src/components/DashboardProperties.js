@@ -99,7 +99,6 @@ function DashboardProperties() {
               <button
                 className="button is-primary my-3"
                 onClick={handleAddProperty}
-                disabled={!canAddProperty}
               >
                 {canAddProperty ? "Add Property" : "Upgrade to Add More"}
                 <span className="icon is-small ml-2">

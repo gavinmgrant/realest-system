@@ -169,7 +169,7 @@ function EditProperty(props) {
                 />
                 <FormField
                   name="loan_interest_rate"
-                  label="Loan Interest Rate (in decimals)"
+                  label="Loan Interest Rate (%)"
                   type="float"
                   placeholder={5}
                   defaultValue={propertyData && propertyData.loan_interest_rate}

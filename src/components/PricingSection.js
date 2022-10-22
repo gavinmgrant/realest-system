@@ -14,11 +14,11 @@ function PricingSection(props) {
       price: "0",
       perks: [
         "Create 1 property at a time",
-        "Store property details on AWS servers",
         "Edit property details anytime",
         "Recalcuate investment analytics anytime",
-        "Share a property report",
-        "Rent roll included",
+        "Share a property report with unique URL",
+        "Rent roll documenting each unit",
+        "Data safely stored on AWS servers",
       ],
     },
     {
@@ -26,10 +26,11 @@ function PricingSection(props) {
       name: "Pro",
       price: "TBD",
       perks: [
-        "All features in the Free Plan",
+        "All features in the Free Plan, plus:",
         "Add and delete multiple properties",
         "Compare properties side-by-side",
-        "And more! Email us what you would like",
+        "And more!",
+        "Email us what you would like to see",
       ],
     },
   ];
