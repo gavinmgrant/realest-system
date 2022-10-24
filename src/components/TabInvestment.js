@@ -107,6 +107,9 @@ function TabInvestment(props) {
                           }}
                         >
                           Monthly Cash Flow:
+                          <span className="icon has-text-white is-small ml-1">
+                            <i className="fas fa-info-circle"></i>
+                          </span>
                         </a>
                       </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
@@ -127,6 +130,9 @@ function TabInvestment(props) {
                           }}
                         >
                           Gross Rent Multiplier:
+                          <span className="icon has-text-white is-small ml-1">
+                            <i className="fas fa-info-circle"></i>
+                          </span>
                         </a>
                       </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
@@ -145,6 +151,9 @@ function TabInvestment(props) {
                           }}
                         >
                           Cap Rate:
+                          <span className="icon has-text-white is-small ml-1">
+                            <i className="fas fa-info-circle"></i>
+                          </span>
                         </a>
                       </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
@@ -165,6 +174,9 @@ function TabInvestment(props) {
                           }}
                         >
                           NOI (Monthly):
+                          <span className="icon has-text-white is-small ml-1">
+                            <i className="fas fa-info-circle"></i>
+                          </span>
                         </a>
                       </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
@@ -180,6 +192,9 @@ function TabInvestment(props) {
                           }}
                         >
                           NOI (Yearly):
+                          <span className="icon has-text-white is-small ml-1">
+                            <i className="fas fa-info-circle"></i>
+                          </span>
                         </a>
                       </td>
                       <td className="has-text-right title is-6 has-text-white is-size-5-tablet">

@@ -25,7 +25,7 @@ function FeaturesSection(props) {
     {
       title: "Get investment analytics",
       description:
-        "We provide key investment analytics, like cash flow, gross rent multiplier, and cap rate. Make an informed residential real estate purchase.",
+        "We provide key investment analytics, like cash flow, gross rent multiplier, cap rate, and net operating income. Make an informed residential real estate purchase.",
       image: "/illustrations/4.png",
     },
   ];
