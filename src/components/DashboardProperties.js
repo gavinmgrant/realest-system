@@ -162,6 +162,7 @@ function DashboardProperties() {
                     onClick={() => {
                       setSelectedTab("investment");
                       setCurrentPropertyId(property.id);
+                      setSelectedProperties([]);
                     }}
                   >
                     <span className="is-hidden-mobile pl-2 pr-2">
