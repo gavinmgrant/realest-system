@@ -360,7 +360,7 @@ function EditProperty(props) {
                   <i className="fas fa-check"></i>
                 </span>
               </button>
-              {auth.user.stripeSubscriptionId ? (
+              {auth.user.stripeCustomerId ? (
                 <>
                   {props.id && units?.length < 1 ? (
                     <button

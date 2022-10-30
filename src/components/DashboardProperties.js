@@ -31,7 +31,7 @@ function DashboardProperties() {
   const [selectedTab, setSelectedTab] = useState("investment");
   const propertiesAreEmpty = !properties || properties?.length === 0;
 
-  const isProUser = auth.user.planIsActive && auth.user.planId === "pro";
+  const isProUser = auth.user.stripeCustomerId;
 
   const canAddProperty = properties?.length < 1 || isProUser;
 
@@ -138,7 +138,6 @@ function DashboardProperties() {
             !currentPropertyId &&
             properties.map((property) => {
               const isSelected = selectedProperties.includes(property.id);
-              console.log("is selected", isSelected);
               return (
                 <div
                   className={`card p-4 mb-4 is-clickable is-flex is-justify-content-space-between ${

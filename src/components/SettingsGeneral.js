@@ -81,6 +81,14 @@ function SettingsGeneral(props) {
           required: "Please enter your email",
         })}
       />
+      <FormField
+        name="plan"
+        type="test"
+        label="Plan"
+        defaultValue={auth.user.stripeCustomerId ? "Pro" : "Free"}
+        disabled
+        size="medium"
+      />
       <div className="field">
         <div className="control">
           <button
