@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import FormAlert from "components/FormAlert";
 import EditProperty from "components/EditProperty";
@@ -21,6 +22,7 @@ function DashboardProperties() {
 
   const { data: units } = useUnitsByUser(auth.user.uid);
 
+  const [selectedProperties, setSelectedProperties] = useState([]);
   const [creatingProperty, setCreatingProperty] = useState(false);
   const [currentPropertyId, setCurrentPropertyId] = useState(null);
   const [updatingPropertyId, setUpdatingPropertyId] = useState(null);
@@ -67,6 +69,13 @@ function DashboardProperties() {
         <div>
           <div className="panel panel-heading has-background-light py-3 px-4 is-flex-tablet is-justify-content-space-between is-align-items-center has-text-center-mobile">
             <h2 className="title is-4 m-0">Properties</h2>
+            {selectedProperties.length > 0 && (
+              <div className="my-1">
+                <Link href="/pricing">
+                  <a className="is-size-6">Compare properties with Pro Plan</a>
+                </Link>
+              </div>
+            )}
             {currentPropertyId && (
               <div className="tabs is-toggle m-0 my-3">
                 <ul>
@@ -128,19 +137,34 @@ function DashboardProperties() {
           {properties &&
             !currentPropertyId &&
             properties.map((property) => {
+              const isSelected = selectedProperties.includes(property.id);
+              console.log("is selected", isSelected);
               return (
                 <div
-                  className="card p-4 mb-4 is-clickable is-flex is-justify-content-space-between"
+                  className={`card p-4 mb-4 is-clickable is-flex is-justify-content-space-between ${
+                    isSelected && "DashboardProperties__card"
+                  }`}
                   key={property.id}
                   onClick={() => {
-                    setSelectedTab("investment");
-                    setCurrentPropertyId(property.id);
+                    if (selectedProperties.includes(property.id)) {
+                      setSelectedProperties((prev) =>
+                        prev.filter((id) => id !== property.id)
+                      );
+                    } else {
+                      setSelectedProperties((prev) => [...prev, property.id]);
+                    }
                   }}
                 >
                   <h3 className="title is-size-4-tablet is-size-5 is-5 mb-0">
                     {property.address}
                   </h3>
-                  <button className="button is-primary p-2">
+                  <button
+                    className="button is-primary p-2"
+                    onClick={() => {
+                      setSelectedTab("investment");
+                      setCurrentPropertyId(property.id);
+                    }}
+                  >
                     <span className="is-hidden-mobile pl-2 pr-2">
                       See Property Details
                     </span>

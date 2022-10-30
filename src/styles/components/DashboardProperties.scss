@@ -22,5 +22,9 @@
         color: #ff9800 !important;
       }
     }
+  };
+  &__card {
+    outline: 2px solid #63c0dc;
+    outline-offset: -2px;
   }
 }

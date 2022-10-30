@@ -10,7 +10,7 @@ function PricingSection(props) {
   const items = [
     {
       id: "free",
-      name: "Free",
+      name: "Free Plan",
       price: "0",
       perks: [
         "Create 1 property",
@@ -23,7 +23,7 @@ function PricingSection(props) {
     },
     {
       id: "pro",
-      name: "Pro",
+      name: "Pro Plan (Coming Soon)",
       price: "TBD",
       perks: [
         "All features in the Free Plan, plus:",
