@@ -142,13 +142,13 @@ function DashboardProperties() {
               const isSelected = selectedProperties.includes(property.id);
               return (
                 <div
-                  className={`card p-4 mb-4 is-clickable is-flex is-justify-content-space-between ${
+                  className={`card p-4 mb-4 is-flex is-justify-content-space-between ${
                     isSelected && "DashboardProperties__card"
                   }`}
                   key={property.id}
                 >
                   <h3
-                    className="title is-size-4-tablet is-size-5 is-5 mb-0"
+                    className="title is-size-4-tablet is-size-6 is-5 mb-0 is-clickable py-2 pr-2"
                     onClick={() => {
                       if (selectedProperties.includes(property.id)) {
                         setSelectedProperties((prev) =>
