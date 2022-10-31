@@ -30,6 +30,8 @@ function DashboardProperties() {
   const [updatingUnitId, setUpdatingUnitId] = useState(null);
   const [selectedTab, setSelectedTab] = useState("investment");
   const propertiesAreEmpty = !properties || properties?.length === 0;
+  console.log("currentPropertyId", currentPropertyId);
+  console.log("selectedProperties", selectedProperties);
 
   const isProUser = auth.user.stripeCustomerId;
 
@@ -144,17 +146,19 @@ function DashboardProperties() {
                     isSelected && "DashboardProperties__card"
                   }`}
                   key={property.id}
-                  onClick={() => {
-                    if (selectedProperties.includes(property.id)) {
-                      setSelectedProperties((prev) =>
-                        prev.filter((id) => id !== property.id)
-                      );
-                    } else {
-                      setSelectedProperties((prev) => [...prev, property.id]);
-                    }
-                  }}
                 >
-                  <h3 className="title is-size-4-tablet is-size-5 is-5 mb-0">
+                  <h3
+                    className="title is-size-4-tablet is-size-5 is-5 mb-0"
+                    onClick={() => {
+                      if (selectedProperties.includes(property.id)) {
+                        setSelectedProperties((prev) =>
+                          prev.filter((id) => id !== property.id)
+                        );
+                      } else {
+                        setSelectedProperties((prev) => [...prev, property.id]);
+                      }
+                    }}
+                  >
                     {property.address}
                   </h3>
                   <button

@@ -376,7 +376,8 @@ function EditProperty(props) {
                     </button>
                   ) : (
                     <div>
-                      To delete a property, first delete all of its units.
+                      {props.id &&
+                        "To delete a property, first delete all of its units."}
                     </div>
                   )}
                 </>

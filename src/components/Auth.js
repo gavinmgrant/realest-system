@@ -35,8 +35,8 @@ function Auth(props) {
         <>
           {props.providers && props.providers.length && (
             <>
-              <div className="Auth__social-divider has-text-centered is-size-7">
-                OR
+              <div className="Auth__social-divider has-text-centered is-size-7" />
+                {/* OR
               </div>
               <AuthSocial
                 buttonAction={props.buttonAction}
@@ -49,7 +49,7 @@ function Auth(props) {
                     message: message,
                   });
                 }}
-              />
+              /> */}
             </>
           )}
         </>
