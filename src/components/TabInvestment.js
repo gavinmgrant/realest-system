@@ -21,7 +21,7 @@ function TabInvestment(props) {
   const [showShareModal, setShowShareModal] = useState(false);
 
   return (
-    <>
+    <div className={props.compareProperties && "column"}>
       {showModal && (
         <AnalyticsModal onDone={() => setShowModal(false)} topic={topic} />
       )}
@@ -63,10 +63,10 @@ function TabInvestment(props) {
               key={property.id}
             >
               <div className="columns is-tablet">
-                <h2 className="title is-8 is-size-4 is-size-3-tablet mb-0 column">
+                <h2 className={`title is-size-4 is-size-3-tablet mb-0 column ${props.compareProperties && "is-8"}`}>
                   {property.address}
                 </h2>
-                {auth.user && (
+                {auth.user && !props.compareProperties && (
                   <div className="column is-4 is-flex-tablet is-justify-content-flex-end">
                     <button
                       className="button mr-3"
@@ -204,7 +204,7 @@ function TabInvestment(props) {
                   </tbody>
                 </table>
               </div>
-              <div className="columns is-desktop">
+              <div className={props.compareProperties ? "" : "columns is-desktop"}>
                 <div className="column p-3">
                   <h3 className="title is-5">Mortgage</h3>
                   <table className="table is-fullwidth is-bordered">
@@ -395,7 +395,7 @@ function TabInvestment(props) {
             </div>
           );
         })}
-    </>
+    </div>
   );
 }
 

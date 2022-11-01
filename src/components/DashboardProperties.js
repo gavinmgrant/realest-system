@@ -23,6 +23,7 @@ function DashboardProperties() {
   const { data: units } = useUnitsByUser(auth.user.uid);
 
   const [selectedProperties, setSelectedProperties] = useState([]);
+  const [compareProperties, setCompareProperties] = useState(false);
   const [creatingProperty, setCreatingProperty] = useState(false);
   const [currentPropertyId, setCurrentPropertyId] = useState(null);
   const [updatingPropertyId, setUpdatingPropertyId] = useState(null);
@@ -30,8 +31,6 @@ function DashboardProperties() {
   const [updatingUnitId, setUpdatingUnitId] = useState(null);
   const [selectedTab, setSelectedTab] = useState("investment");
   const propertiesAreEmpty = !properties || properties?.length === 0;
-  console.log("currentPropertyId", currentPropertyId);
-  console.log("selectedProperties", selectedProperties);
 
   const isProUser = auth.user.stripeCustomerId;
 
@@ -71,7 +70,15 @@ function DashboardProperties() {
         <div>
           <div className="panel panel-heading has-background-light py-3 px-4 is-flex-tablet is-justify-content-space-between is-align-items-center has-text-center-mobile">
             <h2 className="title is-4 m-0">Properties</h2>
-            {selectedProperties.length > 0 && (
+            {selectedProperties.length > 1 && isProUser && !compareProperties && (
+              <button
+                className="button"
+                onClick={() => setCompareProperties(!compareProperties)}
+              >
+                Compare Properties
+              </button>
+            )}
+            {selectedProperties.length > 0 && !isProUser && (
               <div className="my-1">
                 <Link href="/pricing">
                   <a className="is-size-6">Compare properties with Pro Plan</a>
@@ -96,10 +103,13 @@ function DashboardProperties() {
                 </ul>
               </div>
             )}
-            {currentPropertyId ? (
+            {currentPropertyId || compareProperties ? (
               <button
-                className="button is-primary"
-                onClick={() => setCurrentPropertyId(null)}
+                className="button is-primary my-3"
+                onClick={() => {
+                  setCurrentPropertyId(null);
+                  setCompareProperties(false);
+                }}
               >
                 View All
                 <span className="icon ml-2">
@@ -138,6 +148,7 @@ function DashboardProperties() {
 
           {properties &&
             !currentPropertyId &&
+            !compareProperties &&
             properties.map((property) => {
               const isSelected = selectedProperties.includes(property.id);
               return (
@@ -155,7 +166,12 @@ function DashboardProperties() {
                           prev.filter((id) => id !== property.id)
                         );
                       } else {
-                        setSelectedProperties((prev) => [...prev, property.id]);
+                        if (selectedProperties.length < 2) {
+                          setSelectedProperties((prev) => [
+                            ...prev,
+                            property.id,
+                          ]);
+                        }
                       }
                     }}
                   >
@@ -244,6 +260,25 @@ function DashboardProperties() {
             setUpdatingUnitId(null);
           }}
         />
+      )}
+
+      {compareProperties && (
+        <div className="columns mt-3">
+          <TabInvestment
+            properties={properties}
+            currentPropertyId={selectedProperties[0]}
+            units={units}
+            setUpdatingPropertyId={setUpdatingPropertyId}
+            compareProperties={compareProperties}
+          />
+          <TabInvestment
+            properties={properties}
+            currentPropertyId={selectedProperties[1]}
+            units={units}
+            setUpdatingPropertyId={setUpdatingPropertyId}
+            compareProperties={compareProperties}
+          />
+        </div>
       )}
     </>
   );
