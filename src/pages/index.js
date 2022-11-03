@@ -7,7 +7,7 @@ import FeaturesSection from "components/FeaturesSection";
 import CenteredColumns from "components/CenteredColumns";
 import { useAuth } from "util/auth";
 // import TestimonialsSection from "components/TestimonialsSection";
-// import NewsletterSection from "components/NewsletterSection";
+import NewsletterSection from "components/NewsletterSection";
 
 function IndexPage(props) {
   const auth = useAuth();
@@ -70,7 +70,7 @@ function IndexPage(props) {
           </div>
         </CenteredColumns>
       )}
-      {/* <NewsletterSection
+      <NewsletterSection
         color="white"
         size="medium"
         backgroundImage=""
@@ -82,7 +82,7 @@ function IndexPage(props) {
         buttonInverted={false}
         inputPlaceholder="Enter your email"
         subscribedMessage="You are now subscribed!"
-      /> */}
+      />
     </>
   );
 }

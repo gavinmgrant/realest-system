@@ -23,7 +23,7 @@ This project uses the following libraries and services:
 - Authentication - [Supabase](https://supabase.com)
 - Database - [Supabase](https://supabase.com)
 - Payments - [Stripe](https://stripe.com)
-- Newsletter - [Mailchimp](https://mailchimp.com)
+- Newsletter - [ConvertKit](https://convertkit.com)
 - Analytics - [Google Analytics](https://googleanalytics.com)
 - Hosting - [Vercel](https://vercel.com)
 
