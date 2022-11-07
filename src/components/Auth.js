@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import FormAlert from "components/FormAlert";
 import AuthForm from "components/AuthForm";
-import AuthSocial from "components/AuthSocial";
+// import AuthSocial from "components/AuthSocial";
 
 function Auth(props) {
   const router = useRouter();

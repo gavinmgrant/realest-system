@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import FormField from "components/FormField";
 import { useAuth } from "util/auth";
+import newsletter from "util/newsletter";
 
 function AuthForm(props) {
   const auth = useAuth();
 
   const [pending, setPending] = useState(false);
+  const [subscribeToNewsletter, setSubscribeToNewsletter] = useState(true);
   const { handleSubmit, register, errors, getValues } = useForm();
 
   const submitHandlersByType = {
@@ -20,6 +22,10 @@ function AuthForm(props) {
       return auth.signup(email, pass).then((user) => {
         // Call auth complete handler
         props.onAuth(user);
+        // If checkbox is selected, subscribe to newsletter
+        if (subscribeToNewsletter) {
+          newsletter.subscribe({ email });
+        }
       });
     },
     forgotpass: ({ email }) => {
@@ -61,6 +67,10 @@ function AuthForm(props) {
         message: error.message,
       });
     });
+  };
+
+  const handleCheckbox = () => {
+    setSubscribeToNewsletter(!subscribeToNewsletter);
   };
 
   return (
@@ -126,6 +136,19 @@ function AuthForm(props) {
           </button>
         </p>
       </div>
+
+      {["signup"].includes(props.type) && (
+        <label className="checkbox">
+          <input
+            type="checkbox"
+            checked={subscribeToNewsletter}
+            onChange={handleCheckbox}
+          />
+          <span className="ml-2">
+            Subscribe to newsletter for product updates
+          </span>
+        </label>
+      )}
     </form>
   );
 }
