@@ -98,7 +98,7 @@ function EditProperty(props) {
     if (e.target.value) {
       setPurchasePrice(parseInt(e.target.value));
     } else {
-      setPurchasePrice("");
+      setPurchasePrice(undefined);
     }
   };
 
@@ -128,7 +128,7 @@ function EditProperty(props) {
             label="Address"
             type="text"
             placeholder="Address"
-            defaultValue={propertyData && propertyData.address}
+            defaultValue={propertyData ? propertyData.address : undefined}
             size="medium"
             error={errors.address}
             autoFocus={true}
@@ -141,7 +141,6 @@ function EditProperty(props) {
             <div className="columns is-desktop mt-4">
               <section className="column">
                 <h3 className="title is-5">Mortgage</h3>
-
                 <FormField
                   name="purchase_price"
                   label="Purchase Price"
@@ -152,7 +151,7 @@ function EditProperty(props) {
                   inputRef={register({
                     required: "Please enter a purchase price",
                   })}
-                  value={purchasePrice}
+                  value={purchasePrice || undefined}
                   onChange={handlePriceChange}
                 />
                 <FormField
@@ -160,7 +159,9 @@ function EditProperty(props) {
                   label="Down Payment"
                   type="number"
                   placeholder={200000}
-                  defaultValue={propertyData && propertyData.down_payment}
+                  defaultValue={
+                    propertyData ? propertyData.down_payment : undefined
+                  }
                   size="medium"
                   error={errors.down_payment}
                   inputRef={register({
@@ -171,20 +172,35 @@ function EditProperty(props) {
                   name="loan_interest_rate"
                   label="Loan Interest Rate (%)"
                   type="float"
-                  placeholder={5}
-                  defaultValue={propertyData && propertyData.loan_interest_rate}
+                  placeholder={7}
+                  defaultValue={
+                    propertyData ? propertyData.loan_interest_rate : undefined
+                  }
                   size="medium"
                   error={errors.loan_interest_rate}
                   inputRef={register({
                     required: "Please enter an interest rate",
                   })}
                 />
+                <iframe
+                  src="//www.mortgagecalculator.org/rates-widgets/mortgages/text-widget.php?latest"
+                  frameBorder="0"
+                  style={{
+                    border: 0,
+                    overflow: 0,
+                    padding: "8px 0",
+                    height: "88px",
+                  }}
+                  scrolling="no"
+                />
                 <FormField
                   name="loan_period"
                   label="Loan Period (in years)"
                   type="number"
                   placeholder={30}
-                  defaultValue={propertyData && propertyData.loan_period}
+                  defaultValue={
+                    propertyData ? propertyData.loan_period : undefined
+                  }
                   size="medium"
                   error={errors.loan_period}
                   inputRef={register({
@@ -201,7 +217,9 @@ function EditProperty(props) {
                   label="Property Taxes"
                   type="number"
                   placeholder={propertyTax + " at 1.25%"}
-                  defaultValue={propertyData && propertyData.exp_property_taxes}
+                  defaultValue={
+                    propertyData ? propertyData.exp_property_taxes : undefined
+                  }
                   size="medium"
                   error={errors.exp_property_taxes}
                   inputRef={register({
@@ -215,7 +233,7 @@ function EditProperty(props) {
                   type="number"
                   placeholder={300}
                   defaultValue={
-                    propertyData && propertyData.exp_property_manager
+                    propertyData ? propertyData.exp_property_manager : undefined
                   }
                   size="medium"
                   error={errors.exp_property_manager}
@@ -229,7 +247,9 @@ function EditProperty(props) {
                   type="number"
                   placeholder={30}
                   defaultValue={
-                    propertyData && propertyData.exp_insurance_umbrella
+                    propertyData
+                      ? propertyData.exp_insurance_umbrella
+                      : undefined
                   }
                   size="medium"
                   error={errors.exp_insurance_umbrella}
@@ -243,7 +263,7 @@ function EditProperty(props) {
                   type="number"
                   placeholder={100}
                   defaultValue={
-                    propertyData && propertyData.exp_insurance_hazard
+                    propertyData ? propertyData.exp_insurance_hazard : undefined
                   }
                   size="medium"
                   error={errors.exp_insurance_hazard}
@@ -256,7 +276,9 @@ function EditProperty(props) {
                   label="Water and Sewer"
                   type="number"
                   placeholder={150}
-                  defaultValue={propertyData && propertyData.exp_water_sewer}
+                  defaultValue={
+                    propertyData ? propertyData.exp_water_sewer : undefined
+                  }
                   size="medium"
                   error={errors.exp_water_sewer}
                   inputRef={register({
@@ -268,7 +290,9 @@ function EditProperty(props) {
                   label="Landscape"
                   type="number"
                   placeholder={100}
-                  defaultValue={propertyData && propertyData.exp_landscape}
+                  defaultValue={
+                    propertyData ? propertyData.exp_landscape : undefined
+                  }
                   size="medium"
                   error={errors.exp_landscape}
                   inputRef={register({
@@ -281,7 +305,9 @@ function EditProperty(props) {
                   label="Maintenance"
                   type="number"
                   placeholder={500}
-                  defaultValue={propertyData && propertyData.exp_maintenance}
+                  defaultValue={
+                    propertyData ? propertyData.exp_maintenance : undefined
+                  }
                   size="medium"
                   error={errors.exp_maintenance}
                   inputRef={register({
@@ -294,7 +320,9 @@ function EditProperty(props) {
                   label="Vacancy"
                   type="number"
                   placeholder={0}
-                  defaultValue={propertyData && propertyData.exp_vacancy}
+                  defaultValue={
+                    propertyData ? propertyData.exp_vacancy : undefined
+                  }
                   size="medium"
                   error={errors.exp_maintenance}
                   inputRef={register({
