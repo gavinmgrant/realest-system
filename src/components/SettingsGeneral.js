@@ -1,13 +1,18 @@
 import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import FormField from "components/FormField";
 import { useAuth } from "util/auth";
 
 function SettingsGeneral(props) {
   const auth = useAuth();
+  const router = useRouter();
   const [pending, setPending] = useState(false);
 
   const { register, handleSubmit, errors } = useForm();
+
+  const isProUser = auth.user.planIsActive && auth.user.planId === "pro";
 
   const onSubmit = (data) => {
     // Show pending indicator
@@ -81,19 +86,44 @@ function SettingsGeneral(props) {
           required: "Please enter your email",
         })}
       />
-      <FormField
-        name="plan"
-        type="test"
-        label="Plan"
-        defaultValue={auth.user.stripeCustomerId ? "Pro" : "Free"}
-        disabled
-        size="medium"
-      />
+      <div
+        width="100%"
+        className="is-flex flex-direction-row is-justify-content-space-between is-align-items-end"
+      >
+        <FormField
+          name="plan"
+          type="test"
+          label="Plan"
+          defaultValue={isProUser ? "Pro" : "Free"}
+          disabled
+          size="medium"
+        />
+        {!isProUser ? (
+          <button
+            type="button"
+            className="button is-info is-medium"
+            style={{ marginBottom: "12px" }}
+            onClick={(e) => router.push("/pricing")}
+          >
+            Upgrade
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="button is-info is-medium"
+            style={{ marginBottom: "12px" }}
+            onClick={(e) => router.push("/settings/billing")}
+          >
+            Billing
+          </button>
+        )}
+      </div>
+
       <div className="field">
         <div className="control">
           <button
             className={
-              "button is-medium mt-2" +
+              "button is-medium mt-4" +
               (props.buttonColor ? ` is-${props.buttonColor}` : "") +
               (props.buttonInverted ? " is-inverted" : "") +
               (pending ? " is-loading" : "")

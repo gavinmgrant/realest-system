@@ -32,7 +32,7 @@ function DashboardProperties() {
   const [selectedTab, setSelectedTab] = useState("investment");
   const propertiesAreEmpty = !properties || properties?.length === 0;
 
-  const isProUser = auth.user.stripeCustomerId;
+  const isProUser = auth.user.planIsActive && auth.user.planId === "pro";
 
   const canAddProperty = properties?.length < 1 || isProUser;
 
@@ -149,52 +149,70 @@ function DashboardProperties() {
           {properties &&
             !currentPropertyId &&
             !compareProperties &&
-            properties.map((property) => {
-              const isSelected = selectedProperties.includes(property.id);
-              return (
-                <div
-                  className={`card p-4 mb-4 is-flex is-justify-content-space-between ${
-                    isSelected && "DashboardProperties__card"
-                  }`}
-                  key={property.id}
-                >
-                  <h3
-                    className="title is-size-4-tablet is-size-6 is-5 mb-0 is-clickable py-2 pr-2"
-                    onClick={() => {
-                      if (selectedProperties.includes(property.id)) {
-                        setSelectedProperties((prev) =>
-                          prev.filter((id) => id !== property.id)
-                        );
-                      } else {
-                        if (selectedProperties.length < 2) {
-                          setSelectedProperties((prev) => [
-                            ...prev,
-                            property.id,
-                          ]);
+            properties
+              .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+              .map((property, index) => {
+                const isSelected = selectedProperties.includes(property.id);
+                return (
+                  <div
+                    className={`card p-4 mb-4 is-flex is-justify-content-space-between ${
+                      isSelected && "DashboardProperties__card"
+                    }`}
+                    key={property.id}
+                  >
+                    <h3
+                      className="title is-size-4-tablet is-size-6 is-5 mb-0 is-clickable py-2 pr-2"
+                      onClick={() => {
+                        if (isProUser) {
+                          if (selectedProperties.includes(property.id)) {
+                            setSelectedProperties((prev) =>
+                              prev.filter((id) => id !== property.id)
+                            );
+                          } else {
+                            if (selectedProperties.length < 2) {
+                              setSelectedProperties((prev) => [
+                                ...prev,
+                                property.id,
+                              ]);
+                            }
+                          }
                         }
-                      }
-                    }}
-                  >
-                    {property.address}
-                  </h3>
-                  <button
-                    className="button is-primary p-2"
-                    onClick={() => {
-                      setSelectedTab("investment");
-                      setCurrentPropertyId(property.id);
-                      setSelectedProperties([]);
-                    }}
-                  >
-                    <span className="is-hidden-mobile pl-2 pr-2">
-                      See Property Details
-                    </span>
-                    <span className="icon is-small m-0">
-                      <i className="fas fa-arrow-right"></i>
-                    </span>
-                  </button>
-                </div>
-              );
-            })}
+                      }}
+                    >
+                      {property.address}
+                    </h3>
+                    {isProUser || index === 0 ? (
+                      <button
+                        className="button is-primary p-2"
+                        onClick={() => {
+                          setSelectedTab("investment");
+                          setCurrentPropertyId(property.id);
+                          setSelectedProperties([]);
+                        }}
+                      >
+                        <span className="is-hidden-mobile pl-2 pr-2">
+                          See Property Details
+                        </span>
+                        <span className="icon is-small m-0">
+                          <i className="fas fa-arrow-right"></i>
+                        </span>
+                      </button>
+                    ) : (
+                      <button
+                        className="button is-danger p-2"
+                        onClick={(e) => router.push("/pricing")}
+                      >
+                        <span className="is-hidden-mobile pl-2 pr-2">
+                          Upgrade to Unlock
+                        </span>
+                        <span className="icon is-small m-0">
+                          <i className="fas fa-lock"></i>
+                        </span>
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
 
           {currentPropertyId && selectedTab === "investment" && (
             <TabInvestment
