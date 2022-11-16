@@ -5,6 +5,7 @@ import FormAlert from "components/FormAlert";
 import FormField from "components/FormField";
 import EditUnitModal from "components/EditUnitModal";
 import DeleteModal from "./DeleteModal";
+import RatesModal from "./RatesModal";
 import { useAuth } from "util/auth";
 import { formatCurrency } from "../util/util";
 import {
@@ -28,6 +29,7 @@ function EditProperty(props) {
   const [formAlert, setFormAlert] = useState(null);
   const [creatingUnit, setCreatingUnit] = useState(false);
   const [updatingUnitId, setUpdatingUnitId] = useState(null);
+  const [isRatesModalOpen, setIsRatesModalOpen] = useState(false);
   const [deletingProperty, setDeletingProperty] = useState(false);
   const [purchasePrice, setPurchasePrice] = useState(
     propertyData?.purchase_price || 0
@@ -117,6 +119,10 @@ function EditProperty(props) {
         </button>
       </header>
 
+      {isRatesModalOpen && (
+        <RatesModal onDone={() => setIsRatesModalOpen(false)} />
+      )}
+
       <div className="DashboardProperties__panel panel">
         {formAlert && (
           <FormAlert type={formAlert.type} message={formAlert.message} />
@@ -182,17 +188,16 @@ function EditProperty(props) {
                     required: "Please enter an interest rate",
                   })}
                 />
-                <iframe
-                  src="//www.mortgagecalculator.org/rates-widgets/mortgages/text-widget.php?latest"
-                  frameBorder="0"
-                  style={{
-                    border: 0,
-                    overflow: 0,
-                    padding: "8px 0",
-                    height: "88px",
-                  }}
-                  scrolling="no"
-                />
+                <button
+                  type="button"
+                  className="button is-light mb-3"
+                  onClick={() => setIsRatesModalOpen(true)}
+                >
+                  See current rates
+                  <span className="icon ml-2">
+                    <i className="fas fa-chart-line"></i>
+                  </span>
+                </button>
                 <FormField
                   name="loan_period"
                   label="Loan Period (in years)"
