@@ -60,14 +60,14 @@ export function formatPercentage(amount) {
   return new Intl.NumberFormat("en-US", {
     style: "percent",
     maximumFractionDigits: 2,
-  }).format(amount / 100);
+  }).format((!amount ? 0 : amount) / 100);
 }
 
 // Copy text to clipboard
 export async function copyTextToClipboard(text) {
-  if ('clipboard' in navigator) {
+  if ("clipboard" in navigator) {
     return await navigator.clipboard.writeText(text);
   } else {
-    return document.execCommand('copy', true, text);
+    return document.execCommand("copy", true, text);
   }
 }

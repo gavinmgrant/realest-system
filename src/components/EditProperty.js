@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import FormAlert from "components/FormAlert";
@@ -7,7 +7,7 @@ import EditUnitModal from "components/EditUnitModal";
 import DeleteModal from "./DeleteModal";
 import RatesModal from "./RatesModal";
 import { useAuth } from "util/auth";
-import { formatCurrency } from "../util/util";
+import { formatCurrency, formatPercentage } from "../util/util";
 import {
   useProperty,
   updateProperty,
@@ -32,32 +32,23 @@ function EditProperty(props) {
   const [isRatesModalOpen, setIsRatesModalOpen] = useState(false);
   const [deletingProperty, setDeletingProperty] = useState(false);
   const [purchasePrice, setPurchasePrice] = useState(
-    propertyData?.purchase_price || 0
+    propertyData?.purchase_price
   );
   const [propertyTax, setPropertyTax] = useState(
-    propertyData?.exp_property_taxes || 0
+    propertyData?.exp_property_taxes
   );
-
-  useEffect(() => {
-    if (propertyData?.purchasePrice) {
-      setPurchasePrice(propertyData.purchase_price);
-    }
-    if (propertyData?.exp_property_taxes) {
-      setPropertyTax(propertyData.exp_property_taxes);
-    }
-  }, [propertyData]);
-
-  useEffect(() => {
-    if (!!propertyData) {
-      setPurchasePrice(propertyData?.purchase_price);
-    }
-  }, [propertyData]);
-
-  const monthlyTax = Math.round((purchasePrice * 0.0125) / 12);
-
-  useEffect(() => {
-    setPropertyTax(monthlyTax);
-  }, [purchasePrice]);
+  const [percentPropertyTax, setPercentPropertyTax] = useState(
+    (
+      ((propertyData?.exp_property_taxes * 12) / propertyData?.purchase_price) *
+      100
+    ).toFixed(2)
+  );
+  const [downPayment, setDownPayment] = useState(propertyData?.down_payment);
+  const [percentDownPayment, setPercentDownPayment] = useState(
+    ((propertyData?.down_payment / propertyData?.purchase_price) * 100).toFixed(
+      0
+    )
+  );
 
   const { data: units } = useUnitsByProperty(props.id, auth.user.uid);
 
@@ -98,9 +89,55 @@ function EditProperty(props) {
 
   const handlePriceChange = (e) => {
     if (e.target.value) {
-      setPurchasePrice(parseInt(e.target.value));
+      setPurchasePrice(e.target.value);
+      setPercentDownPayment(((downPayment / e.target.value) * 100).toFixed(0));
+      setPercentPropertyTax(
+        (((propertyTax * 12) / e.target.value) * 100).toFixed(2)
+      );
     } else {
       setPurchasePrice(undefined);
+    }
+  };
+
+  const handleDownPaymentChange = (e) => {
+    if (e.target.value) {
+      setDownPayment(e.target.value);
+      setPercentDownPayment(
+        ((e.target.value / purchasePrice) * 100).toFixed(0)
+      );
+    } else {
+      setDownPayment(undefined);
+    }
+  };
+
+  const handlePercentDownPaymentChange = (e) => {
+    if (e.target.value) {
+      setPercentDownPayment(e.target.value);
+      setDownPayment((purchasePrice * (e.target.value / 100)).toFixed(0));
+    } else {
+      setPercentDownPayment(undefined);
+    }
+  };
+
+  const handlePropertyTaxChange = (e) => {
+    if (e.target.value) {
+      setPropertyTax(e.target.value);
+      setPercentPropertyTax(
+        (((e.target.value * 12) / purchasePrice) * 100).toFixed(2)
+      );
+    } else {
+      setPropertyTax(undefined);
+    }
+  };
+
+  const handlePercentPropertyTaxChange = (e) => {
+    if (e.target.value) {
+      setPercentPropertyTax(e.target.value);
+      setPropertyTax(
+        ((purchasePrice * (e.target.value / 100)) / 12).toFixed(0)
+      );
+    } else {
+      setPercentPropertyTax(undefined);
     }
   };
 
@@ -157,28 +194,42 @@ function EditProperty(props) {
                   inputRef={register({
                     required: "Please enter a purchase price",
                   })}
-                  value={purchasePrice || undefined}
+                  value={purchasePrice}
                   onChange={handlePriceChange}
                 />
-                <FormField
-                  name="down_payment"
-                  label="Down Payment"
-                  type="number"
-                  placeholder={200000}
-                  defaultValue={
-                    propertyData ? propertyData.down_payment : undefined
-                  }
-                  size="medium"
-                  error={errors.down_payment}
-                  inputRef={register({
-                    required: "Please enter a down payment",
-                  })}
-                />
+                <div className="is-flex is-flex-direction-row mb-2">
+                  <span className="mr-2 mb-1">
+                    <FormField
+                      name="down_payment"
+                      label="Down Payment"
+                      type="number"
+                      placeholder={200000}
+                      size="medium"
+                      error={errors.down_payment}
+                      inputRef={register({
+                        required: "Please enter a down payment",
+                      })}
+                      value={downPayment}
+                      onChange={handleDownPaymentChange}
+                    />
+                  </span>
+                  <FormField
+                    name="percent_down"
+                    label="Percent Down (%)"
+                    type="number"
+                    step="0.01"
+                    size="medium"
+                    error={errors.percent_down}
+                    value={percentDownPayment}
+                    onChange={handlePercentDownPaymentChange}
+                  />
+                </div>
                 <FormField
                   name="loan_interest_rate"
                   label="Loan Interest Rate (%)"
-                  type="float"
-                  placeholder={7}
+                  type="number"
+                  step="0.01"
+                  placeholder={6}
                   defaultValue={
                     propertyData ? propertyData.loan_interest_rate : undefined
                   }
@@ -217,21 +268,34 @@ function EditProperty(props) {
               <section className="column">
                 <h3 className="title is-5">Monthly Expenses</h3>
 
-                <FormField
-                  name="exp_property_taxes"
-                  label="Property Taxes"
-                  type="number"
-                  placeholder={propertyTax + " at 1.25%"}
-                  defaultValue={
-                    propertyData ? propertyData.exp_property_taxes : undefined
-                  }
-                  size="medium"
-                  error={errors.exp_property_taxes}
-                  inputRef={register({
-                    required:
-                      "Please enter an amount for monthly property taxes",
-                  })}
-                />
+                <div className="is-flex is-flex-direction-row mb-2">
+                  <span className="mr-2 mb-1">
+                    <FormField
+                      name="exp_property_taxes"
+                      label="Property Taxes"
+                      type="number"
+                      placeholder={0}
+                      size="medium"
+                      error={errors.exp_property_taxes}
+                      inputRef={register({
+                        required:
+                          "Please enter an amount for monthly property taxes",
+                      })}
+                      value={propertyTax}
+                      onChange={handlePropertyTaxChange}
+                    />
+                  </span>
+                  <FormField
+                    name="tax_rate"
+                    label="Tax Rate (%)"
+                    type="number"
+                    step="0.01"
+                    size="medium"
+                    error={errors.tax_rate}
+                    value={percentPropertyTax}
+                    onChange={handlePercentPropertyTaxChange}
+                  />
+                </div>
                 <FormField
                   name="exp_property_manager"
                   label="Property Manager Fee"

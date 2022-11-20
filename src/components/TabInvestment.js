@@ -63,7 +63,11 @@ function TabInvestment(props) {
               key={property.id}
             >
               <div className="columns is-tablet">
-                <h2 className={`title is-size-4 is-size-3-tablet mb-0 column ${props.compareProperties && "is-8"}`}>
+                <h2
+                  className={`title is-size-4 is-size-3-tablet mb-0 column ${
+                    props.compareProperties && "is-8"
+                  }`}
+                >
                   {property.address}
                 </h2>
                 {auth.user && !props.compareProperties && (
@@ -204,7 +208,9 @@ function TabInvestment(props) {
                   </tbody>
                 </table>
               </div>
-              <div className={props.compareProperties ? "" : "columns is-desktop"}>
+              <div
+                className={props.compareProperties ? "" : "columns is-desktop"}
+              >
                 <div className="column p-3">
                   <h3 className="title is-5">Mortgage</h3>
                   <table className="table is-fullwidth is-bordered">
@@ -219,6 +225,15 @@ function TabInvestment(props) {
                         <td>Down Payment:</td>
                         <td className="has-text-right">
                           {formatCurrency(property.down_payment)}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Percent Down:</td>
+                        <td className="has-text-right">
+                          {formatPercentage(
+                            (property.down_payment / property.purchase_price) *
+                              100
+                          )}
                         </td>
                       </tr>
                       <tr>
