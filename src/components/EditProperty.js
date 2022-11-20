@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import FormAlert from "components/FormAlert";
@@ -31,24 +31,37 @@ function EditProperty(props) {
   const [updatingUnitId, setUpdatingUnitId] = useState(null);
   const [isRatesModalOpen, setIsRatesModalOpen] = useState(false);
   const [deletingProperty, setDeletingProperty] = useState(false);
-  const [purchasePrice, setPurchasePrice] = useState(
-    propertyData?.purchase_price
-  );
-  const [propertyTax, setPropertyTax] = useState(
-    propertyData?.exp_property_taxes
-  );
-  const [percentPropertyTax, setPercentPropertyTax] = useState(
-    (
-      ((propertyData?.exp_property_taxes * 12) / propertyData?.purchase_price) *
-      100
-    ).toFixed(2)
-  );
-  const [downPayment, setDownPayment] = useState(propertyData?.down_payment);
-  const [percentDownPayment, setPercentDownPayment] = useState(
-    ((propertyData?.down_payment / propertyData?.purchase_price) * 100).toFixed(
-      0
-    )
-  );
+  const [purchasePrice, setPurchasePrice] = useState(0);
+  const [propertyTax, setPropertyTax] = useState(0);
+  const [percentPropertyTax, setPercentPropertyTax] = useState(0);
+  const [downPayment, setDownPayment] = useState(0);
+  const [percentDownPayment, setPercentDownPayment] = useState(0);
+
+  useEffect(() => {
+    // Set initial state
+    if (propertyData) {
+      setPurchasePrice(propertyData.purchase_price);
+      setPropertyTax(propertyData.exp_property_taxes);
+      setPercentPropertyTax(
+        (
+          ((propertyData?.exp_property_taxes * 12) /
+            propertyData?.purchase_price) *
+          100
+        ).toFixed(2)
+      );
+      setDownPayment(propertyData.down_payment);
+      setPercentDownPayment(
+        (
+          (propertyData?.down_payment / propertyData?.purchase_price) *
+          100
+        ).toFixed(0)
+      );
+    }
+  }, [
+    propertyData?.purchase_price,
+    propertyData?.exp_property_taxes,
+    propertyData?.down_payment,
+  ]);
 
   const { data: units } = useUnitsByProperty(props.id, auth.user.uid);
 
