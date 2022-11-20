@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import Meta from "components/Meta";
 import HeroSection from "components/HeroSection";
 import ClientsSection from "components/ClientsSection";
@@ -8,10 +9,21 @@ import CenteredColumns from "components/CenteredColumns";
 import { useAuth } from "util/auth";
 // import TestimonialsSection from "components/TestimonialsSection";
 import NewsletterSection from "components/NewsletterSection";
+import supabase from "../util/supabase";
 
 function IndexPage(props) {
+  const router = useRouter();
   const auth = useAuth();
   const { user } = auth;
+
+  useEffect(() => {
+    // Redirect to edit password page if user requests password reset
+    supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event == "PASSWORD_RECOVERY") {
+        router.push("/settings/password");
+      }
+    });
+  }, []);
 
   return (
     <>
