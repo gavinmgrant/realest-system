@@ -18,6 +18,20 @@ function Auth(props) {
 
   return (
     <>
+      {["forgotpass"].includes(props.type) && (
+        <div className="box">
+          <p>
+            We use{" "}
+            <a href="https://supabase.com/" target="_blank">
+              Supabase
+            </a>{" "}
+            for authentication. Look for an email from{" "}
+            <u>noreply@mail.app.supabase.io</u> to reset your password. This
+            email may be in your spam folder.
+          </p>
+        </div>
+      )}
+
       {formAlert && (
         <FormAlert type={formAlert.type} message={formAlert.message} />
       )}

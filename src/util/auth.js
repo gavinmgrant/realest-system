@@ -102,7 +102,11 @@ function useAuthProvider() {
   };
 
   const sendPasswordResetEmail = (email) => {
-    return supabase.auth.api.resetPasswordForEmail(email).then(handleError);
+    return supabase.auth.api
+      .resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/settings/password`,
+      })
+      .then(handleError);
   };
 
   const confirmPasswordReset = (password, code) => {
