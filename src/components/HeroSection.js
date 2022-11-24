@@ -11,7 +11,7 @@ function HeroSection(props) {
       backgroundImage={props.backgroundImage}
       backgroundImageOpacity={props.backgroundImageOpacity}
     >
-      <div className="container">
+      <div className="container my-4">
         <div className="columns is-vcentered is-desktop">
           <div className="column is-5-desktop has-text-centered-touch">
             <SectionHeader
@@ -34,7 +34,7 @@ function HeroSection(props) {
               </Link>
             </div>
           </div>
-          <div className="column box ml-3 p-0">
+          <div className="column box m-3 p-0">
             <figure className="HeroSection__image image">
               <img src={props.image} alt="Illustration" />
             </figure>
