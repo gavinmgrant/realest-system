@@ -34,8 +34,7 @@ function HeroSection(props) {
               </Link>
             </div>
           </div>
-          <div className="column is-1" />
-          <div className="column">
+          <div className="column box ml-3 p-0">
             <figure className="HeroSection__image image">
               <img src={props.image} alt="Illustration" />
             </figure>
