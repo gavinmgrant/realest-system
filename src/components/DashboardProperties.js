@@ -183,7 +183,13 @@ function DashboardProperties() {
                       {property.address}
                     </h3>
                     <div className="is-flex is-flex-direction-row is-align-items-center">
-                      <p className="tag is-info is-light mr-2">{getPropertyType(units, property.id)}</p>
+                      <p
+                        className={`tag m-2 + " " + ${
+                          getPropertyType(units, property.id).color
+                        }`}
+                      >
+                        {getPropertyType(units, property.id).type}
+                      </p>
                       {isProUser || index === 0 ? (
                         <button
                           className="button is-primary p-2"
@@ -191,6 +197,7 @@ function DashboardProperties() {
                             setSelectedTab("investment");
                             setCurrentPropertyId(property.id);
                             setSelectedProperties([]);
+                            scrollToTop();
                           }}
                         >
                           <span className="is-hidden-mobile pl-2 pr-2">

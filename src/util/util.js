@@ -75,28 +75,35 @@ export async function copyTextToClipboard(text) {
 // Returns the property type based on number of units
 export const getPropertyType = (units, id) => {
   let type;
+  let color;
   const numberUnits = units?.filter((unit) => unit.property_id === id).length;
 
   switch (numberUnits) {
     case 0:
       type = "No units";
+      color = "is-danger";
       break;
     case 1:
       type = "Single-family";
+      color = "is-success";
       break;
     case 2:
       type = "Duplex";
+      color = "is-link";
       break;
     case 3:
       type = "Triplex";
+      color = "is-info";
       break;
     case 4:
       type = "Quad";
+      color = "is-warning";
       break;
     default:
       type = "Multi-family";
+      color = "is-dark";
       break;
   }
 
-  return type;
+  return {type, color};
 };
