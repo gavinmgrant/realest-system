@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { formatCurrency, formatPercentage } from "../util/util";
+import {
+  formatCurrency,
+  formatPercentage,
+  getPropertyType,
+} from "../util/util";
 import {
   totalAmount,
   getTotalIncome,
@@ -63,13 +67,22 @@ function TabInvestment(props) {
               key={property.id}
             >
               <div className="columns is-tablet">
-                <h2
-                  className={`title is-size-4 is-size-3-tablet mb-0 column ${
-                    props.compareProperties && "is-8"
-                  }`}
-                >
-                  {property.address}
-                </h2>
+                <div className="is-flex is-align-items-center">
+                  <h2
+                    className={`title is-size-4 is-size-3-tablet mb-0 column ${
+                      props.compareProperties && "is-8"
+                    }`}
+                  >
+                    {property.address}
+                  </h2>
+                  <p
+                    className={`tag m-2 + " " + ${
+                      getPropertyType(props.units, property.id).color
+                    }`}
+                  >
+                    {getPropertyType(props.units, property.id).type}
+                  </p>
+                </div>
                 {auth.user && !props.compareProperties && (
                   <div className="column is-4 is-flex-tablet is-justify-content-flex-end">
                     <button
