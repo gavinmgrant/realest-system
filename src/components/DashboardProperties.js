@@ -9,6 +9,7 @@ import EditUnitModal from "components/EditUnitModal";
 import { useAuth } from "util/auth";
 import { usePropertiesByUser, useUnitsByUser, deleteProperty } from "util/db";
 import { toast } from "react-toastify";
+import { getPropertyType } from "../util/util";
 
 function DashboardProperties() {
   const router = useRouter();
@@ -181,35 +182,38 @@ function DashboardProperties() {
                     >
                       {property.address}
                     </h3>
-                    {isProUser || index === 0 ? (
-                      <button
-                        className="button is-primary p-2"
-                        onClick={() => {
-                          setSelectedTab("investment");
-                          setCurrentPropertyId(property.id);
-                          setSelectedProperties([]);
-                        }}
-                      >
-                        <span className="is-hidden-mobile pl-2 pr-2">
-                          See Property Details
-                        </span>
-                        <span className="icon is-small m-0">
-                          <i className="fas fa-arrow-right"></i>
-                        </span>
-                      </button>
-                    ) : (
-                      <button
-                        className="button is-danger p-2"
-                        onClick={(e) => router.push("/pricing")}
-                      >
-                        <span className="is-hidden-mobile pl-2 pr-2">
-                          Upgrade to Unlock
-                        </span>
-                        <span className="icon is-small m-0">
-                          <i className="fas fa-lock"></i>
-                        </span>
-                      </button>
-                    )}
+                    <div className="is-flex is-flex-direction-row is-align-items-center">
+                      <p className="tag is-info is-light mr-2">{getPropertyType(units, property.id)}</p>
+                      {isProUser || index === 0 ? (
+                        <button
+                          className="button is-primary p-2"
+                          onClick={() => {
+                            setSelectedTab("investment");
+                            setCurrentPropertyId(property.id);
+                            setSelectedProperties([]);
+                          }}
+                        >
+                          <span className="is-hidden-mobile pl-2 pr-2">
+                            See Property Details
+                          </span>
+                          <span className="icon is-small m-0">
+                            <i className="fas fa-arrow-right"></i>
+                          </span>
+                        </button>
+                      ) : (
+                        <button
+                          className="button is-danger p-2"
+                          onClick={(e) => router.push("/pricing")}
+                        >
+                          <span className="is-hidden-mobile pl-2 pr-2">
+                            Upgrade to Unlock
+                          </span>
+                          <span className="icon is-small m-0">
+                            <i className="fas fa-lock"></i>
+                          </span>
+                        </button>
+                      )}
+                    </div>
                   </div>
                 );
               })}

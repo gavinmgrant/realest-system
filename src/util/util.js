@@ -71,3 +71,32 @@ export async function copyTextToClipboard(text) {
     return document.execCommand("copy", true, text);
   }
 }
+
+// Returns the property type based on number of units
+export const getPropertyType = (units, id) => {
+  let type;
+  const numberUnits = units?.filter((unit) => unit.property_id === id).length;
+
+  switch (numberUnits) {
+    case 0:
+      type = "No units";
+      break;
+    case 1:
+      type = "Single-family";
+      break;
+    case 2:
+      type = "Duplex";
+      break;
+    case 3:
+      type = "Triplex";
+      break;
+    case 4:
+      type = "Quad";
+      break;
+    default:
+      type = "Multi-family";
+      break;
+  }
+
+  return type;
+};
