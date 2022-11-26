@@ -191,7 +191,9 @@ function EditProperty(props) {
               address={propertyData && propertyData.address}
               label="Address"
               size="medium"
-              autoFocus={!propertyData.address}
+              autoFocus={propertyData && !propertyData.address}
+              register={register}
+              errors={errors}
             />
           ) : (
             <FormField

@@ -38,13 +38,17 @@ function AddressAutocomplete(props) {
       <div className="control">
         <Combobox onSelect={handleAddressSelect}>
           <ComboboxInput
-            value={value || props.address}
+            name="address"
+            value={(value || props.address) || ""}
             onChange={handleAddressInput}
             disabled={!ready}
             placeholder="Please enter an address"
             autoFocus={props.autoFocus}
-            error={props.errors?.address}
+            error={props.errors.address}
             className={`input is-${props.size}`}
+            ref={props.register({
+              required: "Please enter an address",
+            })}
           />
           <ComboboxPopover>
             <ComboboxList>

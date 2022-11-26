@@ -189,7 +189,7 @@ function DashboardProperties() {
                     </h3>
                     <div className="is-flex is-flex-direction-row is-align-items-center">
                       <p
-                        className={`tag m-2 + " " + ${
+                        className={`tag my-2 mx-3 + " " + ${
                           getPropertyType(units, property.id).color
                         }`}
                       >

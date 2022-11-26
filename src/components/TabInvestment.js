@@ -78,7 +78,7 @@ function TabInvestment(props) {
                 </div>
                 <div className="column is-4 is-flex is-justify-content-flex-end">
                   <p
-                    className={`tag m-2 + " " + ${
+                    className={`tag my-2 mx-3 + " " + ${
                       getPropertyType(props.units, property.id).color
                     }`}
                   >
