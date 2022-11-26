@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Script from "next/script";
 import { useRouter } from "next/router";
 import FormAlert from "components/FormAlert";
 import EditProperty from "components/EditProperty";
@@ -61,6 +62,10 @@ function DashboardProperties() {
 
   return (
     <>
+      <Script
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`}
+      />
+
       {propertiesError && (
         <div className="mb-3">
           <FormAlert type="error" message={propertiesError.message} />

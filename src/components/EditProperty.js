@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import FormAlert from "components/FormAlert";
 import FormField from "components/FormField";
 import EditUnitModal from "components/EditUnitModal";
+import AddressAutocomplete from "components/AddressAutoComplete";
 import DeleteModal from "./DeleteModal";
 import RatesModal from "./RatesModal";
 import { useAuth } from "util/auth";
-import { formatCurrency, formatPercentage } from "../util/util";
+import { formatCurrency } from "../util/util";
 import {
   useProperty,
   updateProperty,
@@ -36,6 +37,8 @@ function EditProperty(props) {
   const [percentPropertyTax, setPercentPropertyTax] = useState(0);
   const [downPayment, setDownPayment] = useState(0);
   const [percentDownPayment, setPercentDownPayment] = useState(0);
+
+  const isProUser = auth.user.planIsActive && auth.user.planId === "pro";
 
   useEffect(() => {
     // Set initial state
@@ -175,23 +178,36 @@ function EditProperty(props) {
 
       <div className="DashboardProperties__panel panel">
         {formAlert && (
-          <FormAlert type={formAlert.type} message={formAlert.message} />
+          <FormAlert
+            type={formAlert.type}
+            message={formAlert.message}
+            errors={errors}
+          />
         )}
 
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormField
-            name="address"
-            label="Address"
-            type="text"
-            placeholder="Address"
-            defaultValue={propertyData ? propertyData.address : undefined}
-            size="medium"
-            error={errors.address}
-            autoFocus={true}
-            inputRef={register({
-              required: "Please enter an address",
-            })}
-          />
+          {isProUser ? (
+            <AddressAutocomplete
+              address={propertyData && propertyData.address}
+              label="Address"
+              size="medium"
+              autoFocus={!propertyData.address}
+            />
+          ) : (
+            <FormField
+              name="address"
+              label="Address"
+              type="text"
+              placeholder="Address"
+              defaultValue={propertyData ? propertyData.address : undefined}
+              size="medium"
+              error={errors.address}
+              autoFocus={true}
+              inputRef={register({
+                required: "Please enter an address",
+              })}
+            />
+          )}
 
           {props.id && (
             <div className="columns is-desktop mt-4">

@@ -28,10 +28,10 @@ function PricingSection(props) {
       perks: [
         "All features in the Free Plan, plus:",
         "Create multiple properties",
-        "Delete properties",
         "Compare properties side-by-side",
+        "Address autocomplete powered by Google",
+        "Delete properties",
         "And more!",
-        "Email us what you would like to see",
       ],
     },
   ];

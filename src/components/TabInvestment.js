@@ -66,7 +66,7 @@ function TabInvestment(props) {
               className="DashboardProperties__panel panel mb-4"
               key={property.id}
             >
-              <div className="columns is-tablet">
+              <div className="columns is-tablet-flex is-justify-content-space-between">
                 <div className="is-flex is-align-items-center">
                   <h2
                     className={`title is-size-4 is-size-3-tablet mb-0 column ${
@@ -75,6 +75,8 @@ function TabInvestment(props) {
                   >
                     {property.address}
                   </h2>
+                </div>
+                <div className="column is-4 is-flex is-justify-content-flex-end">
                   <p
                     className={`tag m-2 + " " + ${
                       getPropertyType(props.units, property.id).color
@@ -82,29 +84,30 @@ function TabInvestment(props) {
                   >
                     {getPropertyType(props.units, property.id).type}
                   </p>
+
+                  {auth.user && !props.compareProperties && (
+                    <>
+                      <button
+                        className="button mr-3"
+                        onClick={() => setShowShareModal(true)}
+                      >
+                        Share
+                        <span className="icon is-small ml-2">
+                          <i className="fas fa-share"></i>
+                        </span>
+                      </button>
+                      <button
+                        className="button is-primary"
+                        onClick={() => props.setUpdatingPropertyId(property.id)}
+                      >
+                        Edit
+                        <span className="icon is-small ml-2">
+                          <i className="fas fa-pen"></i>
+                        </span>
+                      </button>
+                    </>
+                  )}
                 </div>
-                {auth.user && !props.compareProperties && (
-                  <div className="column is-4 is-flex-tablet is-justify-content-flex-end">
-                    <button
-                      className="button mr-3"
-                      onClick={() => setShowShareModal(true)}
-                    >
-                      Share
-                      <span className="icon is-small ml-2">
-                        <i className="fas fa-share"></i>
-                      </span>
-                    </button>
-                    <button
-                      className="button is-primary"
-                      onClick={() => props.setUpdatingPropertyId(property.id)}
-                    >
-                      Edit
-                      <span className="icon is-small ml-2">
-                        <i className="fas fa-pen"></i>
-                      </span>
-                    </button>
-                  </div>
-                )}
               </div>
               <div className="is-full notification is-primary mb-4 p-2">
                 <h3 className="title is-5 has-text-white mb-3 m-1">
