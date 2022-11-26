@@ -208,6 +208,7 @@ function EditProperty(props) {
               inputRef={register({
                 required: "Please enter an address",
               })}
+              autoComplete="off"
             />
           )}
 

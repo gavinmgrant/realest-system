@@ -37,9 +37,7 @@ function AddressAutocomplete(props) {
       setValue(props.address);
     }
   }, [props.address]);
-  console.log("isFocus", isFocus);
-  console.log("status", status);
-  console.log("data", data);
+
   return (
     <div className="field">
       {props.label && (
@@ -62,6 +60,7 @@ function AddressAutocomplete(props) {
               required: "Please enter an address",
             })}
             onFocus={() => setIsFocus(true)}
+            autoComplete="off"
           />
           <ComboboxPopover>
             <ComboboxList>
