@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import {
   Combobox,
@@ -10,6 +10,7 @@ import {
 import "@reach/combobox/styles.css";
 
 function AddressAutocomplete(props) {
+  const [isFocus, setIsFocus] = useState(false);
   // React hook for Google Maps Places Autocomplete
   const {
     ready,
@@ -26,16 +27,19 @@ function AddressAutocomplete(props) {
   const handleAddressSelect = (address) => {
     setValue(address, false);
     clearSuggestions();
+    setIsFocus(false);
   };
 
   useEffect(() => {
     if (!props.address) {
-      setValue("")
+      setValue("");
     } else {
-      setValue(props.address)
+      setValue(props.address);
     }
-  }, [props.address]) 
-
+  }, [props.address]);
+  console.log("isFocus", isFocus);
+  console.log("status", status);
+  console.log("data", data);
   return (
     <div className="field">
       {props.label && (
@@ -57,10 +61,12 @@ function AddressAutocomplete(props) {
             ref={props.register({
               required: "Please enter an address",
             })}
+            onFocus={() => setIsFocus(true)}
           />
           <ComboboxPopover>
             <ComboboxList>
               {status === "OK" &&
+                isFocus &&
                 data.map(({ description }) => (
                   <ComboboxOption key={description} value={description} />
                 ))}
