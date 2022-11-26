@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import usePlacesAutocomplete from "use-places-autocomplete";
 import {
   Combobox,
@@ -28,6 +28,14 @@ function AddressAutocomplete(props) {
     clearSuggestions();
   };
 
+  useEffect(() => {
+    if (!props.address) {
+      setValue("")
+    } else {
+      setValue(props.address)
+    }
+  }, [props.address]) 
+
   return (
     <div className="field">
       {props.label && (
@@ -39,7 +47,7 @@ function AddressAutocomplete(props) {
         <Combobox onSelect={handleAddressSelect}>
           <ComboboxInput
             name="address"
-            value={(value || props.address) || ""}
+            value={value}
             onChange={handleAddressInput}
             disabled={!ready}
             placeholder="Please enter an address"
