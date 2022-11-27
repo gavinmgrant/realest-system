@@ -119,8 +119,8 @@ function TabInvestment(props) {
               </div>
               <div className="mt-2 mb-3" style={{ margin: "0" }}>
                 <div className="columns">
-                  {isProUser
-                    ? !router.pathname.includes("report") &&
+                  {!router.pathname.includes("report") &&
+                    (isProUser ? (
                       !props.compareProperties && (
                         <div className="column">
                           <iframe
@@ -142,21 +142,21 @@ function TabInvestment(props) {
                           ></iframe>
                         </div>
                       )
-                    : auth.user && (
-                        <div className="column">
-                          <div
-                            className="notification p-4 is-flex is-justify-content-center is-align-items-center"
-                            style={{ height: "100%", borderRadius: "4px" }}
-                          >
-                            <Link href="/pricing">
-                              Upgrade to Pro Plan and see map.
-                            </Link>
-                            <span className="icon is-small ml-1">
-                              <i className="fas fa-lock"></i>
-                            </span>
-                          </div>
+                    ) : (
+                      <div className="column">
+                        <div
+                          className="notification p-4 is-flex is-justify-content-center is-align-items-center"
+                          style={{ height: "100%", borderRadius: "4px" }}
+                        >
+                          <Link href="/pricing">
+                            Upgrade to Pro Plan and see map.
+                          </Link>
+                          <span className="icon is-small ml-1">
+                            <i className="fas fa-lock"></i>
+                          </span>
                         </div>
-                      )}
+                      </div>
+                    ))}
                   <div className="column">
                     <div className="notification is-primary p-2">
                       <h3 className="title is-5 has-text-white mb-3 m-1">
