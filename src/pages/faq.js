@@ -5,7 +5,7 @@ import FaqSection from "components/FaqSection";
 function FaqPage(props) {
   return (
     <>
-      <Meta title="Faq" />
+      <Meta title="Frequently Asked Questions" />
       <FaqSection
         color="white"
         size="medium"
