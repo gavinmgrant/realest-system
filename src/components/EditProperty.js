@@ -71,6 +71,12 @@ function EditProperty(props) {
 
   const { data: units } = useUnitsByProperty(props.id, auth.user.uid);
 
+  useEffect(() => {
+    if (!units) return;
+    if (isProUser || units?.length < 1) setCanAddUnit(true);
+    if (!isProUser && units?.length > 0) setCanAddUnit(false);
+  }, [units, isProUser]);
+
   // If we are updating an existing property
   // don't show until property data is fetched.
   if (props.id && propertyStatus !== "success") {
@@ -159,11 +165,6 @@ function EditProperty(props) {
       setPercentPropertyTax(undefined);
     }
   };
-
-  useEffect(() => {
-    if (isProUser || units?.length < 1) setCanAddUnit(true);
-    if (!isProUser && units?.length > 0) setCanAddUnit(false);
-  }, [units?.length, isProUser]);
 
   return (
     <>
