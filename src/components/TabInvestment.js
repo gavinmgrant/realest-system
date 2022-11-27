@@ -151,6 +151,9 @@ function TabInvestment(props) {
                             <Link href="/pricing">
                               Upgrade to Pro Plan and see map.
                             </Link>
+                            <span className="icon is-small ml-1">
+                              <i className="fas fa-lock"></i>
+                            </span>
                           </div>
                         </div>
                       )}

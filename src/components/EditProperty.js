@@ -512,10 +512,11 @@ function EditProperty(props) {
                 </>
               ) : (
                 <div>
-                  Delete properties with a{" "}
+                  Upgrade to a{" "}
                   <Link href="/pricing">
-                    <a>Pro Plan.</a>
+                    <a>Pro Plan </a>
                   </Link>
+                  to delete property.
                 </div>
               )}
             </div>

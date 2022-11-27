@@ -127,10 +127,21 @@ function DashboardProperties() {
                 className="button is-primary my-3"
                 onClick={handleAddProperty}
               >
-                {canAddProperty ? "Add Property" : "Upgrade to Add More"}
-                <span className="icon is-small ml-2">
-                  <i className="fas fa-plus"></i>
-                </span>
+                {canAddProperty ? (
+                  <>
+                    Add Property
+                    <span className="icon is-small ml-2">
+                      <i className="fas fa-plus"></i>
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    Upgrade to Add More
+                    <span className="icon is-small ml-2">
+                      <i className="fas fa-lock"></i>
+                    </span>
+                  </>
+                )}
               </button>
             )}
           </div>
