@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import FormAlert from "components/FormAlert";
 import FormField from "components/FormField";
@@ -18,6 +19,7 @@ import {
 import { toast } from "react-toastify";
 
 function EditProperty(props) {
+  const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
 
   // This will fetch property if props.id is defined
@@ -32,6 +34,7 @@ function EditProperty(props) {
   const [updatingUnitId, setUpdatingUnitId] = useState(null);
   const [isRatesModalOpen, setIsRatesModalOpen] = useState(false);
   const [deletingProperty, setDeletingProperty] = useState(false);
+  const [canAddUnit, setCanAddUnit] = useState(false);
   const [purchasePrice, setPurchasePrice] = useState(0);
   const [propertyTax, setPropertyTax] = useState(0);
   const [percentPropertyTax, setPercentPropertyTax] = useState(0);
@@ -156,6 +159,11 @@ function EditProperty(props) {
       setPercentPropertyTax(undefined);
     }
   };
+
+  useEffect(() => {
+    if (isProUser || units?.length < 1) setCanAddUnit(true);
+    if (!isProUser && units?.length > 0) setCanAddUnit(false);
+  }, [units?.length, isProUser]);
 
   return (
     <>
@@ -464,12 +472,20 @@ function EditProperty(props) {
                 </table>
                 <button
                   className="button is-primary"
-                  onClick={() => setCreatingUnit(true)}
+                  onClick={
+                    canAddUnit
+                      ? () => setCreatingUnit(true)
+                      : () => router.push("/pricing")
+                  }
                   type="button"
                 >
-                  Add Unit
+                  {canAddUnit ? "Add Unit" : "Upgrade to add more units"}
                   <span className="icon is-small ml-2">
-                    <i className="fas fa-plus"></i>
+                    {canAddUnit ? (
+                      <i className="fas fa-plus"></i>
+                    ) : (
+                      <i className="fas fa-lock"></i>
+                    )}
                   </span>
                 </button>
               </section>

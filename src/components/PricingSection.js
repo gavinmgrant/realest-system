@@ -14,6 +14,7 @@ function PricingSection(props) {
       price: "0",
       perks: [
         "Create 1 property",
+        "Add 1 unit per property",
         "Edit property details anytime",
         "Recalcuate investment analytics anytime",
         "Share a property report with unique URL",
@@ -28,6 +29,7 @@ function PricingSection(props) {
       perks: [
         "All features in the Free Plan, plus:",
         "Create multiple properties",
+        "Add multiple units per property",
         "Compare properties side-by-side",
         "Address autocomplete and suggestions",
         "Embedded map in property details",
