@@ -200,7 +200,7 @@ function DashboardProperties() {
                     </h3>
                     <div className="is-flex is-flex-direction-row is-align-items-center">
                       <p
-                        className={`tag my-2 mx-3 + " " + ${
+                        className={`tag my-2 ${
                           getPropertyType(units, property.id).color
                         }`}
                       >
@@ -208,7 +208,7 @@ function DashboardProperties() {
                       </p>
                       {isProUser || index === 0 ? (
                         <button
-                          className="button is-primary p-2"
+                          className="button is-primary p-2 ml-3"
                           onClick={() => {
                             setSelectedTab("investment");
                             setCurrentPropertyId(property.id);

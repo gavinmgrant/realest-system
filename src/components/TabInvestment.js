@@ -84,7 +84,7 @@ function TabInvestment(props) {
                 {!props.compareProperties && (
                   <div className="column is-4 is-flex is-justify-content-flex-end">
                     <p
-                      className={`tag my-2 mx-3 + " " + ${
+                      className={`tag my-2 ${
                         getPropertyType(props.units, property.id).color
                       }`}
                     >
@@ -93,7 +93,7 @@ function TabInvestment(props) {
                     {auth.user && (
                       <>
                         <button
-                          className="button mr-3"
+                          className="button mx-3"
                           onClick={() => setShowShareModal(true)}
                         >
                           Share
