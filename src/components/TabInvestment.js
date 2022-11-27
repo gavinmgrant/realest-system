@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   formatCurrency,
   formatPercentage,
@@ -20,9 +22,12 @@ import { useAuth } from "util/auth";
 
 function TabInvestment(props) {
   const auth = useAuth();
+  const router = useRouter();
   const [topic, setTopic] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showShareModal, setShowShareModal] = useState(false);
+
+  const isProUser = auth.user.planIsActive && auth.user.planId === "pro";
 
   return (
     <div className={props.compareProperties && "column"}>
@@ -69,160 +74,208 @@ function TabInvestment(props) {
               <div className="columns is-tablet-flex is-justify-content-space-between">
                 <div className="is-flex is-align-items-center">
                   <h2
-                    className={`title is-size-4 is-size-3-tablet mb-0 column ${
-                      props.compareProperties && "is-8"
+                    className={`title is-size-5 is-size-4-tablet mb-0 column ${
+                      props.compareProperties && "is-fullwidth"
                     }`}
                   >
                     {property.address}
                   </h2>
                 </div>
-                <div className="column is-4 is-flex is-justify-content-flex-end">
-                  <p
-                    className={`tag my-2 mx-3 + " " + ${
-                      getPropertyType(props.units, property.id).color
-                    }`}
-                  >
-                    {getPropertyType(props.units, property.id).type}
-                  </p>
-
-                  {auth.user && !props.compareProperties && (
-                    <>
-                      <button
-                        className="button mr-3"
-                        onClick={() => setShowShareModal(true)}
-                      >
-                        Share
-                        <span className="icon is-small ml-2">
-                          <i className="fas fa-share"></i>
-                        </span>
-                      </button>
-                      <button
-                        className="button is-primary"
-                        onClick={() => props.setUpdatingPropertyId(property.id)}
-                      >
-                        Edit
-                        <span className="icon is-small ml-2">
-                          <i className="fas fa-pen"></i>
-                        </span>
-                      </button>
-                    </>
-                  )}
-                </div>
+                {!props.compareProperties && (
+                  <div className="column is-4 is-flex is-justify-content-flex-end">
+                    <p
+                      className={`tag my-2 mx-3 + " " + ${
+                        getPropertyType(props.units, property.id).color
+                      }`}
+                    >
+                      {getPropertyType(props.units, property.id).type}
+                    </p>
+                    {auth.user && (
+                      <>
+                        <button
+                          className="button mr-3"
+                          onClick={() => setShowShareModal(true)}
+                        >
+                          Share
+                          <span className="icon is-small ml-2">
+                            <i className="fas fa-share"></i>
+                          </span>
+                        </button>
+                        <button
+                          className="button is-primary"
+                          onClick={() =>
+                            props.setUpdatingPropertyId(property.id)
+                          }
+                        >
+                          Edit
+                          <span className="icon is-small ml-2">
+                            <i className="fas fa-pen"></i>
+                          </span>
+                        </button>
+                      </>
+                    )}
+                  </div>
+                )}
               </div>
-              <div className="is-full notification is-primary mb-4 p-2">
-                <h3 className="title is-5 has-text-white mb-3 m-1">
-                  Investment Analytics
-                </h3>
-                <table
-                  className="table has-text-white is-fullwidth"
-                  style={{ background: "none" }}
-                >
-                  <tbody>
-                    <tr>
-                      <td>
-                        <a
-                          onClick={() => {
-                            setTopic("cash-flow");
-                            setShowModal(true);
-                          }}
-                        >
-                          Monthly Cash Flow:
-                          <span className="icon has-text-white is-small ml-1">
-                            <i className="fas fa-info-circle"></i>
-                          </span>
-                        </a>
-                      </td>
-                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
-                        {formatCurrency(
-                          cashFlow(
-                            monthlyNOI(totalIncome, totalExpenses),
-                            monthlyPayment
-                          )
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a
-                          onClick={() => {
-                            setTopic("grm");
-                            setShowModal(true);
-                          }}
-                        >
-                          Gross Rent Multiplier:
-                          <span className="icon has-text-white is-small ml-1">
-                            <i className="fas fa-info-circle"></i>
-                          </span>
-                        </a>
-                      </td>
-                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
-                        {grossRentMultiplier(
-                          property.purchase_price,
-                          totalIncome
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a
-                          onClick={() => {
-                            setTopic("cap-rate");
-                            setShowModal(true);
-                          }}
-                        >
-                          Cap Rate:
-                          <span className="icon has-text-white is-small ml-1">
-                            <i className="fas fa-info-circle"></i>
-                          </span>
-                        </a>
-                      </td>
-                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
-                        {formatPercentage(
-                          capRate(
-                            annualNOI(totalIncome, totalExpenses),
-                            property.purchase_price
-                          )
-                        )}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a
-                          onClick={() => {
-                            setTopic("noi");
-                            setShowModal(true);
-                          }}
-                        >
-                          NOI (Monthly):
-                          <span className="icon has-text-white is-small ml-1">
-                            <i className="fas fa-info-circle"></i>
-                          </span>
-                        </a>
-                      </td>
-                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
-                        {formatCurrency(monthlyNOI(totalIncome, totalExpenses))}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a
-                          onClick={() => {
-                            setTopic("noi");
-                            setShowModal(true);
-                          }}
-                        >
-                          NOI (Yearly):
-                          <span className="icon has-text-white is-small ml-1">
-                            <i className="fas fa-info-circle"></i>
-                          </span>
-                        </a>
-                      </td>
-                      <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
-                        {formatCurrency(annualNOI(totalIncome, totalExpenses))}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="mt-2 mb-3" style={{ margin: "0" }}>
+                <div className="columns">
+                  {isProUser
+                    ? !router.pathname.includes("report") &&
+                      !props.compareProperties && (
+                        <div className="column">
+                          <iframe
+                            frameBorder="0"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            src={`https://www.google.com/maps/embed/v1/place?key=${
+                              process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+                            }&q=${encodeURIComponent(
+                              property.address
+                            )}&maptype=satellite&zoom=19`}
+                            allowFullScreen
+                            style={{
+                              height: "100%",
+                              minHeight: "250px",
+                              width: "100%",
+                              border: "0",
+                              borderRadius: "4px",
+                            }}
+                          ></iframe>
+                        </div>
+                      )
+                    : auth.user && (
+                        <div className="column">
+                          <div
+                            className="notification p-4 is-flex is-justify-content-center is-align-items-center"
+                            style={{ height: "100%", borderRadius: "4px" }}
+                          >
+                            <Link href="/pricing">
+                              Upgrade to Pro Plan and see map.
+                            </Link>
+                          </div>
+                        </div>
+                      )}
+                  <div className="column">
+                    <div className="notification is-primary p-2">
+                      <h3 className="title is-5 has-text-white mb-3 m-1">
+                        Investment Analytics
+                      </h3>
+                      <table
+                        className="table has-text-white is-fullwidth"
+                        style={{ background: "none" }}
+                      >
+                        <tbody>
+                          <tr>
+                            <td>
+                              <a
+                                onClick={() => {
+                                  setTopic("cash-flow");
+                                  setShowModal(true);
+                                }}
+                              >
+                                Monthly Cash Flow:
+                                <span className="icon has-text-white is-small ml-1">
+                                  <i className="fas fa-info-circle"></i>
+                                </span>
+                              </a>
+                            </td>
+                            <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                              {formatCurrency(
+                                cashFlow(
+                                  monthlyNOI(totalIncome, totalExpenses),
+                                  monthlyPayment
+                                )
+                              )}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a
+                                onClick={() => {
+                                  setTopic("grm");
+                                  setShowModal(true);
+                                }}
+                              >
+                                Gross Rent Multiplier:
+                                <span className="icon has-text-white is-small ml-1">
+                                  <i className="fas fa-info-circle"></i>
+                                </span>
+                              </a>
+                            </td>
+                            <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                              {grossRentMultiplier(
+                                property.purchase_price,
+                                totalIncome
+                              )}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a
+                                onClick={() => {
+                                  setTopic("cap-rate");
+                                  setShowModal(true);
+                                }}
+                              >
+                                Cap Rate:
+                                <span className="icon has-text-white is-small ml-1">
+                                  <i className="fas fa-info-circle"></i>
+                                </span>
+                              </a>
+                            </td>
+                            <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                              {formatPercentage(
+                                capRate(
+                                  annualNOI(totalIncome, totalExpenses),
+                                  property.purchase_price
+                                )
+                              )}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a
+                                onClick={() => {
+                                  setTopic("noi");
+                                  setShowModal(true);
+                                }}
+                              >
+                                NOI (Monthly):
+                                <span className="icon has-text-white is-small ml-1">
+                                  <i className="fas fa-info-circle"></i>
+                                </span>
+                              </a>
+                            </td>
+                            <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                              {formatCurrency(
+                                monthlyNOI(totalIncome, totalExpenses)
+                              )}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <a
+                                onClick={() => {
+                                  setTopic("noi");
+                                  setShowModal(true);
+                                }}
+                              >
+                                NOI (Yearly):
+                                <span className="icon has-text-white is-small ml-1">
+                                  <i className="fas fa-info-circle"></i>
+                                </span>
+                              </a>
+                            </td>
+                            <td className="has-text-right title is-6 has-text-white is-size-5-tablet">
+                              {formatCurrency(
+                                annualNOI(totalIncome, totalExpenses)
+                              )}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div
                 className={props.compareProperties ? "" : "columns is-desktop"}
