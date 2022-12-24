@@ -95,7 +95,7 @@ function PricingSection(props) {
                     </ul>
                   )}
                   {/* TODO once ready to sell Pro Plans uncomment */}
-                  {/* <Link
+                  <Link
                     href={
                       auth.user
                         ? `/purchase/${item.id}`
@@ -105,12 +105,12 @@ function PricingSection(props) {
                     <a className="PricingSection__button button is-medium is-primary">
                       Choose
                     </a>
-                  </Link> */}
-                  <Link href={item.id === "free" ? "/dashboard" : "#"}>
+                  </Link>
+                  {/* <Link href={item.id === "free" ? "/dashboard" : "#"}>
                     <a className="PricingSection__button button is-medium is-primary">
                       {item.id === "free" ? "Choose" : "Coming Soon"}
                     </a>
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>

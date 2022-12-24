@@ -53,8 +53,11 @@ function Footer(props) {
             </span>
           </a>
         </div>
-        <div className="copyright left">
+        <div className="copyright">
           {props.copyright}
+          <Link href="https://www.gavingrant.co/">
+            <a>Gavin Grant</a>
+          </Link>
           <Link href="/legal/terms-of-service">
             <a>Terms</a>
           </Link>
