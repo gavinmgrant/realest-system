@@ -1,10 +1,13 @@
+# Realest System
+
+Realest System is a SaaS for real estate investors who want to quickly calculate their return on investment for residential income properties.
 
 ## 👉 Get Started
 Install dependencies
 ```
-npm install
+yarn install
 ```
-Update your `.env` file with values for each environment variable
+Create your `.env` file using the `env.example` file as a reference with values for each environment variable
 ```
 API_KEY=AIzaSyBkkFF0XhNZeWuDmOfEhsgdfX1VBG7WTas
 etc ...
@@ -12,7 +15,7 @@ etc ...
 
 Run the development server
 ```
-npm run dev
+yarn dev
 ```
 When the above command completes you'll be able to view your website at `http://localhost:3000`
 
@@ -131,7 +134,7 @@ function ItemsPage(){
 Install the Vercel CLI
 
 ```
-npm install -g vercel
+yarn install -g vercel
 ```
 Link codebase to a Vercel project
 
