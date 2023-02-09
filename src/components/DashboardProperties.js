@@ -40,7 +40,7 @@ function DashboardProperties() {
 
   // maximum number of properties allowed with a pro plan
   const PROLIMIT = 20;
-  const atPropertyLimit = isProUser && properties?.length === PROLIMIT;
+  const atPropertyLimit = isProUser && properties?.length > PROLIMIT;
 
   const handleAddProperty = () => {
     if (canAddProperty) {
@@ -136,7 +136,9 @@ function DashboardProperties() {
               >
                 {canAddProperty ? (
                   <>
-                    {atPropertyLimit ? `At Property Limit of ${PROLIMIT}` : "Add Property"}
+                    {atPropertyLimit
+                      ? `At Property Limit of ${PROLIMIT}`
+                      : "Add Property"}
                     {!atPropertyLimit && (
                       <span className="icon is-small ml-2">
                         <i className="fas fa-plus"></i>
@@ -184,6 +186,7 @@ function DashboardProperties() {
                     className={`card p-4 mb-4 is-flex is-justify-content-space-between ${
                       isSelected && "DashboardProperties__card"
                     }`}
+                    style={{ opacity: isProUser || index === 0 ? 1 : 0.5 }}
                     key={property.id}
                   >
                     <h3
@@ -234,7 +237,7 @@ function DashboardProperties() {
                         </button>
                       ) : (
                         <button
-                          className="button is-danger p-2"
+                          className="button is-danger p-2 ml-3"
                           onClick={(e) => router.push("/pricing")}
                         >
                           <span className="is-hidden-mobile pl-2 pr-2">
