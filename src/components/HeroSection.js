@@ -21,16 +21,15 @@ function HeroSection(props) {
               spaced={true}
             />
             <div className="buttons is-inline-flex">
-              <Link href={props.buttonPath}>
-                <a
-                  className={
-                    "button is-medium" +
-                    (props.buttonColor ? ` is-${props.buttonColor}` : "") +
-                    (props.buttonInverted ? " is-inverted" : "")
-                  }
-                >
-                  {props.buttonText}
-                </a>
+              <Link
+                href={props.buttonPath}
+                className={
+                  "button is-medium" +
+                  (props.buttonColor ? ` is-${props.buttonColor}` : "") +
+                  (props.buttonInverted ? " is-inverted" : "")
+                }
+              >
+                {props.buttonText}
               </Link>
             </div>
           </div>

@@ -22,15 +22,13 @@ function Navbar(props) {
         <div className="navbar-brand">
           <div className="mt-1 ml-2">
             <Link href="/">
-              <a>
-                <img
-                  className="image"
-                  src={props.logo}
-                  width="120"
-                  height="47"
-                  alt="Realest System Logo"
-                />
-              </a>
+              <img
+                className="image"
+                src={props.logo}
+                width="120"
+                height="47"
+                alt="Realest System Logo"
+              />
             </Link>
           </div>
           <div
@@ -51,34 +49,33 @@ function Navbar(props) {
                 </div>
                 <div className="navbar-dropdown is-boxed">
                   <div onClick={() => setMenuOpen(!menuOpen)}>
-                    <Link href="/dashboard">
-                      <a className="navbar-item">Dashboard</a>
+                    <Link href="/dashboard" className="navbar-item">
+                      Dashboard
                     </Link>
                   </div>
                   <div onClick={() => setMenuOpen(!menuOpen)}>
-                    <Link href="/settings/general">
-                      <a className="navbar-item">Settings</a>
+                    <Link href="/settings/general" className="navbar-item">
+                      Settings
                     </Link>
                   </div>
                   <hr className="dropdown-divider" />
-                  <Link href="/auth/signout">
-                    <a
-                      className="navbar-item"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        auth.signout();
-                      }}
-                    >
-                      Sign out
-                    </a>
+                  <Link
+                    href="/auth/signout"
+                    className="navbar-item"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      auth.signout();
+                    }}
+                  >
+                    Sign out
                   </Link>
                 </div>
               </div>
             )}
 
             {!auth.user && (
-              <Link href="/auth/signin">
-                <a className="navbar-item">Sign in</a>
+              <Link href="/auth/signin" className="navbar-item">
+                Sign in
               </Link>
             )}
           </div>

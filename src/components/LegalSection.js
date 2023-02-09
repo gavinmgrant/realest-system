@@ -33,16 +33,12 @@ function LegalSection(props) {
               "" + (section === "terms-of-service" ? " is-active" : "")
             }
           >
-            <Link href="/legal/terms-of-service">
-              <a>Terms of Service</a>
-            </Link>
+            <Link href="/legal/terms-of-service">Terms of Service</Link>
           </li>
           <li
             className={"" + (section === "privacy-policy" ? " is-active" : "")}
           >
-            <Link href="/legal/privacy-policy">
-              <a>Privacy Policy</a>
-            </Link>
+            <Link href="/legal/privacy-policy">Privacy Policy</Link>
           </li>
         </ul>
       </div>

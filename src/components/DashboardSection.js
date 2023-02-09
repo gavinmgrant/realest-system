@@ -56,10 +56,8 @@ function DashboardSection(props) {
             You can change your account info{` `}
             {/* {auth.user.stripeSubscriptionId && <>and plan{` `}</>} */}
             in{` `}
-            <Link href="/settings/general">
-              <a className="has-text-link">
-                <strong>settings</strong>
-              </a>
+            <Link href="/settings/general" className="has-text-link">
+              <strong>settings</strong>
             </Link>
             .
           </div>
@@ -67,10 +65,8 @@ function DashboardSection(props) {
           {/* {!auth.user.stripeSubscriptionId && (
             <div>
               You can signup for a plan in{` `}
-              <Link href="/pricing">
-                <a className="has-text-link">
-                  <strong>pricing</strong>
-                </a>
+              <Link href="/pricing" className="has-text-link">
+                <strong>pricing</strong>
               </Link>
               .
             </div>

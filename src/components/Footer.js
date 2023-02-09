@@ -14,24 +14,14 @@ function Footer(props) {
       <div className="FooterComponent__container container">
         <div className="brand left">
           <Link href="/">
-            <a>
-              <img src={props.logo} alt="Logo" />
-            </a>
+            <img src={props.logo} alt="Logo" />
           </Link>
         </div>
         <div className="links right">
-          <Link href="/pricing">
-            <a>Pricing</a>
-          </Link>
-          <Link href="/about">
-            <a>About</a>
-          </Link>
-          <Link href="/faq">
-            <a>FAQ</a>
-          </Link>
-          <Link href="/contact">
-            <a>Contact</a>
-          </Link>
+          <Link href="/pricing">Pricing</Link>
+          <Link href="/about">About</Link>
+          <Link href="/faq">FAQ</Link>
+          <Link href="/contact">Contact</Link>
         </div>
         <div className="social right">
           <a
@@ -55,15 +45,9 @@ function Footer(props) {
         </div>
         <div className="copyright">
           {props.copyright}
-          <Link href="https://www.gavingrant.co/">
-            <a>Gavin Grant</a>
-          </Link>
-          <Link href="/legal/terms-of-service">
-            <a>Terms</a>
-          </Link>
-          <Link href="/legal/privacy-policy">
-            <a>Privacy</a>
-          </Link>
+          <Link href="https://www.gavingrant.co/">Gavin Grant</Link>
+          <Link href="/legal/terms-of-service">Terms</Link>
+          <Link href="/legal/privacy-policy">Privacy</Link>
         </div>
       </div>
     </Section>

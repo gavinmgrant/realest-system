@@ -86,8 +86,8 @@ function DashboardProperties() {
             )}
             {selectedProperties.length > 0 && !isProUser && (
               <div className="my-1">
-                <Link href="/pricing">
-                  <a className="is-size-6">Compare properties with Pro Plan</a>
+                <Link href="/pricing" className="is-size-6">
+                  Compare properties with Pro Plan
                 </Link>
               </div>
             )}

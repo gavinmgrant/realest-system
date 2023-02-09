@@ -13,23 +13,17 @@ function SettingsNav(props) {
         <li
           className={"" + (props.activeKey === "general" ? " is-active" : "")}
         >
-          <Link href="/settings/general">
-            <a>General</a>
-          </Link>
+          <Link href="/settings/general">General</Link>
         </li>
         <li
           className={"" + (props.activeKey === "password" ? " is-active" : "")}
         >
-          <Link href="/settings/password">
-            <a>Password</a>
-          </Link>
+          <Link href="/settings/password">Password</Link>
         </li>
         <li
           className={"" + (props.activeKey === "billing" ? " is-active" : "")}
         >
-          <Link href="/settings/billing">
-            <a>Billing</a>
-          </Link>
+          <Link href="/settings/billing">Billing</Link>
         </li>
       </ul>
     </div>

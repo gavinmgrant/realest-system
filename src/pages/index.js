@@ -68,16 +68,15 @@ function IndexPage(props) {
       {!user && (
         <CenteredColumns>
           <div className="column is-flex is-flex-direction-column is-align-items-center">
-            <Link href="/auth/signup">
-              <a
-                className={
-                  "button is-medium is-primary mt-5 mb-5" +
-                  (props.buttonColor ? ` is-${props.buttonColor}` : "") +
-                  (props.buttonInverted ? " is-inverted" : "")
-                }
-              >
-                Create Account to Begin
-              </a>
+            <Link
+              href="/auth/signup"
+              className={
+                "button is-medium is-primary mt-5 mb-5" +
+                (props.buttonColor ? ` is-${props.buttonColor}` : "") +
+                (props.buttonInverted ? " is-inverted" : "")
+              }
+            >
+              Create Account to Begin
             </Link>
           </div>
         </CenteredColumns>

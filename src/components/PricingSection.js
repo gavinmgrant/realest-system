@@ -101,15 +101,15 @@ function PricingSection(props) {
                         ? `/purchase/${item.id}`
                         : `/auth/signup?next=/purchase/${item.id}`
                     }
+                    className="PricingSection__button button is-medium is-primary"
                   >
-                    <a className="PricingSection__button button is-medium is-primary">
-                      Choose
-                    </a>
+                    Choose
                   </Link> */}
-                  <Link href={item.id === "free" ? "/dashboard" : "#"}>
-                    <a className="PricingSection__button button is-medium is-primary">
-                      {item.id === "free" ? "Choose" : "Coming Soon"}
-                    </a>
+                  <Link
+                    href={item.id === "free" ? "/dashboard" : "#"}
+                    className="PricingSection__button button is-medium is-primary"
+                  >
+                    {item.id === "free" ? "Choose" : "Coming Soon"}
                   </Link>
                 </div>
               </div>

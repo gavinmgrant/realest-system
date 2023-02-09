@@ -26,7 +26,7 @@ function ContactSection(props) {
             <p>We'd love to hear from you! Send us an email:</p>
             <div className="button is-primary m-4">
               <Link href="mailto:hello@realestsystem.com">
-                <a>hello@realestsystem.com</a>
+                hello@realestsystem.com
               </Link>
             </div>
           </div>
