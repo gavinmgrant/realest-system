@@ -4,7 +4,7 @@
   .is-white + &.is-white {
     border-top: 1px solid #f0f0f0;
     margin-top: 52px;
-    @media screen and (min-width: 769px) {
+    @media screen and (min-width: 1024px) {
       margin-top: 84px;
     }
   }
