@@ -28,13 +28,13 @@ function PricingSection(props) {
       price: "TBD",
       perks: [
         "All features in the Free Plan, plus:",
-        "Create multiple properties",
+        "Create up to 20 properties",
         "Add multiple units per property",
         "Compare properties side-by-side",
         "Address autocomplete and suggestions",
         "Embedded map in property details",
         "Delete properties",
-        "And more!",
+        "And more in development!",
       ],
     },
   ];

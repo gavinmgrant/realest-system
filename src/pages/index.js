@@ -54,8 +54,8 @@ function IndexPage(props) {
         size="medium"
         backgroundImage=""
         backgroundImageOpacity={1}
-        title=""
-        subtitle=""
+        title="How does it work?"
+        subtitle="Add information about your investment property and we'll run the numbers for you."
       />
       {/* <TestimonialsSection
         color="light"

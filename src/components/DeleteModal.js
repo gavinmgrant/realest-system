@@ -19,6 +19,10 @@ function DeleteModal(props) {
         </header>
         <div className="card-content">
           <div className="field">
+            <p className="mb-4">
+              Warning: This will permanently remove this property and cannot be
+              undone.
+            </p>
             <div className="control">
               <button
                 className="button is-medium is-danger"

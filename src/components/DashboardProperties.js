@@ -38,6 +38,10 @@ function DashboardProperties() {
 
   const canAddProperty = properties?.length < 1 || isProUser;
 
+  // maximum number of properties allowed with a pro plan
+  const PROLIMIT = 20;
+  const atPropertyLimit = isProUser && properties?.length === PROLIMIT;
+
   const handleAddProperty = () => {
     if (canAddProperty) {
       setCreatingProperty(true);
@@ -76,14 +80,16 @@ function DashboardProperties() {
         <div>
           <div className="panel panel-heading has-background-light py-3 px-4 is-flex-tablet is-justify-content-space-between is-align-items-center has-text-center-mobile">
             <h2 className="title is-4 m-0">Properties</h2>
-            {selectedProperties.length > 1 && isProUser && !compareProperties && (
-              <button
-                className="button"
-                onClick={() => setCompareProperties(!compareProperties)}
-              >
-                Compare Properties
-              </button>
-            )}
+            {selectedProperties.length > 1 &&
+              isProUser &&
+              !compareProperties && (
+                <button
+                  className="button"
+                  onClick={() => setCompareProperties(!compareProperties)}
+                >
+                  Compare Properties
+                </button>
+              )}
             {selectedProperties.length > 0 && !isProUser && (
               <div className="my-1">
                 <Link href="/pricing" className="is-size-6">
@@ -126,13 +132,16 @@ function DashboardProperties() {
               <button
                 className="button is-primary my-3"
                 onClick={handleAddProperty}
+                disabled={atPropertyLimit}
               >
                 {canAddProperty ? (
                   <>
-                    Add Property
-                    <span className="icon is-small ml-2">
-                      <i className="fas fa-plus"></i>
-                    </span>
+                    {atPropertyLimit ? `At Property Limit of ${PROLIMIT}` : "Add Property"}
+                    {!atPropertyLimit && (
+                      <span className="icon is-small ml-2">
+                        <i className="fas fa-plus"></i>
+                      </span>
+                    )}
                   </>
                 ) : (
                   <>

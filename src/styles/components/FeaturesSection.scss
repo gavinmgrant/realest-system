@@ -6,9 +6,9 @@
 
   &__columns {
     // Reverse every other row
-    &:nth-of-type(even) {
-      flex-direction: row-reverse;
-    }
+    // &:nth-of-type(even) {
+    //   flex-direction: row-reverse;
+    // }
 
     &:not(:last-of-type) {
       padding-bottom: 1.5rem;
@@ -23,7 +23,7 @@
   }
 
   &__image {
-    max-width: 300px;
-    margin: 30px auto;
+    max-width: 400px;
+    margin: 16px auto;
   }
 }
