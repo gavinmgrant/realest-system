@@ -3,6 +3,7 @@ import Link from "next/link";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
 import { useAuth } from "util/auth";
+import { motion } from "framer-motion";
 
 function PricingSection(props) {
   const auth = useAuth();
@@ -87,10 +88,18 @@ function PricingSection(props) {
                   {item.perks && (
                     <ul className="PricingSection__perks">
                       {item.perks.map((perk, index) => (
-                        <li key={index}>
+                        <motion.li
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{
+                            opacity: 1,
+                            y: 0,
+                            transition: { delay: index * 0.2 },
+                          }}
+                        >
                           <i className="fas fa-check has-text-primary" />
                           {perk}
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
                   )}
