@@ -76,7 +76,7 @@ function IndexPage(props) {
                 (props.buttonInverted ? " is-inverted" : "")
               }
             >
-              Create Account to Begin
+              Create an Account to Begin
             </Link>
           </div>
         </CenteredColumns>
