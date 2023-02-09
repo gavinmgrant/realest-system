@@ -13,7 +13,7 @@ function Navbar(props) {
   return (
     <nav
       className={
-        "navbar" +
+        "is-fixed-top navbar" +
         (props.color ? ` is-${props.color}` : "") +
         (props.spaced ? " is-spaced" : "")
       }

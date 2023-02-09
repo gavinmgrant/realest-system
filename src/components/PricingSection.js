@@ -91,11 +91,12 @@ function PricingSection(props) {
                         <motion.li
                           key={index}
                           initial={{ opacity: 0, y: 20 }}
-                          animate={{
+                          whileInView={{
                             opacity: 1,
                             y: 0,
                             transition: { delay: index * 0.2 },
                           }}
+                          viewport={{ once: true }}
                         >
                           <i className="fas fa-check has-text-primary" />
                           {perk}
