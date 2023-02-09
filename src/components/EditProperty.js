@@ -506,7 +506,7 @@ function EditProperty(props) {
                   <i className="fas fa-check"></i>
                 </span>
               </button>
-              {auth.user.stripeCustomerId ? (
+              {isProUser ? (
                 <>
                   {props.id && units?.length < 1 ? (
                     <button
