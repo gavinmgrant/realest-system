@@ -8,6 +8,8 @@ import { motion } from "framer-motion";
 function PricingSection(props) {
   const auth = useAuth();
 
+  const isProUser = auth.user?.planIsActive && auth.user?.planId === "pro";
+
   const items = [
     {
       id: "free",
@@ -69,13 +71,13 @@ function PricingSection(props) {
                 }
               >
                 <div className="PricingSection__card-content card-content">
-                  <div className="PricingSection__name has-text-weight-bold">
+                  <div className="PricingSection__name has-text-weight-bold is-size-4">
                     {item.name}
                   </div>
                   <div className="PricingSection__price has-text-weight-bold is-size-1">
                     ${item.price}
                     <span className="PricingSection__period is-size-3">
-                      /mo
+                      /month
                     </span>
                   </div>
 
@@ -104,23 +106,32 @@ function PricingSection(props) {
                       ))}
                     </ul>
                   )}
-                  {/* TODO once ready to sell Pro Plans uncomment */}
-                  {/* <Link
-                    href={
-                      auth.user
-                        ? `/purchase/${item.id}`
-                        : `/auth/signup?next=/purchase/${item.id}`
-                    }
-                    className="PricingSection__button button is-medium is-primary"
-                  >
-                    Choose
-                  </Link> */}
-                  <Link
-                    href={item.id === "free" ? "/dashboard" : "#"}
-                    className="PricingSection__button button is-medium is-primary"
-                  >
-                    {item.id === "free" ? "Choose" : "Coming Soon"}
-                  </Link>
+                  {(!auth.user || (auth.user && item.id !== "free")) && (
+                    <Link
+                      href={
+                        auth.user
+                          ? isProUser
+                            ? "/dashboard"
+                            : // : `/purchase/${item.id}`
+                              "#"
+                          : item.id === "free"
+                          ? "/auth/signup"
+                          : // : `/auth/signup?next=/purchase/${item.id}`
+                            "/auth/signup"
+                      }
+                      className="PricingSection__button button is-medium is-primary"
+                    >
+                      {!auth.user
+                        ? // ? "Choose"
+                          item.id === "free"
+                          ? "Choose"
+                          : "Coming Soon"
+                        : isProUser
+                        ? "You are subscribed."
+                        : // : "Upgrade"
+                          "Coming Soon"}
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

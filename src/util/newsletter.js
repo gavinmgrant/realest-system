@@ -16,7 +16,7 @@ function subscribe(data) {
       // Throw error so it can be caught and displayed by the UI.
       // Convertkit returns an array of error messages,
       // but we just throw the first one.
-      throw new Error(response.errors.messages[0]);
+      throw new Error(response.errors?.messages[0]);
     }
   });
 }

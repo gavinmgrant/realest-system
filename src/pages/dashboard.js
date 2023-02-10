@@ -1,9 +1,12 @@
 import React from "react";
 import Meta from "components/Meta";
 import DashboardSection from "components/DashboardSection";
-import { requireAuth } from "util/auth";
+import { useAuth, requireAuth } from "util/auth";
 
 function DashboardPage(props) {
+  const auth = useAuth();
+  const isProUser = auth.user?.planIsActive && auth.user?.planId === "pro";
+
   return (
     <>
       <Meta title="Dashboard" />
@@ -11,7 +14,13 @@ function DashboardPage(props) {
         color="white"
         size="medium"
         title="Dashboard"
-        subtitle="We are in beta right now and will be offering a Pro Plan that allows you to compare multiple properties side-by-side in the future. All accounts are Free Plans today and have a 1 property limit."
+        subtitle={
+          isProUser
+            ? `Welcome back ${
+                auth.user.name_first ? auth.user.name_first : "Pro Plan user"
+              }!`
+            : "Free Plans have a 1 property limit. Upgrade to a Pro Plan to add more."
+        }
       />
     </>
   );

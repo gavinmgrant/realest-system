@@ -21,18 +21,18 @@ function DashboardSection(props) {
           className="has-text-centered"
         />
 
-        <DashboardProperties />
-
         {router.query.paid && auth.user.planIsActive && (
           <article className="DashboardSection__paid-message message is-success mx-auto mb-5">
             <div className="message-body">
-              You are now subscribed to the {auth.user.planId} plan
+              You are now subscribed to the Pro Plan!
               <span className="ml-2" role="img" aria-label="party">
                 🥳
               </span>
             </div>
           </article>
         )}
+
+        <DashboardProperties />
 
         <div className="card p-4 mb-4">
           <div>
