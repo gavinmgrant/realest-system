@@ -46,8 +46,7 @@ function FeaturesSection(props) {
       },
       {
         title: "Add Multiple Units",
-        description:
-          `Add up to ${PROLIMITUNITS} units to any property for duplexes, triplexes, quads, and more.`,
+        description: `Manage multifamily properties! Add up to ${PROLIMITUNITS} units to any property for duplexes, triplexes, quads, and ${PROLIMITUNITS} unit properties.`,
         image: "/pro/multiple-units.png",
       },
       {
