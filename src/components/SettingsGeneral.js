@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import FormField from "components/FormField";
@@ -97,6 +96,7 @@ function SettingsGeneral(props) {
           defaultValue={isProUser ? "Pro" : "Free"}
           disabled
           size="medium"
+          style={{ width: "10rem" }}
         />
         {!isProUser ? (
           <button
@@ -114,7 +114,7 @@ function SettingsGeneral(props) {
             style={{ marginBottom: "12px" }}
             onClick={(e) => router.push("/settings/billing")}
           >
-            Billing
+            Manage Billing
           </button>
         )}
       </div>

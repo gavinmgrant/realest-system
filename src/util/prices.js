@@ -1,6 +1,7 @@
 // Map our custom plan IDs ("basic", "premium", etc) to Stripe price IDs
 const stripePriceIds = {
   pro: process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO,
+  "pro-annual": process.env.NEXT_PUBLIC_STRIPE_PRICE_PRO_ANNUAL,
 };
 
 // Get Stripe priceId

@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
+import { PROLIMIT } from "./DashboardProperties";
+import { PROLIMITUNITS } from "./EditProperty";
 import { useAuth } from "util/auth";
 import { motion } from "framer-motion";
 
 function PricingSection(props) {
   const auth = useAuth();
+  const [annual, setAnnual] = useState(false);
 
   const isProUser = auth.user?.planIsActive && auth.user?.planId === "pro";
 
@@ -15,6 +18,7 @@ function PricingSection(props) {
       id: "free",
       name: "Free Plan",
       price: "0",
+      price_year: "0",
       perks: [
         "Create 1 property",
         "Add 1 unit per property",
@@ -26,18 +30,18 @@ function PricingSection(props) {
       ],
     },
     {
-      id: "pro",
-      name: "Pro Plan (Coming Soon)",
-      price: "TBD",
+      id: annual ? "pro-annual" : "pro",
+      name: "Pro Plan (7 day free trial)",
+      price: annual ? "2" : "3",
+      price_year: annual ? "24" : "36",
       perks: [
         "All features in the Free Plan, plus:",
-        "Create up to 20 properties",
-        "Add multiple units per property",
+        `Create up to ${PROLIMIT} properties`,
+        `Add up to ${PROLIMITUNITS} units per property`,
         "Compare properties side-by-side",
         "Address autocomplete and suggestions",
         "Embedded map in property details",
         "Delete properties",
-        "And more in development!",
       ],
     },
   ];
@@ -71,15 +75,69 @@ function PricingSection(props) {
                 }
               >
                 <div className="PricingSection__card-content card-content">
-                  <div className="PricingSection__name has-text-weight-bold is-size-4">
-                    {item.name}
+                  <div
+                    width="100%"
+                    className="PricingSection__name has-text-weight-bold is-size-4 is-flex-tablet flex-direction-row is-justify-content-space-between is-align-items-center"
+                  >
+                    <div>{item.name}</div>
+                    {item.id !== "free" && annual && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                      >
+                        💰 Save 33%
+                      </motion.div>
+                    )}
                   </div>
-                  <div className="PricingSection__price has-text-weight-bold is-size-1">
-                    ${item.price}
-                    <span className="PricingSection__period is-size-3">
-                      /month
-                    </span>
+
+                  <div
+                    width="100%"
+                    className="is-flex flex-direction-row is-justify-content-space-between is-align-items-center"
+                  >
+                    <div className="PricingSection__price has-text-weight-bold is-size-1">
+                      ${item.price}
+                      <span className="PricingSection__period is-size-3">
+                        /mo
+                      </span>
+                    </div>
+
+                    {item.id !== "free" && (
+                      <div className="PricingSection__price has-text-weight-bold is-size-3">
+                        ${item.price_year}
+                        <span className="PricingSection__period">/year</span>
+                      </div>
+                    )}
                   </div>
+
+                  {item.id !== "free" && (
+                    <div
+                      width="100%"
+                      className="is-flex flex-direction-row is-justify-content-space-between is-align-items-center mb-3"
+                    >
+                      <div className="PricingSection__period is-size-3 has-text-weight-bold">
+                        Bill:
+                      </div>
+                      <div>
+                        <button
+                          type="button"
+                          className="button is-info is-medium"
+                          onClick={() => setAnnual(false)}
+                          style={{ opacity: annual ? 0.25 : 1 }}
+                        >
+                          Monthly
+                        </button>
+                        <button
+                          type="button"
+                          className="button is-info is-medium ml-2"
+                          onClick={() => setAnnual(true)}
+                          style={{ opacity: annual ? 1 : 0.25 }}
+                        >
+                          Yearly
+                        </button>
+                      </div>
+                    </div>
+                  )}
 
                   {item.description && (
                     <p className="PricingSection__description">
@@ -112,24 +170,18 @@ function PricingSection(props) {
                         auth.user
                           ? isProUser
                             ? "/dashboard"
-                            : // : `/purchase/${item.id}`
-                              "#"
+                            : `/purchase/${item.id}`
                           : item.id === "free"
                           ? "/auth/signup"
-                          : // : `/auth/signup?next=/purchase/${item.id}`
-                            "/auth/signup"
+                          : `/auth/signup?next=/purchase/${item.id}`
                       }
                       className="PricingSection__button button is-medium is-primary"
                     >
                       {!auth.user
-                        ? // ? "Choose"
-                          item.id === "free"
-                          ? "Choose"
-                          : "Coming Soon"
+                        ? "Choose"
                         : isProUser
-                        ? "You are subscribed."
-                        : // : "Upgrade"
-                          "Coming Soon"}
+                        ? "You are subscribed to this plan."
+                        : "Upgrade"}
                     </Link>
                   )}
                 </div>

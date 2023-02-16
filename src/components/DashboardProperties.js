@@ -12,6 +12,9 @@ import { usePropertiesByUser, useUnitsByUser, deleteProperty } from "util/db";
 import { toast } from "react-toastify";
 import { getPropertyType } from "../util/util";
 
+// maximum number of properties allowed with a pro plan
+export const PROLIMIT = 20;
+
 function DashboardProperties() {
   const router = useRouter();
   const auth = useAuth();
@@ -38,8 +41,6 @@ function DashboardProperties() {
 
   const canAddProperty = properties?.length < 1 || isProUser;
 
-  // maximum number of properties allowed with a pro plan
-  const PROLIMIT = 20;
   const atPropertyLimit = isProUser && properties?.length > PROLIMIT;
 
   const handleAddProperty = () => {
@@ -79,7 +80,14 @@ function DashboardProperties() {
       {!creatingProperty && !updatingPropertyId && (
         <div>
           <div className="panel panel-heading has-background-light py-3 px-4 is-flex-tablet is-justify-content-space-between is-align-items-center has-text-center-mobile">
-            <h2 className="title is-4 m-0">Properties</h2>
+            <h2 className="title is-4 m-0">
+              Properties{" "}
+              <span className="title is-5 ml-2">
+                {isProUser
+                  ? `(${properties?.length} of ${PROLIMIT} max.)`
+                  : `(${properties?.length} of 1 max.)`}
+              </span>
+            </h2>
             {selectedProperties.length > 1 &&
               isProUser &&
               !compareProperties && (

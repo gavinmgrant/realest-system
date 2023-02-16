@@ -78,7 +78,7 @@ function Navbar(props) {
                 <Link href="/auth/signin" className="navbar-item mr-2">
                   Sign in
                 </Link>
-                <Link href="/auth/signup" className="button is-success ml-2">
+                <Link href="/auth/signup" className="button is-success ml-2 mr-3">
                   Sign up
                 </Link>
               </>

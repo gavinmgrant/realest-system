@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import Section from "components/Section";
 import SectionHeader from "components/SectionHeader";
 import { motion } from "framer-motion";
+import { PROLIMIT } from "./DashboardProperties";
+import { PROLIMITUNITS } from "./EditProperty";
 
 function FeaturesSection(props) {
   const router = useRouter();
@@ -39,13 +41,13 @@ function FeaturesSection(props) {
     items = [
       {
         title: "Create Multiple Properties",
-        description: "Add up to 20 properties in your accounts.",
+        description: `Add up to ${PROLIMIT} properties in your accounts.`,
         image: "/pro/multiple-properties.png",
       },
       {
         title: "Add Multiple Units",
         description:
-          "Add more than one unit to any property for duplexes, triplexes, quads, and more.",
+          `Add up to ${PROLIMITUNITS} units to any property for duplexes, triplexes, quads, and more.`,
         image: "/pro/multiple-units.png",
       },
       {

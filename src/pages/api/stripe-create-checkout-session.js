@@ -34,9 +34,11 @@ export default requireAuth(async (req, res) => {
       payment_method_types: ["card"],
       subscription_data: {
         // Use trial period set for this priceId (if there is one)
-        trial_from_plan: true,
+        // trial_from_plan: true,
+        // The number of trial period days before the customer is charged for the first time
+        trial_period_days: 7,
         // Uncomment to add a coupon code from request body
-        //coupon: body.coupon
+        // coupon: body.coupon
       },
       line_items: [
         {
@@ -46,7 +48,7 @@ export default requireAuth(async (req, res) => {
       ],
       mode: "subscription",
       // Uncomment to allow user to enter a promotional code
-      //allow_promotion_codes: true,
+      // allow_promotion_codes: true,
       // Uncomment if you need address collection
       //billing_address_collection: "required",
       //shipping_address_collection: { allowed_countries: ['US'] },

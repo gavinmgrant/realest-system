@@ -18,6 +18,9 @@ import {
 } from "util/db";
 import { toast } from "react-toastify";
 
+// maximum number of units allowed with a pro plan
+export const PROLIMITUNITS = 5;
+
 function EditProperty(props) {
   const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
@@ -73,7 +76,8 @@ function EditProperty(props) {
 
   useEffect(() => {
     if (!units) return;
-    if (isProUser || units?.length < 1) setCanAddUnit(true);
+    if ((isProUser && units?.length < PROLIMITUNITS) || units?.length < 1)
+      setCanAddUnit(true);
     if (!isProUser && units?.length > 0) setCanAddUnit(false);
   }, [units, isProUser]);
 
@@ -445,6 +449,8 @@ function EditProperty(props) {
               <section className="column">
                 <h3 className="title is-5">Monthly Income</h3>
 
+                <p className="mb-2">(Maximum units: 1 Free Plan, {PROLIMITUNITS} Pro Plan)</p>
+
                 <table className="table is-fullwidth is-hoverable is-bordered">
                   <thead>
                     <tr>
@@ -479,8 +485,9 @@ function EditProperty(props) {
                       : () => router.push("/pricing")
                   }
                   type="button"
+                  disabled={isProUser && !canAddUnit}
                 >
-                  {canAddUnit ? "Add Unit" : "Upgrade to add more units"}
+                  {canAddUnit ? "Add Unit" : "Max Units Reached"}
                   <span className="icon is-small ml-2">
                     {canAddUnit ? (
                       <i className="fas fa-plus"></i>
