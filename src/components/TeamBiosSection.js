@@ -16,7 +16,7 @@ function TeamBiosSection(props) {
       avatar: "/images/gavin.jpg",
       name: "Gavin Grant",
       role: "Co-founder",
-      bio: "Gavin has owned a rental property and pivoted from a career in architecture to web development. He built his first website in 2011 when he and Mark partnered to create a blog called Tesón Life, where they shared business advice learned through research and real-life experience. Gavin is a developer building web apps with modern web development frameworks.",
+      bio: "Gavin has owned a rental property and pivoted from a career in architecture to web development. He built his first website in 2011 when he and Mark partnered to create a blog where they shared business advice learned through research and real-life experience. Gavin is a developer building web apps such as Listingify, a real estate listing description writing service.",
     },
   ];
 

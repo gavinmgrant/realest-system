@@ -84,8 +84,8 @@ function DashboardProperties() {
               Properties{" "}
               <span className="title is-5 ml-2">
                 {isProUser
-                  ? `(${properties?.length} of ${PROLIMIT} max.)`
-                  : `(${properties?.length} of 1 max.)`}
+                  ? `(${properties?.length} of ${PROLIMIT} used)`
+                  : `(${properties?.length} of 1 used)`}
               </span>
             </h2>
             {selectedProperties.length > 1 &&
