@@ -1,0 +1,8 @@
+.HeroSection2 {
+  &__header {
+    margin-top: 52px;
+    @media screen and (min-width: 1024px) {
+      margin-top: 84px;
+    }
+  }
+}

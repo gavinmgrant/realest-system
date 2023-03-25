@@ -10,7 +10,7 @@ function HeroSection2(props) {
       backgroundImage={props.backgroundImage}
       backgroundImageOpacity={props.backgroundImageOpacity}
     >
-      <div className="container">
+      <div className="container HeroSection2__header">
         <SectionHeader
           title={props.title}
           subtitle={props.subtitle}
