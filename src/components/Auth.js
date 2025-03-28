@@ -45,7 +45,7 @@ function Auth(props) {
         buttonInverted={props.buttonInverted}
       />
 
-      {["signup", "signin"].includes(props.type) && (
+      {/* {["signup", "signin"].includes(props.type) && (
         <>
           {props.providers && props.providers.length && (
             <>
@@ -67,7 +67,7 @@ function Auth(props) {
             </>
           )}
         </>
-      )}
+      )} */}
     </>
   );
 }
